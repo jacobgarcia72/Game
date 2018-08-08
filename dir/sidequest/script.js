@@ -30,7 +30,7 @@ $(function(){
         }
 
       });
-
+      console.log(newBank);
       if (newBank.length > 0) {
         console.log('Returning newBank');
         console.log(newBank);
