@@ -598,8 +598,10 @@ $(function(){
       createPlayerInputs : function() {
         var html = '';
         for (var i = 0; i <= 8; i++) {
-          var name = localStorage.getItem('player'+i+'name', '');
-          var gender = localStorage.getItem('player'+i+'gender', '');
+          var name = localStorage.getItem('player'+i+'name');
+          if (!name) {name='';};
+          var gender = localStorage.getItem('player'+i+'gender');
+          if (!gender) {gender='';};
           var heClassSelected = gender === 'he' ? 'greenSelected' : '';
           var sheClassSelected = gender === 'she' ? 'greenSelected' : '';
           html += '<div class="row" id="rowPlayer' + i + '" style="display:none;"><div class="col-70"><input type="text" value="' + name + '" id="txtName'+ i +'"></div><div class="col-30" data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div>';
@@ -613,7 +615,8 @@ $(function(){
 
         switch (screen) {
           case 'inputPlayers':
-            numPlayers = localStorage.getItem('numPlayers', 3); //load number from previous game
+            numPlayers = localStorage.getItem('numPlayers')//load number from previous game
+            if (!numPlayers) {numPlayers=3};
             this.selectNumPlayers(numPlayers);
             $(domID.frmEnterPlayers + ',' + domID.continue + ',' + domID.foot).show();
             break;
