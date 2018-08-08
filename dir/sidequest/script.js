@@ -33,9 +33,11 @@ $(function(){
       });
 
       if (newBank) {
+        console.log('Returning newBank');
+        console.log(newBank);
         return newBank;
       }
-      
+
       return [
         //hide a coin chest
         {
