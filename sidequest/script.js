@@ -25,6 +25,7 @@ $(function(){
         method: 'GET',
         success: function(retrievedData){
           newBank = retrievedData.mainQuests;
+          console.log(newBank);
         },
         error: function(){
           alert("There has been an error loading necessary data for this game.");
