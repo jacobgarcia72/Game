@@ -12,7 +12,8 @@ $(function(){
         ['Outside & Back In','If another player walks outside at any point in the game, you win when they come back in.'],
         ['Bathroom Break','If Name1 or Name2 goes to the bathroom at any point in the game, you win when they come back.'],
         ['Phone Call','If another player takes a phone call at any point, you win when they hang up.'],
-        ['Ask Name2','You must get Name1 to ask Name2 a question for you. Name1 must ask Name2 a question that you told him1 to ask.']
+        ['Ask Name2','You must get Name1 to ask Name2 a question for you. Name1 must ask Name2 a question that you told him1 to ask.'],
+        ['Name1 Brings Food','If at any point Name1 brings you any food, you win.']
       ]
     };
     var getMainQuestBank = function(){
@@ -742,7 +743,7 @@ $(function(){
       showMainQuest: function(quest, index) {
         $(domClass.gameElement).hide(); 
         $(domID.header).text('Read Aloud:').show();
-        $(domID.instructions).html(quest.pages[index].caption + '<br><br>').show();
+        $(domID.instructions).html('<p>' + quest.pages[index].caption + '</p><br>').show();
 
         if (quest.pages[index].options.length === 1) {
           //if there is one option, use the continue button
@@ -757,7 +758,6 @@ $(function(){
 
         $(domID.foot).show();
 
-        window.scrollTo(0,0); 
       },
 
       showTrophyMenu: function(players) {
@@ -938,6 +938,8 @@ $(function(){
 
       //yesNo buttons
       $(domID.yesNo).on('submit', function(){
+        $(domID.yes).removeClass('')
+
         var choice = $(document.activeElement).data('index');
         if (trophyMenu.open) {
           
@@ -1080,6 +1082,7 @@ $(function(){
         default:
           uiCtrl.showScreen(screen);
       }
+      window.scrollTo(0,0); 
     };
 
     return {
