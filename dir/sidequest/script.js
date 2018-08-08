@@ -17,7 +17,7 @@ $(function(){
     };
     var getMainQuestBank = function(){
 
-      var newBank = '';
+      var newBank = [];
 
       $.ajax('data.json', {
         dataType: 'json',
@@ -31,7 +31,7 @@ $(function(){
 
       });
 
-      if (newBank) {
+      if (newBank.length > 0) {
         console.log('Returning newBank');
         console.log(newBank);
         return newBank;
