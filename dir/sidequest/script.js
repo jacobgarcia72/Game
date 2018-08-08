@@ -17,12 +17,14 @@ $(function(){
     };
     var getMainQuestBank = function(){
 
+      var newBank = '';
+
       $.ajax('data.json', {
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
           console.log(retrievedData.mainQuests);
-          return retrievedData.mainQuests;
+          newBank = retrievedData.mainQuests;
         },
         error: function(){
           alert("There has been an error loading necessary data for this game.");
@@ -30,6 +32,10 @@ $(function(){
 
       });
 
+      if (newBank) {
+        return newBank;
+      }
+      
       return [
         //hide a coin chest
         {
