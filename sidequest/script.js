@@ -20,6 +20,7 @@ $(function(){
       var newBank = [];
 
       $.ajax('data.json', {
+        async: false,
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
