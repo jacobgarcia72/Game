@@ -23,7 +23,6 @@ $(function(){
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
-          console.log(retrievedData.mainQuests);
           newBank = retrievedData.mainQuests;
         },
         error: function(){
