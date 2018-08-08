@@ -288,6 +288,30 @@
           ]
         }
       ]
+    },
+    
+    {
+      "coins": 5,
+      "pages": 
+      [
+        {
+          "awards": [0],
+          "penalties": [1],
+          "caption": "test",
+          "options": 
+          [
+            {
+              "caption": "test",
+              "nextPage": 1
+            },
+            {
+              "caption": "test",
+              "nextPage": 2
+            }
+          ]
+        }
+
+      ]
     }
 
   ],

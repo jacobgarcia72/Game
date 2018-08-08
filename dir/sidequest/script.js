@@ -16,16 +16,17 @@ $(function(){
       ]
     };
     var getMainQuestBank = function(){
-      var url = 'data.json';
-      $.ajax(url, {
+
+      $.ajax('data.json', {
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
-          console.log(retrievedData);
+          return retrievedData.mainQuests;
         },
         error: function(){
           alert("There has been an error loading necessary data for this game.");
         }
+
       });
 
       return [
