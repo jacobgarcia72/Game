@@ -157,10 +157,10 @@ function nextPlayer() {
 
 //These 2 function will turn questions into 3rd or 2nd person statements:
 function makeThirdPerson(str, name){
-  return str.replace('Name', name);
+  return str.split('Name').join(name);
 }
 function makeSecondPerson(str){
-  return str.replace('Name\'s', 'your').replace('Name', 'you').replace('does','do');
+  return str.split('Name\'s').join('your').split('Name').join('you').split('does').join('do');
 }
 
 function loadQuestion() {

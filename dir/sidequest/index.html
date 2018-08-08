@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Side Quest</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+  </head>
+  <body>
+
+<!-- Trophy -->
+    <div class="greenBack iconContainer" style="display: none; opacity: 0;">
+        <img src="trophy.png" id="trophyIcon">
+    </div>
+    
+    
+<!--  Header  -->
+    
+    <header class="gameBanner">
+      <h1><span class="greenText">Side</span><span>Quest</span></h1>
+    </header>
+
+    
+<!--  Game  -->
+    
+    <div class="strip pad center greyBack" id="gameBody">
+
+      <!-- Input Players -->
+      <form id="frmEnterPlayers" style="display: none;" class="gameElement">
+        Number of Players<br>
+        <!-- <input id="txtNumPlayers" type="number" min=3 max=8 maxlength=1 value="3"> -->
+        <input type="button" value="3" class="greenHover btnNum">
+        <input type="button" value="4" class="greenHover btnNum">
+        <input type="button" value="5" class="greenHover btnNum">
+        <input type="button" value="6" class="greenHover btnNum">
+        <input type="button" value="7" class="greenHover btnNum">
+        <input type="button" value="8" class="greenHover btnNum">
+        <div id="nameInputs">
+
+        </div>
+      </form>
+
+
+      <!-- Header -->
+      <p id="gameHeader" class="gameElement">Welcome to Side Quest</p>
+
+
+      <!-- Next Player -->
+      <p id="nextPlayer" style="display: none;" class="gameElement">Jacob</p>
+      
+
+      <!-- Text -->
+      <div id="instructions" class="gameElement">
+        <p>Players will compete for points in a series of group challenges.</p><p>Meanwhile, each player will have secret side quests that only they know.</p><p>The main challenges will earn you points, but the only way to win is by successfully completing a side quest.</p>
+      </div>
+
+
+
+      <!-- Multiple Options -->
+      <form id="frmButtons" style="display: none;" class="gameElement">
+        <input type="submit" value="" class="greenHover" id="option0" data-index="0"><br>
+
+      </form>
+
+
+
+    </div>
+
+    <div class="gameElement" id="foot">
+        <div class = "whiteSpace"></div>
+
+        <div class="center greyBack" id="gameFooter">
+          
+          <!-- Continue Button -->
+          <form id="frmContinue" class="gameElement">
+            <input type="submit" value="Continue" class="greenHover">
+            <br><br>
+          </form>
+
+          <!-- Yes or No -->
+          <form id="frmYesNo" style="display: none;" class="gameElement">
+            <input type="submit" value="Yes" class="greenHover" id="submitYes" data-index="0">
+            <input type="submit" value="No" class="greenHover" id="submitNo" data-index="1">
+            <br><br><br>
+          </form>
+
+
+        </div>
+    </div>
+
+  
+    
+    <!-- script -->
+    <script type="text/javascript" src="../libraries/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

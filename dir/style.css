@@ -1,3 +1,4 @@
+
 /******* DEFAULTS ******************************************************/
 
 body {
@@ -17,9 +18,18 @@ body {
   padding-bottom: 0px;
   padding-top: 12px;
 }
+div.strip p {
+  font-size: 22pt;
+  margin: 6px; 
+}
+
+.noMargin {
+  margin: 0px;
+}
+
 .pad {
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 12%;
+  padding-right: 12%;
 }
 
 .center {
@@ -59,17 +69,120 @@ body {
   box-sizing: border-box;
 }
 
-form {
-  padding: 12px;
-}
-
-div.strip p {
-  font-size: 22pt;
-  margin: 6px; 
-}
-
 .noMargin {
   margin: 0px;
+}
+div.noPad {
+  padding: 0px;
+}
+
+#gameFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
+  margin: 0;
+  padding-top:12px;
+  background-color: #d0d9df;
+  background: linear-gradient(to bottom, #ecf3ff, #ffffff);
+}
+.whiteSpace {
+  height: 180px;
+}
+
+h1, h2, .pad, header.banner, header.gameBanner, p, #gameFooter, .whiteSpace, .iconContainer, .iconContainer > * {
+  transition-duration: 0.4s;
+}
+
+/******* COLORED TEXT & BACKS ***************************************************/
+
+.greenText {
+  color: #11dd99;
+}
+.orangeText {
+  color: #e68230;
+}
+.blueText {
+  color: #3154c5;
+}
+
+.greenBack {
+  background-color: #11dd99;
+}
+
+
+form input[type="submit"].greenHover:hover {
+  background: #11dd99;
+}  
+
+form input[type="submit"].blueHover:hover {
+  background: #3154c5;
+}  
+
+.greyBack {
+  background-color: #eff6f9;
+  background: linear-gradient(to bottom, #eff6f9, #f8fdff);
+}
+
+.colorChoices {
+  line-height: 480px;
+  color: #eeeeee;
+  font-size: 28pt;
+  cursor: pointer;
+}
+.colorCorrect {
+  line-height: 480px;
+  color: #eeeeee;
+  font-size: 42pt;
+  background-color: #279235;
+}
+.colorIncorrect {
+  line-height: 480px;
+  color: #eeeeee;
+  font-size: 42pt;
+  background-color: #c71d1d;
+}
+div.yesNo .colorChoices {
+  line-height: 360px;
+}
+div.yesNo .colorCorrect {
+  line-height: 360px;
+}
+div.yesNo .colorIncorrect {
+  line-height: 360px;
+}
+.colorChoice1 {
+  background-color: #ce762e;
+}
+.colorChoice2 {
+  background-color: #3154c5;
+}
+.colorChoice1:hover {
+  background-color: #f08126;
+}
+.colorChoice2:hover {
+  background-color: #3560eb;
+}
+.colorChoiceYes {
+  background-color: #2baf8e;
+}
+.colorChoiceNo {
+  background-color: #c54162;
+}
+.colorChoiceYes:hover {
+  background-color: #24c99f;
+}
+.colorChoiceNo:hover {
+  background-color: #e4426b;
+}
+[class*="colorChoice"] {
+  transition-duration: 0.4s;
+}
+
+/********** Forms *******************************************************/
+
+form {
+  padding: 12px;
 }
 
 form input[type="number"] {
@@ -83,29 +196,52 @@ form input[type="number"] {
   background: #fdfeff;
   color: #333344;
   font-family: 'Comfortaa', sans-serif;
+  margin: 8px 8px 18px 8px;
 }
-form input[type="submit"] {
-  box-shadow: 4px 4px 10px 2px rgba(0,0,0,0.2);
+form input[type="submit"], form input[type="button"] {
   font-size: 24pt;
   text-align: center;
   border: none;
-  border-radius: 5px;
+  border-radius: 32px;
   border-style: none;
   background: #99aabb;
   color: #fafaff;
-  padding: 12px 36px;
   margin: auto;
   margin: 20px 12px 12px 12px;
   width: 320px;
+  height: 64px;
   font-family: 'Comfortaa', sans-serif;
+  cursor: pointer;
+  transition-duration: 0.3s;
 }
+form#frmYesNo input[type="submit"] {
+  margin: 20px 12px 12px 12px;
+  width: 320px;
+}
+form input[type="submit"], form input[type="button"]:focus {
+  outline: 0;
+}
+form input[type="submit"]:hover {
+  transform: scale(1.04);
+}
+form input[type="button"]:hover {
+  transform: scale(1.2);
+}
+
+form input[type="submit"]:disabled,
+form input[type="submit"]:disabled:hover {
+  background: #484c53;
+  color: #7d7d85;
+  cursor: default;
+  transform: scale(1);
+}
+
+
 form.frmAnswer input[type="submit"] {
   width: 95%;
   margin: 12px 0px 0px 0px;
 }
-form input[type="submit"].greenHover:hover {
-  background: #11dd99;
-}  
+
 form input[type="text"] {
   height: 58px;
   width: 95%;
@@ -118,83 +254,28 @@ form input[type="text"] {
   color: #333344;
   font-family: 'Comfortaa', sans-serif;
   padding-left: 12px;
+  margin-bottom: 12px;
 }
 
-form.frmName {
-  display: none;
+select {
+  font-size: 36pt;
+  font-family: 'Comfortaa', sans-serif;
 }
 
-/******* COLORED TEXT & BACKS ***************************************************/
-
-.greenText {
-  color: #11dd99;
-}
-.greenBack {
-  background-color: #11dd99;
-}
-.greyBack {
-  background-color: #eff6f9;
-  background: linear-gradient(to bottom, #eff6f9, #f8fdff);
-}
-
-/********* DROPDOWN MENU **************************************************/
-
-/* Dropdown Button */
-.dropbtn {
-    color: white;
-    width: 100px;
-    height: 60px;
-    font-size: 32px;
-    border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content button {
-    color: black;
-    text-decoration: none;
-    display: block;
-    width: 100px;
-    height: 60px;
-    font-size: 32px;
-    border: none;
-    background-color: #eef9ff;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content button:hover {background-color: #e0efff;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #c0d0df;}
 
 
 /******** Special Styling **********************************************/
 
-header.banner {
-  padding: 64px 12px 32px 12px;
+
+header.banner, header.gameBanner {
+  padding: 64px 12px;
   text-align: center;
 }
 
 
 header.banner h1, 
-header.banner h2 {
+header.banner h2,
+header.gameBanner h1 {
   padding: 0px;
   margin: 0px;
   line-height: 1;
@@ -214,17 +295,36 @@ header.banner h2 {
   word-spacing: -5px;
 }
 
-p.questionText {
-  font-size: 24pt;
+header.gameBanner h1 {
+  font-size:44pt;
+  color: #889faa;
+  text-transform: uppercase;
+  letter-spacing: 6px;
 }
 
-div.gameLinks div.col-33 {
-  padding-bottom: 75px;
+#gameHeader {
+  font-size: 24pt;
+  font-weight: 700;
+} 
+#nextPlayer {
+  font-size: 72pt;
+  font-weight: 700;
+  line-height: 72pt;
+  padding: 24pt 0 36pt 0;
+} 
+#instructions p {
+  font-size: 20pt;
+  padding: 10pt 0;
+}
+
+div.gameLinks h2 {
+  margin: 0px 0px 10px 0px;
 }
 
 div.gameLinks a {
   display: block;
   margin: auto;
+  margin-bottom: 40px;
   font-size: 16pt;
   text-decoration: none;
   text-align: center;
@@ -235,12 +335,18 @@ div.gameLinks a {
   border-radius: 39px;
   width: 90%;
   line-height: 78px;
+  transition-duration: 0.3s;
   
 }
 
 div.gameLinks a:hover {
   color: #ffffff;
   background-color: #44ccff;
+  transform: scale(1.08);
+}
+
+p.questionText {
+  font-size: 24pt;
 }
 
 div.inputNames {
@@ -248,29 +354,117 @@ div.inputNames {
   padding-bottom: 36px;
 }
 
+div #questionText {
+  padding: 10px;
+  font-size: 24pt;
+}
+
+form#frmButtons input[type="submit"] {
+  height: 72px;
+  width: 100%;
+  max-width: 720px;
+  border-radius: 36px;
+  margin-bottom: 24px;
+}
+
+form input.btnNum {
+  width: 64px;
+  border-radius: 10px;
+  margin: 12px 2px 30px 2px;
+  max-width: 13%;
+}
+form input.btnGender {
+  width: 45%;
+  height: 48px;
+  border-radius: 10px;
+  margin: 0px 2.5%;
+  font-size:16pt;
+  transform: translateY(-7px);
+}
+form input.btnGender:hover {
+  transform: translateY(-7px) scale(1.1);
+}
+form input[type="button"].greenSelected {
+  background-color: #11dd99;
+}
+
+.iconContainer  {
+  position: fixed; 
+}
+.iconContainer, .iconContainer > * {  
+  height: 100px;
+  width: 100px;
+  top: 35px; 
+  right: 30px;
+}
+.iconContainer:hover {
+  transform: scale(1.2);
+}
+img#trophyIcon:hover {
+  opacity: 0.7;
+  
+}
+.doubleSize {
+  transform: scale(2);
+}
+
 /*############ Mobile #############*/
 
-@media screen and (max-width: 1280px) {
-  
-  
-  div.gameLinks div.col-33 {
-    width: 50%;
-  }
-  
-  div.col-25 {
+
+@media screen and (max-width: 1080px) {
+
+  .col-25 {
     width: 33.33%;
   }
-    
-  div.gameLinks a {
-    line-height: 72px;
-    border-radius: 36px;
-    
+
+  .col-50 {
+    width: 100%;
+  }
+  .colorChoices {
+    line-height: 240px;
+  }
+
+  div.yesNo .colorChoices {
+    line-height: 180px;
+  }
+
+  header.banner, header.gameBanner {
+    padding: 32px 12px;
+  }
+
+  header.banner h1 {
+    font-size: 72pt;
   }
   
+  header.banner h2 {
+    font-size:28pt;
+  }
+  header.gameBanner h1 {
+    font-size: 36pt;
+  }
+
+  #gameHeader {
+    font-size: 22pt;
+  } 
+  #instructions p {
+    font-size: 18pt;
+  }
+  #nextPlayer {
+    font-size: 66pt;
+  }
+  .iconContainer, .iconContainer > *  {
+    height: 80px;
+    width: 80px;
+    top: 15px; 
+  }
 }
 
 @media screen and (max-width: 800px) {
-  
+
+  header.gameBanner h1 {
+    font-size: 28pt;
+  }
+
   p {
     font-size: 14pt;
   }
@@ -283,15 +477,25 @@ div.inputNames {
     font-size: 18pt;
   }
 
-  div.strip h1 {
-    font-size: 28pt;
+  div.strip p {
+    font-size: 18pt;
+    margin: 4px; 
   }
 
-  div.gameLinks div.col-33 {
-    width: 100%;
-    padding-bottom: 30px;
+  div #questionText {
+    font-size: 20pt;
+    line-height: 2rem;
   }
-  
+
+  #gameHeader {
+    font-size: 20pt;
+  } 
+  #instructions p {
+    font-size: 16pt;
+  }
+  #nextPlayer {
+    font-size: 58pt;
+  }
   div.inputNames div.col-25,
   div.inputNames div.col-33 {
     width: 50%;
@@ -305,31 +509,98 @@ div.inputNames {
     margin: 0px;
     width: 100%;
   }
-  
-  header.banner {
-    padding: 20px 12px 30px 12px;
-    text-align: center;
-  }
-  
-  header.banner h1 {
-    font-size: 60pt;
-    line-height: 1.1;
+
+  form#frmYesNo input[type="submit"] {
+    margin: 20px 6px 12px 6px;
+    width: 280px;
   }
 
-  header.banner h2 {
-    font-size:26pt;
+  .iconContainer, .iconContainer > *  {
+    height: 72px;
+    width: 72px;
+    top: 12px; 
+    right: 25px;
   }
-
-  div.gameLinks a {
-    width: 95%;
-  }
-  
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 640px) {
+
+  header.gameBanner h1 {
+    font-size: 20pt;
+  }
+
+  header.banner h1 {
+    font-size: 58pt;
+  }
+  
+  header.banner h2 {
+    font-size:20pt;
+  }
+
+  .pad {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   div.inputNames div.col-25,
   div.inputNames div.col-33 {
     width: 100%;
   }
+
+  div.strip p {
+    font-size: 16pt;
+    margin: 2px; 
+  }
+  #gameHeader {
+    font-size: 18pt;
+  } 
+  #instructions p {
+    font-size: 14pt;
+  }
+  #nextPlayer {
+    font-size: 52pt;
+  }
+  form input[type="submit"] {
+    font-size: 18pt;
+    margin: 6px;
+    width: 280px;
+    height: 54px;
+  }
+
+  form#frmYesNo input[type="submit"] {
+    width: 200px;
+    margin-top: 4px;
+  }
+
+  #gameFooter {
+    height: 100px;
+    padding: 0px;
+  }
+
+  .whiteSpace {
+    height: 120px;
+  }
+
+  .iconContainer, .iconContainer > *  {
+    height: 65px;
+    width: 65px;
+    right: 20px;
+  }
 }
 
+@media screen and (max-width: 480px) {
+  .pad {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+  form input.btnGender {
+    width: 48%;
+    margin: 0 0 0 2%;
+    font-size:16pt;
+  }
+  form#frmYesNo input[type="submit"] {
+    width: 160px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
