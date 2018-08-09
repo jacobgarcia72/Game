@@ -580,6 +580,7 @@ $(function(){
           } else {
             clearInterval(timer);
             $(domID.continue + ' input').val('Continue');
+            navigator.vibrate(1000);
           }
         }, 1000);
 
