@@ -3,26 +3,30 @@ $(function(){
   //Data Controller
   var dataController = (function() {
     var getSideQuestBank = function() {
+
+      var newBank = [];
+
+      $.ajax('data.json', {
+        async: false,
+        dataType: 'json',
+        method: 'GET',
+        success: function(retrievedData){
+          newBank = retrievedData.sideQuests;
+        },
+        error: function(){
+          return; //alert("There has been an error loading necessary data for this game.");
+        }
+
+      });
+      console.log(newBank);
+      if (newBank.length > 0) {
+        console.log('Returning newBank');
+        console.log(newBank);
+        return newBank;
+      }
+
       return [
-        ['Sing Along','You must get Name1 or Name2 to join you in singing the words of a song.'],
-        ['Name1 Drinks','Name1 must drink an entire glass of water, can of soda, or any other drink, but it must be something that you brought to him1.'],
-        ['Name1 Eats','Name1 must eat a snack that you bring him1. Whatever it is, he1 must eat the entire thing.'],
-        ['Name1 Loves You','You must get Name1 to tell you he1 loves you. Context doesn\'t matter, but he1 must use the word "love."'],
-        ['Jinx','You must "jinx" Name1. In other words, you must say a phrase at the exact same time that he1 does, and then yell "Jinx!" The particular phrase doesn\'t matter, but it must be more than one word long. THEN, you must ALSO "jinx" Name2.'],
-        ['Outside & Back In','If another player walks outside at any point in the game, you win when they come back in.'],
-        ['Bathroom Break','If Name1 or Name2 goes to the bathroom at any point in the game, you win when they come back.'],
-        ['Phone Call','If another player takes a phone call at any point, you win when they hang up.'],
-        ['Ask Name2','You must get Name1 to ask Name2 a question for you. Name1 must ask Name2 a question that you told him1 to ask.'],
-        ['Name1 Brings Food','If at any point Name1 brings you any food, you win.'],
-        ["Shoes","If at any point another player takes off, or puts on, shoes or sandals, you win."],
-        ["Yawn","If another player opens his or her mouth to yawn at any point, you win when they finish yawning."],
-        ["Hang Out","If you can get Name1 to agree to hang out with you outside of the game at some future date, you win. The agreement must include the specific day you will hang out."],
-        ["Take Picture","If at any point another player takes a picture (selfies count) that includes you in it, you win."],
-        ["Show Picture", "If at any point another player shows you a picture saved on his or her phone, you win."],
-        ["Social Media","If another player interacts with you on social media in any way during the game (liking a post, commenting, sending a friend request, etc.), you win."],
-        ["Phone Number","If at any point another player gives you a phone number, theirs or somebody else's, you win."],
-        ["Movie Quote","If Name1 quotes a movie at any point, you win."],
-        ["Song Lyrics","If Name1 quotes the lyrics to a song at any point, you win."]
+        ['','Data did not properly load.'],
       ]
     };
     var getMainQuestBank = function(){
@@ -35,10 +39,9 @@ $(function(){
         method: 'GET',
         success: function(retrievedData){
           newBank = retrievedData.mainQuests;
-          console.log(newBank);
         },
         error: function(){
-          alert("There has been an error loading necessary data for this game.");
+          return; //alert("Please try again.");
         }
 
       });
@@ -49,324 +52,63 @@ $(function(){
         return newBank;
       }
 
-      return [
-        //hide a coin chest
-        {
-          coins: 5,
-          pages: 
-          [
-            {
-              caption: 'Name0, you have come across a chest containing five gold coins! However, Name1 is very jealous and wants to steal them from you!<br><br>You look around and see two possible places to hide them:<br><br>In the River<br><br>Inside the Cave<br><br>Secretly choose your hiding spot.',
-              options: 
-              [
-                {
-                  caption: 'River',
-                  nextPage: 1
-                },
-                {
-                  caption: 'Cave',
-                  nextPage: 2
-                }
-              ]
-            },
-            {
-              caption: 'You have hidden the coins!<br><br>You may now say anything you would like to say to Name1 to influence his1 decision.<br><br>Pass your device to Name1 and allow him1 to select where he1 would like to look for the coins.<br><br>Name1, where are the coins?',
-              options: 
-              [
-                {
-                  caption: 'River',
-                  nextPage: 3
-                },
-                {
-                  caption: 'Cave',
-                  nextPage: 4
-                }
-              ]
-            },
-            {
-              caption: 'You have hidden your coins!<br><br>You may now say anything you would like to say to Name1 to influence his1 decision.<br><br>Pass your device to Name1 and allow him1 to select where he1 would like to look for the coins.<br><br>Name1, where are the coins?',
-              options: 
-              [
-                {
-                  caption: 'River',
-                  nextPage: 4,
-                },
-                {
-                  caption: 'Cave',
-                  nextPage: 3,
-                }
-              ]
-            },
-            {
-              awards: [1],
-              caption: 'Name1 has found the coins, and has stolen them for him1self!<br><br>Sorry, Name0!<br><br>Name1 is now five coins richer!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 5
-                }
-              ]
-            },
-            {
-              awards: [0],
-              caption: 'Name1 was not able to find the coins!<br><br>Congratulations, Name0!<br><br>You are now five coins richer!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 5
-                }
-              ]
-            },
-          ]
-        },
-        //poison goblets
-        {
-          coins: 5,
-          pages: 
-          [
-            {
-              caption: 'Name0, you have been tasked with the important mission of poisoning Name1, for obvious reasons.<br><br>If you are successful in your mission, you will be rewarded with five coins, while Name1 will lose five coins in medical expenses.<br><br>If you are unsuccessful, you will be penalized five coins for failing your mission.<br><br>Now, time to poison Name1!<br><br>You have before you two silver goblets.<br><br>Secretly select which goblet will contain the poison.<br><br>Choose wisely!',
-              options: 
-              [
-                {
-                  caption: 'Goblet A',
-                  nextPage: 1
-                },
-                {
-                  caption: 'Goblet B',
-                  nextPage: 2
-                }
-              ]
-            },
-            {
-              caption: 'You have successfully poisoned one of the goblets. You may now say whatever you would like to Name1 to influence his1 decision.<br><br>Pass your device to Name1 and allow him1 to select which goblet he1 will drink out of.<br><br>Name1, select your goblet.',
-              options: 
-              [
-                {
-                  caption: 'Goblet A',
-                  nextPage: 3
-                },
-                {
-                  caption: 'Goblet B',
-                  nextPage: 4
-                }
-              ]
-            },
-            {
-              caption: 'You have successfully poisoned one of the goblets. You may now say whatever you would like to Name1 to influence his1 decision.<br><br>Pass your device to Name1 and allow him1 to select which goblet he1 will drink out of.<br><br>Name1, select your goblet.',
-              options: 
-              [
-                {
-                  caption: 'Goblet A',
-                  nextPage: 4
-                },
-                {
-                  caption: 'Goblet B',
-                  nextPage: 3
-                }
-              ]
-            },
-            {
-              awards: [0],
-              penalties: [1],
-              caption: 'Name1 has been poisoned, costing him1 5 coins in medical expenses!<br><br>Name0 has been awarded 5 coins for successfully completing his0 mission!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 5
-                }
-              ]
-            },
-            {
-              penalties: [0],
-              caption: 'Name1 was not poisoned!<br><br>Name0 has failed his0 mission and has been penalized 5 coins!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 5
-                }
-              ]
-            },
-          ]
-        },
-        //pillage
-        {
-          coins: 5,
-          pages: 
-          [
-            {
-              caption: 'Name0, you decide to go pillage a neighboring village. You enter the village, and it\'s filled with modest homes, and one mansion.<br><br>You can get five coins from a modest home, but ten coins from the mansion.<br><br>However, Name1 is following behind you to do some pillaging of his1 own!<br><br>There are plenty of modest homes that you can each get five coins from. But if you BOTH try to pillage the mansion, the owner will wake up, chase you out, and you\'ll both end up with nothing.<br><br>Without revealing your decision, where do you decide to do your pillaging?',
-              options: 
-              [
-                {
-                  caption: 'Modest Home',
-                  nextPage: 1
-                },
-                {
-                  caption: 'Mansion',
-                  nextPage: 2
-                }
-              ]
-            },
-            {
-              caption: 'Here comes Name1! Don\'t tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he chooses to pillage.',
-              options: 
-              [
-                {
-                  caption: 'Modest Home',
-                  nextPage: 3
-                },
-                {
-                  caption: 'Mansion',
-                  nextPage: 4
-                }
-              ]
-            },
-            {
-              caption: 'Here comes Name1! Don\'t tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he chooses to pillage.',
-              options: 
-              [
-                {
-                  caption: 'Modest Home',
-                  nextPage: 5
-                },
-                {
-                  caption: 'Mansion',
-                  nextPage: 6
-                }
-              ]
-            },
-            {
-              awards: [0,1],
-              caption: 'You each chose to pillage modest homes in the village!<br><br>You each get away with five coins!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 7
-                }
-              ]
-            },
-            {
-              awards: [0,1,1],
-              caption: 'While Name0 played it safe and made out with five coins from a modest home, Name1 went for the mansion and successfully got out with ten!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 7
-                }
-              ]
-            },
-            {
-              awards: [0,0,1],
-              caption: 'While Name1 played it safe and made out with five coins from a modest home, Name0 went for the mansion and successfully got out with ten!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 7
-                }
-              ]
-            },
-            {
-              caption: 'You both went for the mansion!<br><br>The owner of the mansion woke up and chased the two of you out with a pitchfork!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 7
-                }
-              ]
-            },
-
-          ]
-        },
-
-        {
-          coins: 5,
-          pages: 
-          [
-            {
-              caption: 'Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is five gold coins!xxHere\'s what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 1
-                }
-              ]
-            },
-            {
-              caption: 'Name2, when they\'re finished, tell us who the winner is!',
-              options: 
-              [
-                {
-                  caption: 'Name0',
-                  nextPage: 2
-                },
-                {
-                  caption: 'Name1',
-                  nextPage: 3
-                }
-              ]
-            },
-            {
-              awards: [0],
-              caption: 'Congratulations, Name0!xxYou\'ve won five coins!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 4
-                }
-              ]
-            },
-            {
-              awards: [1],
-              caption: 'Congratulations, Name1!xxYou\'ve won five coins!',
-              options: 
-              [
-                {
-                  caption: 'Continue',
-                  nextPage: 4
-                }
-              ]
-            }
-          ]
-        },
-
-
-        // {
-        //   coins: 5,
-        //   pages: 
-        //   [
-        //     {
-        //       awards: [0],
-        //       penalties: [1],
-        //       caption: '',
-        //       options: 
-        //       [
-        //         {
-        //           caption: '',
-        //           nextPage: 1
-        //         },
-        //         {
-        //           caption: '',
-        //           nextPage: 2
-        //         }
-        //       ]
-        //     },
-
-        //   ]
-        // },
-
-      ]
+      return [{
+        "coins": 4,
+        "pages": 
+        [
+          {
+            "caption": "Name0, as you know, Name1 has not been laughing enough. This needs to change.xxYou've been assigned the task of making Name1 laugh.xxPass the device to Name2 to read the next page of instructions.",
+            "options": 
+            [
+              {
+                "caption": "Continue",
+                "nextPage": 1
+              }
+            ]
+          },
+          {
+            "caption": "Name2, you will be the judge. Here are the rules.xxName0 has 30 seonds to make Name1 laugh.xxHe0 can't touch him1, but other than that, he0 can do whatever it takes to get Name1 to laugh.xxWhen Name0 is ready, start the timer!",
+            "options": 
+            [
+              {
+                "caption": "Start Timer",
+                "timer": 30,
+                "nextPage": 2
+              }
+            ]
+          },
+          {
+            "caption": "Name2, did Name1 laugh?",
+            "options": 
+            [
+              {
+                "caption": "Yes",
+                "nextPage": 3
+              },
+              {
+                "caption": "No",
+                "nextPage": 4
+              }
+            ]
+          },
+          {
+            "awards": [0],
+            "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 4 coins!",
+            "options": 
+            [
+              {
+                "caption": "Continue",
+                "nextPage": 4
+              }
+            ]
+          }
+      ]}
+  
+  
+  
+    ]
     };
+
     var sideQuestBank = getSideQuestBank();
     var mainQuestBank = getMainQuestBank();
 
@@ -374,7 +116,7 @@ $(function(){
     var Player = function(name, gender) {
       this.name = name;
       this.gender = gender;
-      this.points = 0;
+      this.points = 72;
       this.quests = [];
     };
 
@@ -429,7 +171,7 @@ $(function(){
       };
 
       function formatText(text) {
-        text = text.split('xx').join('<br><br>')
+        text = text.split('xx').join('<br><br>');
         //replace Name0, Name1, and Name2
         for (var i = 0; i <= 2; i++) {
           text = text.split('Name' + i).join(format[i].name)
@@ -625,7 +367,7 @@ $(function(){
           if (!gender) {gender='';};
           var heClassSelected = gender === 'he' ? 'greenSelected' : '';
           var sheClassSelected = gender === 'she' ? 'greenSelected' : '';
-          html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div></div>';
+          html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" tabindex="' + (i + 1) + '" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div></div>';
           if (i%2===1 && i) {
             html += '</div><div class="row">';
           }
@@ -821,8 +563,32 @@ $(function(){
       dataCtrl.createPlayers(playerDetails);
     };
 
-    var loadNextPage = function(nextPage) {
-      curPage = nextPage;
+    var loadNextPage = function(choice) {
+      
+      //see if there's a timer
+      if (mainQuest.pages[curPage].options[choice].timer>0) {
+
+        $(domClass.gameElement).hide(); 
+        $(domID.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer).show();
+        $(domID.continue + ' input').val('Stop Timer');
+        $(domID.foot + ',' + domID.continue).show();
+
+        var timer = setInterval(function(){
+          mainQuest.pages[curPage].options[choice].timer-=1;
+          if (mainQuest.pages[curPage].options[choice].timer >= 0){
+            $(domID.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer);
+          } else {
+            clearInterval(timer);
+            $(domID.continue + ' input').val('Continue');
+          }
+        }, 1000);
+
+
+        return;
+      }
+
+
+      curPage = mainQuest.pages[curPage].options[choice].nextPage;
 
       //if new page > index of the last page, that means the quest is over
       if (curPage > mainQuest.pages.length - 1) {
@@ -941,7 +707,10 @@ $(function(){
               currentScreen = 'viewSideQuests';
               break;
             case 'mainQuest':
-              loadNextPage(mainQuest.pages[curPage].options[0].nextPage);
+              if ($(domID.continue + ' input').val() === 'Stop Timer'){ //if there's a timer and you clicked Stop
+                mainQuest.pages[curPage].options[0].timer = 0; //cut timer short
+              };
+              loadNextPage(0);
               return;
           };
         };
@@ -972,6 +741,7 @@ $(function(){
           switch(currentScreen) {
             case 'unlockQuests':
               if (choice===0) {
+                currentScreen = 'viewSideQuest';
                 dataCtrl.getSideQuest(curP, 10);
                 var newQuestIndex = currentPlayer().quests.length - 1;
                 showScreen(currentScreen, newQuestIndex);
@@ -982,7 +752,7 @@ $(function(){
               break;
             case 'mainQuest':
               //go to the page the chosen option indicates
-              loadNextPage(mainQuest.pages[curPage].options[choice].nextPage);
+              loadNextPage(choice);
               break;
             case 'winner':
               if (choice===0) {
@@ -1091,7 +861,7 @@ $(function(){
           break;
         case 'winner':
           uiCtrl.displayText(domID.header, 'Congratulations, ' + dataCtrl.player(trophyMenu.playerIndex).name + '!!');
-          uiCtrl.displayText(domID.instructions, 'You are the Side Quest champion!<br><br><br><br>Play Again?');
+          uiCtrl.displayText(domID.instructions, '<p>You are the Side Quest champion!<br><br><br>Play Again?</p>');
           break;
         default:
           uiCtrl.showScreen(screen);
