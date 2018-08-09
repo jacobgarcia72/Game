@@ -476,7 +476,10 @@ form input[type="button"].greenSelected {
   } 
   #instructions p {
     font-size: 18pt;
+    line-height: 1.7;
+    padding: 6pt 0;
   } 
+
   #nextPlayer {
     font-size: 47pt;
     padding-top: 40pt;

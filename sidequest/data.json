@@ -22,20 +22,21 @@
     ["Name1 Says \"I\"","Keep a running tally of how many times Name1 uses the word \"I.\" If it reaches 10, you win."],
     ["Like, Um, Uh","Keep a running tally of how many times Name1 says \"Like,\" \"Um,\" or \"Uh.\" If the tally reaches 10, you win."],
     ["Name1 Laughs","Keep a running tally of how many times Name1 laughs. If it gets to 6, you win."],
-    ["30 Coins","You must acquire 30 coins. Coins that you spend don't count. You must have 30 coins in your balance to win the quest."],
+    ["30 Coins","You must acquire 50 coins. Coins that you spend don't count. You must have 50 coins in your balance to win this quest."],
     ["Name1's Behaviors","Observe Name1's behaviors for the following. If you can cross at least 3 off the list, you win.xxFolding his1 armsxxCrossing his1 legsxxCovering his1 mouthxxScratching his1 earxxCoughing"],
     ["Fart","If at any point you hear somebody else fart audibly, you win."],
     ["Stare","You must stare at people throughout the game.xxStare at someone until they ask what you're doing or why you're staring. Reply simply, \"I don't know,\" and look away.xxThe third time you do this successfully, you win."],
-    ["Looking at Phones","Keep count to yourself of how many times other player's look at their phones. (If you're playing on a phone, this phone doesn't count.) If you get to 10, you win."]
+    ["Looking at Phones","Keep count to yourself of how many times other player's look at their phones. (If you're playing on a phone, this phone doesn't count.) If you get to 10, you win."],
+    ["Dude","Get someone to draw attention to the fact that you're saying \"Dude\" a lot.xxHowever, you can't say it more than once per sentence. (For example, you can't just keep saying \"Dude, Dude, Dude\" until someone says something.)"]
   ],
   "mainQuests": 
   [
     {
-      "coins": 5,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "Name0, you have come across a chest containing five gold coins! However, Name1 is very jealous and wants to steal them from you!<br><br>You look around and see two possible places to hide them:<br><br>In the River<br><br>Inside the Cave<br><br>Secretly choose your hiding spot.",
+          "caption": "Name0, you have come across a chest containing 10 gold coins! However, Name1 is very jealous and wants to steal them from you!<br><br>You look around and see two possible places to hide them:<br><br>In the River<br><br>Inside the Cave<br><br>Secretly choose your hiding spot.",
           "options": 
           [
             {
@@ -78,7 +79,7 @@
         },
         {
           "awards": [1],
-          "caption": "Name1 has found the coins, and has stolen them for him1self!<br><br>Sorry, Name0!<br><br>Name1 is now five coins richer!",
+          "caption": "Name1 has found the coins, and has stolen them for him1self!<br><br>Sorry, Name0!<br><br>Name1 is now 10 coins richer!",
           "options": 
           [
             {
@@ -89,7 +90,7 @@
         },
         {
           "awards": [0],
-          "caption": "Name1 was not able to find the coins!<br><br>Congratulations, Name0!<br><br>You are now five coins richer!",
+          "caption": "Name1 was not able to find the coins!<br><br>Congratulations, Name0!<br><br>You are now 10 coins richer!",
           "options": 
           [
             {
@@ -102,11 +103,11 @@
     },
 
     {
-      "coins": 5,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "Name0, you have been tasked with the important mission of poisoning Name1, for obvious reasons.<br><br>If you are successful in your mission, you will be rewarded with 5 coins, while Name1 will lose 10 coins in medical expenses.<br><br>If you are unsuccessful, you will be penalized 5 coins for failing your mission.<br><br>Now, time to poison Name1!<br><br>You have before you two silver goblets.<br><br>Secretly select which goblet will contain the poison.<br><br>Choose wisely!",
+          "caption": "Name0, you have been tasked with the important mission of poisoning Name1, for obvious reasons.<br><br>If you are successful in your mission, you will be rewarded with 10 coins, while Name1 will lose 20 coins in medical expenses.<br><br>If you are unsuccessful, you will be penalized 10 coins for failing your mission.<br><br>Now, time to poison Name1!<br><br>You have before you two silver goblets.<br><br>Secretly select which goblet will contain the poison.<br><br>Choose wisely!",
           "options": 
           [
             {
@@ -150,7 +151,7 @@
         {
           "awards": [0],
           "penalties": [1,1],
-          "caption": "Name1 has been poisoned, costing him1 10 coins in medical expenses!<br><br>Name0 has been awarded 5 coins for successfully completing his0 mission!",
+          "caption": "Name1 has been poisoned, costing him1 20 coins in medical expenses!<br><br>Name0 has been awarded 10 coins for successfully completing his0 mission!",
           "options": 
           [
             {
@@ -161,7 +162,7 @@
         },
         {
           "penalties": [0],
-          "caption": "Name1 was not poisoned!<br><br>Name0 has failed his0 mission and has been penalized 5 coins!",
+          "caption": "Name1 was not poisoned!<br><br>Name0 has failed his0 mission and has been penalized 10 coins!",
           "options": 
           [
             {
@@ -174,11 +175,11 @@
     },
 
     {
-      "coins": 5,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "Name0, you decide to go pillage a neighboring village. You enter the village, and it's filled with modest cottage homes, and one mansion.<br><br>You can get 5 coins from a cottage, but 10 coins from the mansion.<br><br>However, Name1 is following behind you to do some pillaging of his1 own!<br><br>There are plenty of cottages that you can each get 5 coins from. But if you BOTH try to pillage the mansion, the owner will wake up, chase you out, and you'll both end up with nothing.<br><br>Without revealing your decision, where do you decide to do your pillaging?",
+          "caption": "Name0, you decide to go pillage a neighboring village. You enter the village, and it's filled with modest cottage homes, and one mansion.<br><br>You can get 10 coins from a cottage, but 20 coins from the mansion.<br><br>However, Name1 is following behind you to do some pillaging of his1 own!<br><br>There are plenty of cottages that you can each get 10 coins from. But if you BOTH try to pillage the mansion, the owner will wake up, chase you out, and you'll both end up with nothing.<br><br>Without revealing your decision, where do you decide to do your pillaging?",
           "options": 
           [
             {
@@ -192,7 +193,7 @@
           ]
         },
         {
-          "caption": "Here comes Name1! Don't tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he chooses to pillage.",
+          "caption": "Here comes Name1! Don't tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he1 chooses to pillage.",
           "options": 
           [
             {
@@ -206,7 +207,7 @@
           ]
         },
         {
-          "caption": "Here comes Name1! Don't tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he chooses to pillage.",
+          "caption": "Here comes Name1! Don't tell him1 where you are!<br><br>Pass your device to Name1, and let him1 select where he1 chooses to pillage.",
           "options": 
           [
             {
@@ -221,7 +222,7 @@
         },
         {
           "awards": [0,1],
-          "caption": "You each chose to pillage small cottages in the village!<br><br>You each get away with 5 coins!",
+          "caption": "You each chose to pillage small cottages in the village!<br><br>You each get away with 10 coins!",
           "options": 
           [
             {
@@ -232,7 +233,7 @@
         },
         {
           "awards": [0,1,1],
-          "caption": "While Name0 played it safe and made out with 5 coins from a small cottage, Name1 went for the mansion and successfully got out with 10!",
+          "caption": "While Name0 played it safe and made out with 10 coins from a small cottage, Name1 went for the mansion and successfully got out with 20!",
           "options": 
           [
             {
@@ -243,7 +244,7 @@
         },
         {
           "awards": [0,0,1],
-          "caption": "While Name1 played it safe and made out with 5 coins from a small cottage, Name0 went for the mansion and successfully got out with 10!",
+          "caption": "While Name1 played it safe and made out with 10 coins from a small cottage, Name0 went for the mansion and successfully got out with 20!",
           "options": 
           [
             {
@@ -267,11 +268,11 @@
     },
 
     {
-      "coins": 8,
+      "coins": 15,
       "pages": 
       [
         {
-          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is 8 gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
+          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is 15 gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
           "options": 
           [
             {
@@ -296,7 +297,7 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYou've won 8 coins!",
+          "caption": "Congratulations, Name0!xxYou've won 15 coins!",
           "options": 
           [
             {
@@ -307,7 +308,7 @@
         },
         {
           "awards": [1],
-          "caption": "Congratulations, Name1!xxYou've won 8 coins!",
+          "caption": "Congratulations, Name1!xxYou've won 15 coins!",
           "options": 
           [
             {
@@ -320,11 +321,11 @@
     },
     
     {
-      "coins": 5,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "Name0, you and Name1 have successfully robbed the bank and gotten out with 5 coins each!xxHowever, the law was not far behind! Both of you have been brought in by the warden for questioning to find out who was behind the robbery.xxLuckily for you, there is not enough evidence to convict either one of you without an eyewitness.xxIf neither of you says anything, you're both let go and get away with 5 coins each!xxHowever, there is a reward of 5 coins for any information that leads to an arrest.xxIf one of you rats out the other, they'll walk away with the reward in addition to their 5 coins, for a total of 10 coins! The other will lose all their coins and be fined 5 coins.xxHowever, if both of you rats out the other, you'll both walk away with nothing.xxAfter discussing what you plan on doing, Name0, secretly select your choice:",
+          "caption": "Name0, you and Name1 have successfully robbed the village treasury and gotten out with 10 coins each!xxHowever, the law was not far behind! Both of you have been brought in by the warden for questioning to find out who was behind the robbery.xxLuckily for you, there is not enough evidence to convict either one of you without an eyewitness.xxIf neither of you says anything, you're both let go and get away with 10 coins each!xxHowever, there is a reward of 10 coins for any information that leads to an arrest.xxIf one of you rats out the other, they'll walk away with the reward in addition to their 10 coins, for a total of 20! The other will lose all the coins they stole and be fined 10 coins.xxHowever, if both of you rats out the other, you'll both walk away with nothing.xxAfter discussing what you plan on doing, Name0, secretly select your choice:",
           "options": 
           [
             {
@@ -367,7 +368,7 @@
         },
         {
           "awards": [0,1],
-          "caption": "You have both been released with insufficient evidence to convict either one of you!xxCongratulations! You both walk away with 5 coins!",
+          "caption": "You have both been released with insufficient evidence to convict either one of you!xxCongratulations! You both walk away with 10 coins!",
           "options": 
           [
             {
@@ -379,7 +380,7 @@
         {
           "awards": [1,1],
           "penalties": [0],
-          "caption": "The warden has been provided the evidence needed to convict Name0!xxHis0 penalty?xx5 coins.xxMeanwhile, Name1 walks away with 10!",
+          "caption": "The warden has been provided the evidence needed to convict Name0!xxHis0 penalty?xx10 coins.xxMeanwhile, Name1 walks away with 20!",
           "options": 
           [
             {
@@ -391,7 +392,7 @@
         {
           "awards": [0,0],
           "penalties": [1],
-          "caption": "The warden has been provided the evidence needed to convict Name1!xxHis1 penalty?xx5 coins.xxMeanwhile, Name0 walks away with 10!",
+          "caption": "The warden has been provided the evidence needed to convict Name1!xxHis1 penalty?xx10 coins.xxMeanwhile, Name0 walks away with 20!",
           "options": 
           [
             {
@@ -415,11 +416,11 @@
 
 
     {
-      "coins": 5,
+      "coins": 8,
       "pages": 
       [
         {
-          "caption": "Name1 has been comissioned to write the village's new official dictionary of words, but he1 needs one more entry to complete it.xxPass your device Name1.",
+          "caption": "Name1 has been comissioned to compile the village's new official dictionary of words, but he1 needs one more entry to complete it.xxPass your device Name1.",
           "options": 
           [
             {
@@ -429,7 +430,7 @@
           ]
         },
         {
-          "caption": "Name1, make up a funny sounding word. Then give Name0 and Name2 each an opportunity to define the word.xxWhen they're done, select the winning entry. The winner is awarded 5 coins.",
+          "caption": "Name1, make up a funny sounding word. Then give Name0 and Name2 each an opportunity to define the word.xxWhen they're done, select the winning entry. The winner is awarded 8 coins.",
           "options": 
           [
             {
@@ -444,7 +445,7 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYour most excellent definition has been recorded in the Official Name1's Dictionary and preserved for generations to come!xxYou've been awarded 5 coins.",
+          "caption": "Congratulations, Name0!xxYour most excellent definition has been recorded in the Official Name1's Dictionary and preserved for generations to come!xxYou've been awarded 8 coins.",
           "options": 
           [
             {
@@ -455,7 +456,7 @@
         },
         {
           "awards": [2],
-          "caption": "Congratulations, Name2!xxYour most excellent definition has been recorded in the Official Name1's Dictionary and preserved for generations to come!xxYou've been awarded 5 coins.",
+          "caption": "Congratulations, Name2!xxYour most excellent definition has been recorded in the Official Name1's Dictionary and preserved for generations to come!xxYou've been awarded 8 coins.",
           "options": 
           [
             {
@@ -468,11 +469,11 @@
     },
 
     {
-      "coins": 8,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "The time has come once again for the annual Arm Wrestling Competition. Name0 and Name1 are the finalists. The prize is 8 gold coins.xxName2 is the judge. Pass him2 the device.",
+          "caption": "The time has come once again for the annual Arm Wrestling Competition. Name0 and Name1 are the finalists. The prize is 10 gold coins.xxName2 is the judge. Pass him2 the device.",
           "options": 
           [
             {
@@ -497,7 +498,7 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYou are the arm wrestling champion! You've been awarded 8 coins!",
+          "caption": "Congratulations, Name0!xxYou are the arm wrestling champion! You've been awarded 10 coins!",
           "options": 
           [
             {
@@ -508,7 +509,7 @@
         },
         {
           "awards": [1],
-          "caption": "Congratulations, Name1!xxYou are the arm wrestling champion! You've been awarded 8 coins!",
+          "caption": "Congratulations, Name1!xxYou are the arm wrestling champion! You've been awarded 10 coins!",
           "options": 
           [
             {
@@ -521,7 +522,7 @@
     },
 
     {
-      "coins": 10,
+      "coins": 20,
       "pages": 
       [
         {
@@ -561,7 +562,7 @@
         },
         {
           "awards": [0,1],
-          "caption": "Congratulations, Name0 and Name1!xxYou have escaped the dragon! Tales of your bravery swept through the land, and you were each awarded the medal of bravery along with 10 coins!",
+          "caption": "Congratulations, Name0 and Name1!xxYou have escaped the dragon! Tales of your bravery swept through the land, and you were each awarded the medal of bravery along with 20 coins!",
           "options": 
           [
             {
@@ -584,7 +585,7 @@
     ]},
 
     {
-      "coins": 4,
+      "coins": 8,
       "pages": 
       [
         {
@@ -624,12 +625,128 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 4 coins!",
+          "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 8 coins!",
           "options": 
           [
             {
               "caption": "Continue",
               "nextPage": 4
+            }
+          ]
+        }
+    ]},
+
+    {
+      "coins": 10,
+      "pages": 
+      [
+        {
+          "caption": "The whole village has gathered to watch the annual Staring Competition between Name0 and Name1. The prize is 10 gold coins.xxName2 is the judge. Pass him2 the device.",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 1
+            }
+          ]
+        },
+        {
+          "caption": "Name2, facilitate the staring competition between Name0 and Name1, and then select the winner.",
+          "options": 
+          [
+            {
+              "caption": "Name0",
+              "nextPage": 2
+            },
+            {
+              "caption": "Name1",
+              "nextPage": 3
+            }
+          ]
+        },
+        {
+          "awards": [0],
+          "caption": "Congratulations, Name0!xxYou are the staring champion! You've been awarded 10 coins!",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 4
+            }
+          ]
+        },
+        {
+          "awards": [1],
+          "caption": "Congratulations, Name1!xxYou are the staring champion! You've been awarded 10 coins!",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 4
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "coins": 10,
+      "pages": 
+      [
+        {
+          "caption": "Name0, Name1 is in danger! There is a flock of wild animals heading in his1 direction and you need to warn him1!xxUnfortunately, on your way, you trip and fall face first into a pool of acid. You can no longer speak or see, and your only option is to draw the kind of animal that's coming with your eyes shut.xxGrab some paper and something to draw with, and pass the device to Name2 and have him2 read the next page of instructions.",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 1
+            }
+          ]
+        },
+        {
+          "caption": "Name2, you get to decide what kind of animal Name0 has to draw. Whisper to him0 the animal, then press Start Timer to give him0 30 seconds to draw.xxName0 has to keep his0 eyes shut the entire time, and Name1 has to guess what he0's drawing. If they are successful, they both earn 10 coins. Otherwise, the lose 10.",
+          "options": 
+          [
+            {
+              "caption": "Start Timer",
+              "timer": 30,
+              "nextPage": 2
+            }
+          ]
+        },
+        {
+          "caption": "How did it go?",
+          "options": 
+          [
+            {
+              "caption": "Good",
+              "nextPage": 3
+            },
+            {
+              "caption": "Bad",
+              "nextPage": 4
+            }
+          ]
+        },
+        {
+          "awards": [0,1],
+          "caption": "Congratulations, Name0 and Name1! You each win 10 coins.",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 5
+            }
+          ]
+        },
+        {
+          "penalties": [0,1],
+          "caption": "Sorry, Name0 and Name1! You each lose 10 coins.",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 5
             }
           ]
         }

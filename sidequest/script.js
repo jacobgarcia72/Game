@@ -116,7 +116,7 @@ $(function(){
     var Player = function(name, gender) {
       this.name = name;
       this.gender = gender;
-      this.points = 72;
+      this.points = 10;
       this.quests = [];
     };
 
@@ -171,7 +171,7 @@ $(function(){
       };
 
       function formatText(text) {
-        text = text.split('xx').join('<br><br>');
+        text = text.split('xx').join('</p><p>');
         //replace Name0, Name1, and Name2
         for (var i = 0; i <= 2; i++) {
           text = text.split('Name' + i).join(format[i].name)
@@ -389,7 +389,7 @@ $(function(){
             $(domID.frmEnterPlayers + ',' + domID.continue + ',' + domID.foot).show();
             break;
           case 'instructions':
-            var htmlInstructions = '<p>Each player begins the game with one side quest.</p><p>Players can unlock more quests using coins earned throughout the game.</p><p>A player only needs to complete one side quest in order to win the game. Therefore, additional side quests will give you more chances of winning.</p><p>Side quests may be completed at any point, once the game begins. So try to fulfill your quests when your opponents least expect it.</p><p>Good luck!</p>';
+            var htmlInstructions = '<p>Each player begins the game with 10 coins and one side quest.</p><p>Coins are earned as the game goes on. Players can use coins to unlock more quests.</p><p>A player only needs to complete one side quest in order to win the game. Therefore, additional side quests will give you more chances of winning.</p><p>Side quests may be completed at any point, once the game begins. So try to fulfill your quests when your opponents least expect it.</p><p>Good luck!</p>';
 
             $(domID.header).text('Instructions');
             $(domID.instructions).html(htmlInstructions);
@@ -481,8 +481,8 @@ $(function(){
       showUnlockScreen: function(points) {
         $(domClass.gameElement).hide(); 
 
-        var html = '<p>You have <b>' + points + '</b> coins.</p><p>It costs <b>10</b> coins to unlock a new side quest.</p>';
-        if (points < 10) {
+        var html = '<p>You have <b>' + points + '</b> coins.</p><p>It costs <b>20</b> coins to unlock a new side quest.</p>';
+        if (points < 20) {
           html+='<p>Sorry! Come back another time!</p>';
           $(domID.continue).show();
         } else {
@@ -742,7 +742,7 @@ $(function(){
             case 'unlockQuests':
               if (choice===0) {
                 currentScreen = 'viewSideQuest';
-                dataCtrl.getSideQuest(curP, 10);
+                dataCtrl.getSideQuest(curP, 20);
                 var newQuestIndex = currentPlayer().quests.length - 1;
                 showScreen(currentScreen, newQuestIndex);
               } else if (choice===1) {
