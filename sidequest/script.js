@@ -608,7 +608,7 @@ $(function(){
       },
 
       createPlayerInputs : function() {
-        var html = '';
+        var html = '<div class="row">';
         for (var i = 0; i <= 8; i++) {
           var name = localStorage.getItem('player'+i+'name');
           if (!name) {name='';};
@@ -616,8 +616,12 @@ $(function(){
           if (!gender) {gender='';};
           var heClassSelected = gender === 'he' ? 'greenSelected' : '';
           var sheClassSelected = gender === 'she' ? 'greenSelected' : '';
-          html += '<div class="row" id="rowPlayer' + i + '" style="display:none;"><div class="col-70"><input type="text" value="' + name + '" id="txtName'+ i +'"></div><div class="col-30" data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div>';
+          html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div></div>';
+          if (i%2===1 && i) {
+            html += '</div><div class="row">';
+          }
         };
+        html+="</div>";
         $(domID.nameInputs).html(html);
       },
 
@@ -630,6 +634,7 @@ $(function(){
             numPlayers = localStorage.getItem('numPlayers')//load number from previous game
             if (!numPlayers) {numPlayers=3};
             this.selectNumPlayers(numPlayers);
+            $(domID.header).text("Number of Players:").show();
             $(domID.frmEnterPlayers + ',' + domID.continue + ',' + domID.foot).show();
             break;
           case 'instructions':
