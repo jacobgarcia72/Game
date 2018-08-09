@@ -90,7 +90,7 @@ div.noPad {
   height: 180px;
 }
 
-.pad, #gameFooter {
+.pad, #gameFooter, h1 {
   transition-duration: 0.4s;
 }
 
@@ -425,5 +425,35 @@ form input[type="button"].greenSelected {
   .pad {
     padding-left: 1%;
     padding-right: 1%;
+  }
+
+  header.gameBanner h1 {
+    font-size:40pt;
+  }
+  header.gameBanner {
+    padding: 40px 0px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+
+  .col-25 {
+    width: 33.33%;
+  }
+
+  .col-50 {
+    width: 100%;
+  }
+
+  .pad {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+
+  header.gameBanner h1 {
+    font-size:32pt;
+  }
+  header.gameBanner {
+    padding: 20px 0px;
   }
 }
