@@ -80,14 +80,15 @@ div.noPad {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 180px;
+  height: 150px;
   margin: 0;
   padding-top:12px;
   background-color: #d0d9df;
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
+  border-top: 1px solid #d0d7e2;
 }
 .whiteSpace {
-  height: 180px;
+  height: 155px;
 }
 
 p, input, .pad, #gameFooter, h1, .iconContainer, .iconContainer > * {
@@ -256,6 +257,7 @@ form input[type="text"] {
 form input.playerNameInput {
   max-width: 600px;
   text-align: center;
+  margin-top: 40px;
 }
 
 
@@ -310,7 +312,7 @@ header.gameBanner h1 {
   font-weight: 700;
 } 
 #nextPlayer {
-  font-size: 100pt;
+  font-size: 80pt;
   font-weight: 700;
   line-height: 72pt;
   padding: 60pt 0 36pt 0;
@@ -394,8 +396,8 @@ form input[type="button"].greenSelected {
   position: fixed; 
 }
 .iconContainer, .iconContainer > * {  
-  height: 136px;
-  width: 136px;
+  height: 120px;
+  width: 120px;
   top: 30px; 
   right: 30px;
 }
@@ -440,8 +442,8 @@ form input[type="button"].greenSelected {
   }
 
   .iconContainer, .iconContainer > * {  
-    height: 100px;
-    width: 100px;
+    height: 95px;
+    width: 95px;
     top: 20px; 
     right: 20px;
   }
@@ -463,7 +465,7 @@ form input[type="button"].greenSelected {
   }
 
   header.gameBanner h1 {
-    font-size:32pt;
+    font-size:28pt;
   }
   header.gameBanner {
     padding: 20px 0px;
@@ -476,27 +478,54 @@ form input[type="button"].greenSelected {
     font-size: 18pt;
   } 
   #nextPlayer {
-    font-size: 48pt;
+    font-size: 47pt;
     padding-top: 40pt;
   } 
   .iconContainer, .iconContainer > * {  
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     top: 10px; 
     right: 10px;
   }
+
   form#frmYesNo input[type="submit"] {
-    width: 45%;
+    width: 47%;
+    font-size: 20pt;
+    height: 66px;
+    border-radius: 33px;
+    margin: 0px;
   }
   form input[type="submit"] {
     font-size: 20pt;
+    height: 66px;
+    border-radius: 33px;
     margin: 0px 2px;
   }
+  form input.btnNum {
+    font-size: 20pt;
+    height: 50px;
+    width: 30%;
+    margin: 0px 1px 12px 1px;
+  }
+  
+  form input.btnGender {
+    font-size: 20pt;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  form input.playerNameInput {
+    height: 50px;
+    font-size: 26pt;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
   #gameFooter {
-    height: 110px;
+    height: 90px;
+    padding-top:8px;
   }
   .whiteSpace {
-    height: 120px;
+    height: 95px;
   }
 
 }

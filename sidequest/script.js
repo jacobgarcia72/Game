@@ -13,7 +13,16 @@ $(function(){
         ['Bathroom Break','If Name1 or Name2 goes to the bathroom at any point in the game, you win when they come back.'],
         ['Phone Call','If another player takes a phone call at any point, you win when they hang up.'],
         ['Ask Name2','You must get Name1 to ask Name2 a question for you. Name1 must ask Name2 a question that you told him1 to ask.'],
-        ['Name1 Brings Food','If at any point Name1 brings you any food, you win.']
+        ['Name1 Brings Food','If at any point Name1 brings you any food, you win.'],
+        ["Shoes","If at any point another player takes off, or puts on, shoes or sandals, you win."],
+        ["Yawn","If another player opens his or her mouth to yawn at any point, you win when they finish yawning."],
+        ["Hang Out","If you can get Name1 to agree to hang out with you outside of the game at some future date, you win. The agreement must include the specific day you will hang out."],
+        ["Take Picture","If at any point another player takes a picture (selfies count) that includes you in it, you win."],
+        ["Show Picture", "If at any point another player shows you a picture saved on his or her phone, you win."],
+        ["Social Media","If another player interacts with you on social media in any way during the game (liking a post, commenting, sending a friend request, etc.), you win."],
+        ["Phone Number","If at any point another player gives you a phone number, theirs or somebody else's, you win."],
+        ["Movie Quote","If Name1 quotes a movie at any point, you win."],
+        ["Song Lyrics","If Name1 quotes the lyrics to a song at any point, you win."]
       ]
     };
     var getMainQuestBank = function(){
@@ -762,7 +771,7 @@ $(function(){
         };
 
         $(domID.foot).show();
-
+        window.scrollTo(0,0); 
       },
 
       showTrophyMenu: function(players) {

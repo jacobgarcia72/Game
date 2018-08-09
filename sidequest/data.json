@@ -149,11 +149,11 @@
       "pages": 
       [
         {
-          "caption": "Name0, you decide to go pillage a neighboring village. You enter the village, and it's filled with modest homes, and one mansion.<br><br>You can get five coins from a modest home, but ten coins from the mansion.<br><br>However, Name1 is following behind you to do some pillaging of his1 own!<br><br>There are plenty of modest homes that you can each get five coins from. But if you BOTH try to pillage the mansion, the owner will wake up, chase you out, and you'll both end up with nothing.<br><br>Without revealing your decision, where do you decide to do your pillaging?",
+          "caption": "Name0, you decide to go pillage a neighboring village. You enter the village, and it's filled with modest cottage homes, and one mansion.<br><br>You can get five coins from a cottage, but ten coins from the mansion.<br><br>However, Name1 is following behind you to do some pillaging of his1 own!<br><br>There are plenty of cottages that you can each get five coins from. But if you BOTH try to pillage the mansion, the owner will wake up, chase you out, and you'll both end up with nothing.<br><br>Without revealing your decision, where do you decide to do your pillaging?",
           "options": 
           [
             {
-              "caption": "Modest Home",
+              "caption": "Cottage",
               "nextPage": 1
             },
             {
@@ -167,7 +167,7 @@
           "options": 
           [
             {
-              "caption": "Modest Home",
+              "caption": "Cottage",
               "nextPage": 3
             },
             {
@@ -181,7 +181,7 @@
           "options": 
           [
             {
-              "caption": "Modest Home",
+              "caption": "Cottage",
               "nextPage": 5
             },
             {
@@ -192,7 +192,7 @@
         },
         {
           "awards": [0,1],
-          "caption": "You each chose to pillage modest homes in the village!<br><br>You each get away with five coins!",
+          "caption": "You each chose to pillage small cottages in the village!<br><br>You each get away with five coins!",
           "options": 
           [
             {
@@ -203,7 +203,7 @@
         },
         {
           "awards": [0,1,1],
-          "caption": "While Name0 played it safe and made out with five coins from a modest home, Name1 went for the mansion and successfully got out with ten!",
+          "caption": "While Name0 played it safe and made out with five coins from a small cottage, Name1 went for the mansion and successfully got out with ten!",
           "options": 
           [
             {
@@ -214,7 +214,7 @@
         },
         {
           "awards": [0,0,1],
-          "caption": "While Name1 played it safe and made out with five coins from a modest home, Name0 went for the mansion and successfully got out with ten!",
+          "caption": "While Name1 played it safe and made out with five coins from a small cottage, Name0 went for the mansion and successfully got out with ten!",
           "options": 
           [
             {
@@ -238,11 +238,11 @@
     },
 
     {
-      "coins": 5,
+      "coins": 8,
       "pages": 
       [
         {
-          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is five gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
+          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is eight gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
           "options": 
           [
             {
@@ -267,7 +267,7 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYou've won five coins!",
+          "caption": "Congratulations, Name0!xxYou've won eight coins!",
           "options": 
           [
             {
@@ -278,7 +278,7 @@
         },
         {
           "awards": [1],
-          "caption": "Congratulations, Name1!xxYou've won five coins!",
+          "caption": "Congratulations, Name1!xxYou've won eight coins!",
           "options": 
           [
             {
@@ -295,18 +295,89 @@
       "pages": 
       [
         {
-          "awards": [0],
-          "penalties": [1],
-          "caption": "test",
+          "caption": "Name0, you and Name1 have successfully robbed the bank and gotten out with 5 coins each!xxHowever, the law was not far behind! Both of you have been brought in by the warden for questioning to find out who was behind the robbery.xxLuckily for you, there is not enough evidence to convict either one of you without an eyewitness.xxIf neither of you says anything, you're both let go and get away with 5 coins each!xxHowever, there is a reward of 5 coins for any information that leads to an arrest.xxIf one of you rats out the other, they'll walk away with the reward in addition to their 5 coins, for a total of 10 coins! The other will lose all their coins and be fined 5 coins.xxHowever, if both of you rats out the other, you'll both walk away with nothing.xxAfter discussing what you plan on doing, Name0, secretly select your choice:",
           "options": 
           [
             {
-              "caption": "test",
+              "caption": "Keep quiet",
               "nextPage": 1
             },
             {
-              "caption": "test",
+              "caption": "Rat him1 out",
               "nextPage": 2
+            }
+          ]
+        },
+        {
+          "caption": "Now pass the phone to Name1.xxName1, what do you do?",
+          "options": 
+          [
+            {
+              "caption": "Keep quiet",
+              "nextPage": 3
+            },
+            {
+              "caption": "Rat him0 out",
+              "nextPage": 4
+            }
+          ]
+        },
+        {
+          "caption": "Now pass the phone to Name1.xxName1, what do you do?",
+          "options": 
+          [
+            {
+              "caption": "Keep quiet",
+              "nextPage": 5
+            },
+            {
+              "caption": "Rat him0 out",
+              "nextPage": 6
+            }
+          ]
+        },
+        {
+          "awards": [0,1],
+          "caption": "You have both been released with insufficient evidence to convict either one of you!xxCongratulations! You both walk away with 5 coins!",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 7
+            }
+          ]
+        },
+        {
+          "awards": [1,1],
+          "penalties": [0],
+          "caption": "The warden has been provided the evidence needed to convict Name0!xxHis0 penalty?xx5 coins.xxMeanwhile, Name1 walks away with 10!",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 7
+            }
+          ]
+        },
+        {
+          "awards": [0,0],
+          "penalties": [1],
+          "caption": "The warden has been provided the evidence needed to convict Name1!xxHis1 penalty?xx5 coins.xxMeanwhile, Name0 walks away with 10!",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 7
+            }
+          ]
+        },
+        {
+          "caption": "There is no honor among theives!xxYou both ratted each other out!xxYou each walk away with nothing.",
+          "options": 
+          [
+            {
+              "caption": "Continue",
+              "nextPage": 7
             }
           ]
         }
@@ -324,7 +395,7 @@
       {
         "awards": [0],
         "penalties": [1],
-        "caption": "",
+        "caption": "Name0, ",
         "options": 
         [
           {
