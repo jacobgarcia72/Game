@@ -1,6 +1,10 @@
 
 /******* DEFAULTS ******************************************************/
 
+html,body {
+  height: 100%;
+}
+
 body {
   margin:0px;
   font-family: 'Comfortaa', sans-serif;
@@ -633,6 +637,11 @@ div#scoreBoard p {
   }
   .whiteSpace {
     height: 95px;
+  }
+  .wrapper {
+    min-height: 100%;
+    position: relative;
+    padding-bottom:90px;
   }
 
   select {
