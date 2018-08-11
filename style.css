@@ -91,10 +91,11 @@ div.noPad {
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
 }
-.wrapper {
-  min-height: 100%;
-  position: relative;
-  padding-bottom:160px;
+/* hide the footer if a keyboard comes up */
+@media (pointer:none), (pointer:coarse) {
+  .keyboardOpen {
+    display: none;
+  }
 }
 
 p, input, select, .pad, #gameFooter, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
@@ -109,8 +110,8 @@ p, input, select, .pad, #gameFooter, header.banner, header.gameBanner, h1, h2, .
 .darkgreenText {
   color: #2d7c2d;
 }
-.orangeText {
-  color: #e68230;
+.tealText {
+  color: #0fa099;
 }
 .blueText {
   color: #3154c5;
@@ -132,6 +133,9 @@ form input[type="submit"].darkgreenHover:hover {
 }  
 form input[type="submit"].blueHover:hover {
   background: #3154c5;
+}  
+form input[type="submit"].tealHover:hover {
+  background: #2bafa8;
 }  
 
 .greyBack {
@@ -177,23 +181,25 @@ div.yesNo p#questionText {
 .colorChoice2 {
   background-color: #3154c5;
 }
-.colorChoice1:hover {
-  background-color: #f08126;
-}
-.colorChoice2:hover {
-  background-color: #3560eb;
-}
 .colorChoiceYes {
-  background-color: #2baf8e;
+  background-color: #2bafa8;
 }
 .colorChoiceNo {
-  background-color: #c54162;
+  background-color: #e07f59;
 }
-.colorChoiceYes:hover {
-  background-color: #24c99f;
-}
-.colorChoiceNo:hover {
-  background-color: #e4426b;
+@media (pointer:fine) {
+  .colorChoice1:hover {
+    background-color: #f08126;
+  }
+  .colorChoice2:hover {
+    background-color: #3560eb;
+  }
+  .colorChoiceYes:hover {
+    background-color: #24c9c1;
+  }
+  .colorChoiceNo:hover {
+    background-color: #f8895d;
+  }
 }
 [class*="colorChoice"] {
   transition-duration: 0.4s;
@@ -639,6 +645,7 @@ div#scoreBoard p {
     height: 90px;
     padding-top:8px;
   }
+
   .wrapper {
     padding-bottom:96px;
   }
@@ -671,5 +678,8 @@ div#scoreBoard p {
   }  
   form input[type="submit"].blueHover {
     background: #3154c5;
+  }  
+  form input[type="submit"].tealHover {
+    background: #2bafa8;
   }  
 }

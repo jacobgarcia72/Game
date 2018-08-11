@@ -314,7 +314,8 @@ $(function(){
       btnNumPlayers: '.btnNum',
       btnGender: '.btnGender',
       gameElement: '.gameElement',
-      iconContainer: '.iconContainer'
+      iconContainer: '.iconContainer',
+      playerNameInput: '.playerNameInput'
     };
 
 
@@ -783,6 +784,15 @@ $(function(){
         }
 
       });
+
+      //player inputs
+      $(domClass.playerNameInput).focus(function() {
+        $(domID.foot).addClass('keyboardOpen');
+        console.log($(domID.foot));
+      })
+      $(domClass.playerNameInput).blur(function() {
+        $(domID.foot).removeClass('keyboardOpen');
+      })
 
       //options
       setEventListenersForOptions();
