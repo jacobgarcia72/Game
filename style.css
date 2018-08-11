@@ -91,8 +91,10 @@ div.noPad {
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
 }
-.whiteSpace {
-  height: 155px;
+.wrapper {
+  min-height: 100%;
+  position: relative;
+  padding-bottom:160px;
 }
 
 p, input, select, .pad, #gameFooter, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
@@ -128,7 +130,6 @@ form input[type="submit"].greenHover:hover {
 form input[type="submit"].darkgreenHover:hover {
   background: #2d7c2d;
 }  
-
 form input[type="submit"].blueHover:hover {
   background: #3154c5;
 }  
@@ -237,13 +238,13 @@ form input[type="submit"], form input[type="button"] {
   cursor: pointer;
   transition-duration: 0.3s;
 }
+
 form input[type="submit"]:active, form input[type="button"]:active {
   transform: scale(0.95);
-
 }
 
 form#frmYesNo input[type="submit"] {
-  margin: 20px 12px 12px 12px;
+  margin: 12px 6px;
   width: 45%;
 }
 form input[type="submit"]:focus, form input[type="button"]:focus {
@@ -584,8 +585,8 @@ div#scoreBoard p {
   } 
   #instructions p {
     font-size: 18pt;
-    line-height: 1.7;
-    padding: 6pt 0;
+    line-height: 1.6;
+    padding: 3pt 3pt 0 3pt;
   } 
 
   #nextPlayer {
@@ -597,6 +598,9 @@ div#scoreBoard p {
     width: 70px;
     top: 10px; 
     right: 10px;
+  }
+  header.gameBanner.moveLeft {
+    padding-right: 40px;
   }
 
   form#frmYesNo input[type="submit"] {
@@ -635,13 +639,8 @@ div#scoreBoard p {
     height: 90px;
     padding-top:8px;
   }
-  .whiteSpace {
-    height: 95px;
-  }
   .wrapper {
-    min-height: 100%;
-    position: relative;
-    padding-bottom:90px;
+    padding-bottom:96px;
   }
 
   select {
@@ -655,4 +654,22 @@ div#scoreBoard p {
     padding-top: 4pt;
     padding-bottom: 16pt;
   }
+
+}
+
+
+@media (pointer:none), (pointer:coarse) {
+  /* Turn off hover effects for mobile screens */
+  form#frmButtons input[type="submit"] {
+    background: #99aabb;
+  }
+  form input[type="submit"].greenHover {
+    background: #11dd99;
+  }  
+  form input[type="submit"].darkgreenHover {
+    background: #2d7c2d;
+  }  
+  form input[type="submit"].blueHover {
+    background: #3154c5;
+  }  
 }

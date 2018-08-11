@@ -310,6 +310,7 @@ $(function(){
       trophy: '#trophyIcon'
     };
     var domClass = {
+      banner: '.gameBanner',
       btnNumPlayers: '.btnNum',
       btnGender: '.btnGender',
       gameElement: '.gameElement',
@@ -385,6 +386,7 @@ $(function(){
               var htmlInstructions = '<p>When a player believes he or she has completed a side quest, tap the trophy icon on the top of the screen.</p><p>Let the game begin!</p>';
               $(domClass.iconContainer).show();
               $(domClass.iconContainer).animate({opacity: '1'}, {duration: 250});
+              $(domClass.banner).addClass('moveLeft');
               $(domID.header).text('Read Aloud:').show();
               $(domID.instructions).html(htmlInstructions).show();
               $(domID.continue + ',' + domID.foot).show();
@@ -392,6 +394,7 @@ $(function(){
           case 'passDeviceIntro':
           case 'passDevice':
             $(domID.header).text('Pass the device to');
+            $(domID.continue + ' input').val('Continue');
             $(domID.header + ',' + domID.nextPlayer + ',' + domID.continue + ',' + domID.foot).show();
             break;
           case 'firstSideQuest1':
@@ -582,12 +585,14 @@ $(function(){
 
         var timer = setInterval(function(){
           mainQuest.pages[curPage].options[choice].timer-=1;
+          if ($(domID.nextPlayer).text()==='1') {
+            navigator.vibrate(1500);
+            $(domID.continue + ' input').val('Continue');
+          }
           if (mainQuest.pages[curPage].options[choice].timer >= 0){
             $(domID.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer);
           } else {
             clearInterval(timer);
-            $(domID.continue + ' input').val('Continue');
-            navigator.vibrate(1500);
           }
         }, 1000);
 
@@ -638,6 +643,7 @@ $(function(){
     var closeTrophyMenu = function() {
       trophyMenu.open = false;
       $(domClass.iconContainer).animate({opacity: '1'}, {duration: 250});
+      $(domClass.banner).addClass('moveLeft');
       $(domID.continue + ' input').val('Continue');
       //if they were looking at something on the turn menu when they clicked the icon, just go back to the turn menu to avoid confusion
       if (currentScreen === 'viewSideQuest' || currentScreen === 'viewSideQuests' || currentScreen === 'unlockQuests') {
@@ -650,6 +656,7 @@ $(function(){
       //trophy icon
       $(domID.trophy).on('click', function(){
         $(domClass.iconContainer).animate({opacity: '0'}, {duration: 50});
+        $(domClass.banner).removeClass('moveLeft');
         var players = dataCtrl.getPlayerNamesArray();
         uiCtrl.showTrophyMenu(players);
         setEventListenersForOptions();

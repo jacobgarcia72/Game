@@ -119,6 +119,7 @@ var uiController = (function() {
     },
 
     displayScoreboard: function(name0, score0, name1, score1, curR, totalRounds) {
+      $(dom.banner).text('This or That');
       $(dom.gameBody).show();
       $(dom.gameElement).hide();
       if (score0 >= score1) {
@@ -173,10 +174,11 @@ var uiController = (function() {
           $(dom.gameBoard).show();
           $(dom.gameBody).hide();
           $(dom.continue + ' input').val('Pass');
+          if (guessing) {$(dom.banner).text(other + ' said...');};
           break;
       }
       $(dom.continue).show();
-      //the footer should always show unless your guessing
+      //the footer should always show unless you're guessing
       if (!(guessing && screen==='playing')) {
         $(dom.footer).show();
       }
