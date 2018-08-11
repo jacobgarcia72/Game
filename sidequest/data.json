@@ -19,10 +19,10 @@
     ["Phone Number","If at any point another player gives you a phone number, theirs or somebody else's, you win."],
     ["Movie Quote","If Name1 quotes a movie at any point, you win."],
     ["Song Lyrics","If Name1 quotes the lyrics to a song at any point, you win."],
-    ["Name1 Says \"I\"","Keep a running tally of how many times Name1 uses the word \"I.\" If it reaches 10, you win."],
+    ["Name1 Says \"I\"","Keep a running tally of how many times Name1 uses the word \"I\" or \"I'm.\" If it reaches 10, you win."],
     ["Like, Um, Uh","Keep a running tally of how many times Name1 says \"Like,\" \"Um,\" or \"Uh.\" If the tally reaches 10, you win."],
     ["Name1 Laughs","Keep a running tally of how many times Name1 laughs. If it gets to 6, you win."],
-    ["30 Coins","You must acquire 50 coins. Coins that you spend don't count. You must have 50 coins in your balance to win this quest."],
+    ["100 Coins","You must acquire 100 coins. Coins that you spend don't count. You must have 100 coins in your balance to win this quest."],
     ["Name1's Behaviors","Observe Name1's behaviors for the following. If you can cross at least 3 off the list, you win.xxFolding his1 armsxxCrossing his1 legsxxCovering his1 mouthxxScratching his1 earxxCoughing"],
     ["Fart","If at any point you hear somebody else fart audibly, you win."],
     ["Stare","You must stare at people throughout the game.xxStare at someone until they ask what you're doing or why you're staring. Reply simply, \"I don't know,\" and look away.xxThe third time you do this successfully, you win."],
@@ -268,11 +268,11 @@
     },
 
     {
-      "coins": 15,
+      "coins": 10,
       "pages": 
       [
         {
-          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is 15 gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
+          "caption": "Name0, the local village is holding an eating competition, and you and Name1 are finalists!xxThe grand prize is 10 gold coins!xxHere's what you need to do.xxGo to the kitchen, the pantry, your hidden stash, or wherever you keep food. Find two identical food items.xxName2 can be the judge, when he2 says go, the first one to finish eating wins the prize!",
           "options": 
           [
             {
@@ -297,7 +297,7 @@
         },
         {
           "awards": [0],
-          "caption": "Congratulations, Name0!xxYou've won 15 coins!",
+          "caption": "Congratulations, Name0!xxYou've won 10 coins!",
           "options": 
           [
             {
@@ -308,7 +308,7 @@
         },
         {
           "awards": [1],
-          "caption": "Congratulations, Name1!xxYou've won 15 coins!",
+          "caption": "Congratulations, Name1!xxYou've won 10 coins!",
           "options": 
           [
             {
@@ -536,12 +536,12 @@
           ]
         },
         {
-          "caption": "Name2, Name0 and Name1 must remain absolutely quiet for one minute. If either one of them makes any noise, the dragon wakes up.xxOther players are allowed to talk and do anything they would like for the 60 seconds, as long as they don't touch Name0 or Name1.xxReady?xxStart the timer!",
+          "caption": "Name2, Name0 and Name1 must remain absolutely quiet for one minute. If either one of them makes any noise, the dragon wakes up.xxOther players are allowed to talk and do anything they would like for the 30 seconds, as long as they don't touch Name0 or Name1.xxReady?xxStart the timer!",
           "options": 
           [
             {
               "caption": "Start Timer",
-              "timer": 60,
+              "timer": 30,
               "nextPage": 2
             }
           ]

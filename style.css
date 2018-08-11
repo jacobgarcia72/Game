@@ -91,7 +91,7 @@ div.noPad {
   height: 155px;
 }
 
-p, input, .pad, #gameFooter, h1, .iconContainer, .iconContainer > * {
+p, input, select, .pad, #gameFooter, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
   transition-duration: 0.4s;
 }
 
@@ -99,6 +99,9 @@ p, input, .pad, #gameFooter, h1, .iconContainer, .iconContainer > * {
 
 .greenText {
   color: #11dd99;
+}
+.darkgreenText {
+  color: #2d7c2d;
 }
 .orangeText {
   color: #e68230;
@@ -110,10 +113,16 @@ p, input, .pad, #gameFooter, h1, .iconContainer, .iconContainer > * {
 .greenBack {
   background-color: #11dd99;
 }
+.darkgreenBack {
+  background-color: #2d7c2d;
+}
 
 
 form input[type="submit"].greenHover:hover {
   background: #11dd99;
+}  
+form input[type="submit"].darkgreenHover:hover {
+  background: #2d7c2d;
 }  
 
 form input[type="submit"].blueHover:hover {
@@ -152,6 +161,11 @@ div.yesNo .colorCorrect {
 div.yesNo .colorIncorrect {
   line-height: 360px;
 }
+div.yesNo p#questionText {
+  margin: 0 0 8pt 0;
+  font-size: 25pt;
+  line-height: 30pt;
+}
 .colorChoice1 {
   background-color: #ce762e;
 }
@@ -183,8 +197,10 @@ div.yesNo .colorIncorrect {
 /********** Forms *******************************************************/
 
 form#frmEnterPlayers p {
-  font-size: 28pt;
-  font-weight: 600;
+  padding-bottom: 6px;
+  margin-bottom: 0;
+  padding-top: 12px;
+  line-height: 1;
 }
 
 form input[type="number"] {
@@ -198,7 +214,7 @@ form input[type="number"] {
   background: #fdfeff;
   color: #333344;
   font-family: 'Comfortaa', sans-serif;
-  margin: 8px 8px 18px 8px;
+  margin: 12px 8px 18px 8px;
 }
 form input[type="submit"], form input[type="button"] {
   font-size: 24pt;
@@ -217,11 +233,16 @@ form input[type="submit"], form input[type="button"] {
   cursor: pointer;
   transition-duration: 0.3s;
 }
+form input[type="submit"]:active, form input[type="button"]:active {
+  transform: scale(0.95);
+
+}
+
 form#frmYesNo input[type="submit"] {
   margin: 20px 12px 12px 12px;
   width: 45%;
 }
-form input[type="submit"], form input[type="button"]:focus {
+form input[type="submit"]:focus, form input[type="button"]:focus {
   outline: 0;
 }
 
@@ -257,7 +278,6 @@ form input[type="text"] {
 form input.playerNameInput {
   max-width: 600px;
   text-align: center;
-  margin-top: 40px;
 }
 
 
@@ -265,7 +285,16 @@ form input.playerNameInput {
 select {
   font-size: 36pt;
   font-family: 'Comfortaa', sans-serif;
+  margin: 12px;
+  padding: 10px 10px 10px 20px;
+  text-align: center;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 5px;
+  outline-width: 0;
+  background: white;
 }
+
 
 
 
@@ -324,6 +353,7 @@ header.gameBanner h1 {
 
 div.gameLinks h2 {
   margin: 0px 0px 10px 0px;
+  font-size: 28pt;
 }
 
 div.gameLinks a {
@@ -341,7 +371,6 @@ div.gameLinks a {
   width: 95%;
   line-height: 100px;
   transition-duration: 0.3s;
-  
 }
 
 div.gameLinks a:hover {
@@ -350,19 +379,6 @@ div.gameLinks a:hover {
   transform: scale(1.08);
 }
 
-p.questionText {
-  font-size: 24pt;
-}
-
-div.inputNames {
-  padding-top: 8px;
-  padding-bottom: 36px;
-}
-
-div #questionText {
-  padding: 10px;
-  font-size: 24pt;
-}
 
 form#frmButtons input[type="submit"] {
   width: 100%;
@@ -383,13 +399,16 @@ form input.btnGender {
   max-width: 250px;
   height: 60px;
   border-radius: 20px;
-  margin: 10px 4px 30px 4px;
+  margin: 10px 4px 50px 4px;
   font-size:24pt;
   transform: translateY(0px);
 }
 
 form input[type="button"].greenSelected {
   background-color: #11dd99;
+}
+form input[type="button"].darkgreenSelected {
+  background-color: #2d7c2d;
 }
 
 .iconContainer  {
@@ -402,6 +421,16 @@ form input[type="button"].greenSelected {
   right: 30px;
 }
 
+div.rowNumbers {
+  padding-top: 24px;
+}
+
+div#scoreBoard p {
+  font-size: 28pt;
+  font-weight: 800;
+  padding-top: 8pt;
+  padding-bottom: 20pt;
+}
 
 
 /*############ Mobile #############*/
@@ -417,9 +446,39 @@ form input[type="button"].greenSelected {
     width: 100%;
   }
 
+  .colorChoices {
+    line-height: 240px;
+  }
+  div.yesNo .colorChoices {
+    line-height: 180px;
+  }
+  div.yesNo p#questionText {
+    font-size: 23pt;
+    line-height: 27pt;
+  }
 }
 
 @media screen and (max-width: 800px) {
+
+  header.banner {
+    padding: 24px 0px;
+  }
+  header.banner h1 {
+    font-size: 72pt;
+  }
+  header.banner h2 {
+    font-size:30pt;
+  }
+  div.gameLinks a {
+    margin-bottom: 30px;
+    font-size: 20pt;
+    border-radius: 35px;
+    line-height: 80px;
+    width: 85%;
+  }
+  div.gameLinks h2 {
+    font-size: 25pt;
+  }
 
   .col-25 {
     width: 33.33%;
@@ -430,8 +489,8 @@ form input[type="button"].greenSelected {
   }
 
   .pad {
-    padding-left: 1%;
-    padding-right: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
   }
 
   header.gameBanner h1 {
@@ -447,9 +506,38 @@ form input[type="button"].greenSelected {
     top: 20px; 
     right: 20px;
   }
+  div.rowNumbers {
+    padding-top: 0px;
+  }
+  div.yesNo p#questionText {
+    font-size: 20pt;
+    line-height: 25pt;
+  }
 }
 
 @media screen and (max-width: 640px) {
+
+  
+  header.banner {
+    padding: 12px 0px;
+  }
+  header.banner h1 {
+    font-size: 54pt;
+  }
+  header.banner h2 {
+    font-size:20pt;
+  }
+  div.gameLinks a {
+    margin-bottom: 20px;
+    font-size: 16pt;
+    border-radius: 35px;
+    line-height: 70px;
+    width: 90%;
+  }
+  div.gameLinks h2 {
+    font-size: 20pt;
+  }
+  
 
   .col-25 {
     width: 33.33%;
@@ -459,17 +547,33 @@ form input[type="button"].greenSelected {
     width: 100%;
   }
 
-  .pad {
-    padding-left: 2%;
-    padding-right: 2%;
-  }
-
   header.gameBanner h1 {
-    font-size:28pt;
+    font-size:22pt;
+    letter-spacing: 3pt;
+    word-spacing: -3pt;
   }
   header.gameBanner {
     padding: 20px 0px;
   }
+  
+  .colorChoices {
+    line-height: 165px;
+    font-size: 22pt;
+  }
+  .colorCorrect, .colorIncorrect {
+    line-height: 330px;
+  }
+  div.yesNo .colorChoices {
+    line-height: 120px;
+  }
+  div.yesNo .colorCorrect, div.yesNo .colorIncorrect {
+    line-height: 240px;
+  }
+  div.yesNo p#questionText {
+    font-size: 16pt;
+    line-height: 20pt;
+  }
+
 
   #gameHeader {
     font-size: 20pt;
@@ -481,7 +585,7 @@ form input[type="button"].greenSelected {
   } 
 
   #nextPlayer {
-    font-size: 47pt;
+    font-size: 42pt;
     padding-top: 40pt;
   } 
   .iconContainer, .iconContainer > * {  
@@ -515,12 +619,12 @@ form input[type="button"].greenSelected {
     font-size: 20pt;
     height: 50px;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   form input.playerNameInput {
     height: 50px;
     font-size: 26pt;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 0px;
   }
   #gameFooter {
@@ -531,4 +635,15 @@ form input[type="button"].greenSelected {
     height: 95px;
   }
 
+  select {
+    font-size: 24pt;
+    margin-top: 6px;
+    padding: 8px 18px 8px 28px;
+  }
+
+  div#scoreBoard p {
+    font-size: 26pt;
+    padding-top: 4pt;
+    padding-bottom: 16pt;
+  }
 }

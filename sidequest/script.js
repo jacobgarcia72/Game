@@ -3,55 +3,41 @@ $(function(){
   //Data Controller
   var dataController = (function() {
     var getSideQuestBank = function() {
-
-      var newBank = [];
+      var bank = [];
 
       $.ajax('data.json', {
         async: false,
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
-          newBank = retrievedData.sideQuests;
+          bank = retrievedData.sideQuests;
         },
         error: function(){
-          return; //alert("There has been an error loading necessary data for this game.");
+          bank = [['','Data did not properly load.'],['','Data did not properly load.']];
         }
-
       });
-      console.log(newBank);
-      if (newBank.length > 0) {
-        console.log('Returning newBank');
-        console.log(newBank);
-        return newBank;
-      }
 
-      return [
-        ['','Data did not properly load.'],
-      ]
+      return bank;
     };
-    var getMainQuestBank = function(){
 
-      var newBank = [];
+    var getMainQuestBank = function(){
+      var bank = [];
 
       $.ajax('data.json', {
         async: false,
         dataType: 'json',
         method: 'GET',
         success: function(retrievedData){
-          newBank = retrievedData.mainQuests;
+          bank = retrievedData.mainQuests;
         },
         error: function(){
-          return; //alert("Please try again.");
+          alert("Failed to load necessary data.");
         }
-
       });
-      console.log(newBank);
-      if (newBank.length > 0) {
-        console.log('Returning newBank');
-        console.log(newBank);
-        return newBank;
-      }
 
+      if (bank.length > 0) {
+        return bank;
+      }
       return [{
         "coins": 4,
         "pages": 
@@ -336,7 +322,7 @@ $(function(){
       var html = '';
 
       for (var i = 0; i < captions.length; i++) {
-        html += '<input type="submit" value="' + captions[i] + '" class="greenHover" id="option' + i + '" data-index="' + i + '"><br>';
+        html += '<input type="submit" value="' + captions[i] + '" class="darkgreenHover" id="option' + i + '" data-index="' + i + '"><br>';
       }
       $(domID.options).html(html);
       $(domID.options).show();
@@ -365,9 +351,9 @@ $(function(){
           if (!name) {name='';};
           var gender = localStorage.getItem('player'+i+'gender');
           if (!gender) {gender='';};
-          var heClassSelected = gender === 'he' ? 'greenSelected' : '';
-          var sheClassSelected = gender === 'she' ? 'greenSelected' : '';
-          html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" tabindex="' + (i + 1) + '" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div></div>';
+          var heClassSelected = gender === 'he' ? 'darkgreenSelected' : '';
+          var sheClassSelected = gender === 'she' ? 'darkgreenSelected' : '';
+          html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" tabindex="' + (i + 1) + '" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="darkgreenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="darkgreenHover btnGender ' + sheClassSelected +'"></div></div></div>';
           if (i%2===1 && i) {
             html += '</div><div class="row">';
           }
@@ -423,8 +409,8 @@ $(function(){
       },
 
       selectNumPlayers: function(numPlayers) {
-        $('input[class *= "btnNum"]').removeClass("greenSelected"); //deselect all buttons
-        $(domClass.btnNumPlayers+'[value="' + numPlayers + '"]').addClass("greenSelected"); //show selected
+        $('input[class *= "btnNum"]').removeClass("darkgreenSelected"); //deselect all buttons
+        $(domClass.btnNumPlayers+'[value="' + numPlayers + '"]').addClass("darkgreenSelected"); //show selected
 
         for (var i = 0; i < numPlayers; i++) {
           $('#rowPlayer' + i).show()
@@ -436,8 +422,8 @@ $(function(){
 
       selectGender: function(playerIndex, gender) {
         var otherGender = gender === 'he' ? 'she' : 'he';
-        $('div#gender' + playerIndex + ' > input[value="' + otherGender + '"').removeClass("greenSelected"); //deselect other gender
-        $('div#gender' + playerIndex + ' > input[value="' + gender + '"').val(gender).addClass("greenSelected"); //select gender
+        $('div#gender' + playerIndex + ' > input[value="' + otherGender + '"').removeClass("darkgreenSelected"); //deselect other gender
+        $('div#gender' + playerIndex + ' > input[value="' + gender + '"').val(gender).addClass("darkgreenSelected"); //select gender
         $('div#gender' + playerIndex).data('gender', gender); //set gender
       },
 
@@ -481,8 +467,8 @@ $(function(){
       showUnlockScreen: function(points) {
         $(domClass.gameElement).hide(); 
 
-        var html = '<p>You have <b>' + points + '</b> coins.</p><p>It costs <b>20</b> coins to unlock a new side quest.</p>';
-        if (points < 20) {
+        var html = '<p>You have <b>' + points + '</b> coins.</p><p>It costs <b>25</b> coins to unlock a new side quest.</p>';
+        if (points < 25) {
           html+='<p>Sorry! Come back another time!</p>';
           $(domID.continue).show();
         } else {
@@ -543,16 +529,37 @@ $(function(){
     var currentPlayer = function(){
       return dataCtrl.player(curP);
     }
-    var numPlayers;
+    var numPlayers=3;
     var mainQuest;
     var curPage; 
 
-
+    var validateNames = function() {
+      var num = $('.darkgreenSelected').val();
+      var names = [];
+      for (var i = 0; i < num; i++) {
+        var newName = $('#txtName'+ i).val();
+        if (!newName) {
+          alert('You can\'t leave a name blank!');
+          return false;
+        } else {
+          names.push(newName);
+        }
+      };
+      for (var i = 0; i < num; i++) {
+        for (var j = 0; j < num; j++) {
+          if (i !== j && names[i]===names[j]) {
+            alert('You can\'t have more than one player with the same name!');
+            return false;
+          }
+        }
+      }
+      return true;
+    };
 
 
     //submit player names
     var submitPlayerNames = function(){
-      numPlayers = $('.greenSelected').val();
+      numPlayers = $('.darkgreenSelected').val();
       var playerDetails = []; //array of names and genders
       for (var i = 0; i < numPlayers; i++) {
         playerDetails.push([
@@ -580,7 +587,7 @@ $(function(){
           } else {
             clearInterval(timer);
             $(domID.continue + ' input').val('Continue');
-            navigator.vibrate(1000);
+            navigator.vibrate(1500);
           }
         }, 1000);
 
@@ -677,8 +684,12 @@ $(function(){
               currentScreen = 'inputPlayers';
               break;
             case 'inputPlayers':
-              submitPlayerNames();
-              currentScreen = "instructions";
+              if (validateNames()) {
+                currentScreen = "instructions";
+                submitPlayerNames();
+              } else {
+                return; //abort if name forms weren't filled out properly
+              }
               break;
             case 'instructions':
             case 'firstSideQuest2':
@@ -743,7 +754,7 @@ $(function(){
             case 'unlockQuests':
               if (choice===0) {
                 currentScreen = 'viewSideQuest';
-                dataCtrl.getSideQuest(curP, 20);
+                dataCtrl.getSideQuest(curP, 25);
                 var newQuestIndex = currentPlayer().quests.length - 1;
                 showScreen(currentScreen, newQuestIndex);
               } else if (choice===1) {
@@ -882,8 +893,6 @@ $(function(){
         
         setEventListeners();
         
-
-        console.log("Application Running");
       }
     }
   })(dataController, uiController);

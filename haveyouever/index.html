@@ -2,154 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta property="og:image" content="../images/logo.png" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Have You Ever?</title>
+  <meta property="og:title" content="Jacob's Game House" />
+  <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="stylesheet" href="../style.css">
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Game Banner -->
   <header class="gameBanner">
-    <h1><span class="blueText" id="topHeader">Have You Ever?</span></h1>
-  </header>
-
-  <div class="strip pad center inputNames greyBack" id="sectionInputNames">
+      <h1><span id="topHeader">Have You Ever</span></h1>
+    </header>
+  
+    <!-- Game -->
+  
+    <div class="strip pad center greyBack" id ="gameBody">
+  
+        <!-- Header -->
+        <p id="gameHeader" class="gameElement blueText">Welcome!</p>
+  
+  
+        <!-- Input Players -->
+        <form id="frmEnterPlayers" class="gameElement">
     
-    <div class="row">
-      <div class = "col-100">
-        <p>Players:</p>
-      </div>
-      <div class="col-50" id="inputSection0">
-        <form id="frmName0" class="frmName">
-          <input type="text" id="txtName0">
+          <!-- Names -->
+          <div id="nameInputs">
+            <p>Players:</p>
+            <div class="row">
+              <div class="col-50" id="inputSection0">
+                <input type="text" class="playerNameInput" id="txtName0">
+              </div>
+              <div class="col-50" id="inputSection1">
+                <input type="text" class="playerNameInput" id="txtName1">
+              </div>
+            </div>
+          </div>
+  
+          <div class="row rowNumbers">
+            <div class="col-50">
+              <p>Rounds</p>
+              <select name="Rounds" id="selectRounds">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+  
+            <div class="col-50">
+              <p>Questions / Round</p>
+              <select name="Questions" id="selectQuestions">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
         </form>
+  
+  
+        <!-- Score Board -->
+        <div id="scoreBoard" class="gameElement">
+          <p id="scoreEntry0">Rick: 7</p>
+          <p id="scoreEntry1">Morty: 2</p>
+        </div>   
+  
+        <!-- Text -->
+        <div id="instructions" class="gameElement">
+          <p>Answer each <span  class="blueText">Have You Ever</span> question by tapping Yes or No. Each round is 10 questions, and you get one pass per round. </p>
+        </div>
+  
+  
+        <!-- Next Player -->
+        <p id="nextPlayer" style="display: none;" class="gameElement">Jacob</p>
+  
+    </div>
+  
+  
+    <!-- This or That Board -->
+    <div class="gameElement yesNo center" id="thisOrThat" style="display:none">
+      <p id="questionText">Have you even been in handcuffs?</p>
+      <div class="colorChoices" id="question">
+        <div class="row">
+          <div class = "col-50 colorChoiceYes" id="choice1">
+            Yes
+          </div>
+          <div class = "col-50 colorChoiceNo" id="choice2">
+            No
+          </div>
+        </div>
       </div>
-
-      <div class="col-50" id="inputSection1">
-        <form id="frmName1" class="frmName">
-          <input type="text" id="txtName1">
+      <div style="display:none" id = "result">
+        <div class="row">
+          <div class = "col-100 colorCorrect" style="display:none" id = "correct">
+            Correct
+          </div>
+          <div class = "col-100 colorIncorrect" style="display:none" id = "incorrect">
+            Incorrect
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Footer -->
+    <div id="foot" class="gameElement">
+      <div class = "whiteSpace"></div>
+  
+      <div class="center pad" id="gameFooter">
+        
+        <!-- Continue Button -->
+        <form id="frmContinue" class="gameElement">
+          <input type="submit" value="Continue" class="blueHover">
         </form>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="col-50">
-        <p>Rounds</p>
-        <select name="Rounds" id="selectRounds">
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5" selected>5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          </select>
-      </div>
-
-      <div class="col-50">
-        <p>Questions / Round</p>
-        <select name="Questions" id="selectQuestions">
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5" selected>5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-100 ">
-       <form id="submitNames">
-          <input type="submit" value="Begin!" class="blueHover">
+  
+        <!-- Yes or No -->
+        <form id="frmYesNo" style="display: none;" class="gameElement">
+          <input type="submit" value="Yes" id="submitYes" data-index="0">
+          <input type="submit" value="No" id="submitNo" data-index="1">
         </form>
-      </div>
-
-    </div>
-  </div>
-
-
-
-  <div class="strip pad center greyBack" id="sectionInstructions" style="display:none">
-    <div class="row">
-      <div class = "col-100">
-        <!-- <h2 id="curPlayerName">Jacob:</h2> -->
-        <p id="instructionsText">Answer each <span  class="blueText">Have You Ever</span> question by tapping your preference from the two options shown. Don't think about your answer&mdash;just follow your first instinct. Each round is 10 questions, and you get one pass per round. </p>
-      </div>
-
-      <div class="col-100">
-        <form id="submitContinue">
-          <input type="submit" value="Begin" class="blueHover">
-        </form>
-      </div>
-    
-    </div>
-  </div>
-
-  <div class="strip noPad center greyBack yesNo" id="sectionThisOrThat" style="display:none">
-    <p id="questionText">Have you even been in handcuffs?</p>
-
-    <div class="row colorChoices" id="question">
-      <div class = "col-50 colorChoiceYes" id="choice1">
-        Yes
-      </div>
-      <div class = "col-50 colorChoiceNo" id="choice2">
-        No
+      
       </div>
     </div>
-
-    <div class="row" style="display:none" id = "sectionResult">
-      <div class = "col-100 colorCorrect" style="display:none" id = "correct">
-        Correct
-      </div>
-      <div class = "col-100 colorIncorrect" style="display:none" id = "incorrect">
-        Incorrect
-      </div>
-    </div>
-
-    <div class="row" id = "rowPass">  
-      <div class="col-100">
-        <form id="formPass">
-          <input type="submit" value="Pass" class="blueHover" id="submitPass">
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="strip pad center greyBack" id="sectionScoreBoard" style="display: none">
-    
-    <div id="sectionScoreEntry0">
-        <h1 id="scoreEntry0">Rick</h1>
-    </div>
-    <div id="sectionScoreEntry1">
-        <h1 id="scoreEntry1">Morty</h1>
-    </div>
-
-    <form id="frmScoreBoard">
-      <input type="submit" value="Continue" class="greenHover">
-      <br>
-    </form>
-
-    <form id="frmPlayAgain" style="display: none;">
-      <p>Play Again?</p>
-      <input type="submit" value="Yes" class="greenHover" id="yesPlayAgain">
-      <input type="submit" value="No" class="greenHover" id="noPlayAgain">
-      <br>
-    </form>
-    </div>   
-
-
-
-<!-- Javascript --> 
-<script type="text/javascript" src="script.js"></script>
+  
+  
+  
+    <!-- script --> 
+    <script type="text/javascript" src="../libraries/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 
 </body>
 </html>
