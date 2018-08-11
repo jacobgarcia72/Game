@@ -80,7 +80,7 @@ div.noPad {
   padding: 0px;
 }
 
-#gameFooter {
+#foot {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -91,14 +91,21 @@ div.noPad {
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
 }
+.wrapper {
+  padding-bottom:160px;
+}
 /* hide the footer if a keyboard comes up */
 @media (pointer:none), (pointer:coarse) {
-  .keyboardOpen {
-    display: none;
+  #foot.keyboardOpen {
+    position: static;
+    bottom: -200px;
+  }
+  .wrapper.keyboardOpen {
+    padding-bottom:0px;
   }
 }
 
-p, input, select, .pad, #gameFooter, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
+p, input, select, .pad, #foot, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
   transition-duration: 0.4s;
 }
 
@@ -171,7 +178,8 @@ div.yesNo .colorIncorrect {
   line-height: 360px;
 }
 div.yesNo p#questionText {
-  margin: 0 0 8pt 0;
+  padding: 15pt 0 20pt 0;
+  margin: 0;
   font-size: 25pt;
   line-height: 30pt;
 }
@@ -316,7 +324,9 @@ header.banner, header.gameBanner {
   padding: 64px 12px;
   text-align: center;
 }
-
+header.gameBanner {
+  border-bottom: 1px solid #dde2eb;
+}
 
 header.banner h1, 
 header.banner h2,
@@ -349,7 +359,7 @@ header.gameBanner h1 {
 
 #gameHeader {
   font-size: 28pt;
-  font-weight: 700;
+  font-weight: 700; 
 } 
 #nextPlayer {
   font-size: 80pt;
@@ -567,18 +577,20 @@ div#scoreBoard p {
     padding: 20px 0px;
   }
   
-  .colorChoices {
-    line-height: 165px;
-    font-size: 22pt;
-  }
-  .colorCorrect, .colorIncorrect {
-    line-height: 330px;
-  }
-  div.yesNo .colorChoices {
-    line-height: 120px;
-  }
-  div.yesNo .colorCorrect, div.yesNo .colorIncorrect {
-    line-height: 240px;
+  @media (pointer:none), (pointer:coarse) {
+    .colorChoices {
+      line-height: 180px;
+      font-size: 22pt;
+    }
+    .colorCorrect, .colorIncorrect {
+      line-height: 360px;
+    }
+    div.yesNo .colorChoices {
+      line-height: 150px;
+    }
+    div.yesNo .colorCorrect, div.yesNo .colorIncorrect {
+      line-height: 300px;
+    }
   }
   div.yesNo p#questionText {
     font-size: 16pt;
@@ -588,6 +600,7 @@ div#scoreBoard p {
 
   #gameHeader {
     font-size: 20pt;
+    margin-top: 0;
   } 
   #instructions p {
     font-size: 18pt;
@@ -616,6 +629,9 @@ div#scoreBoard p {
     border-radius: 33px;
     margin: 0px;
   }
+  div.yesNo p#questionText {
+    padding: 0pt 0 10pt 0;
+  }
   form input[type="submit"] {
     font-size: 20pt;
     height: 66px;
@@ -641,7 +657,7 @@ div#scoreBoard p {
     margin-top: 5px;
     margin-bottom: 0px;
   }
-  #gameFooter {
+  #foot {
     height: 90px;
     padding-top:8px;
   }

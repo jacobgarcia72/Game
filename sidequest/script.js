@@ -788,10 +788,12 @@ $(function(){
       //player inputs
       $(domClass.playerNameInput).focus(function() {
         $(domID.foot).addClass('keyboardOpen');
-        console.log($(domID.foot));
+        $('.wrapper').addClass('keyboardOpen');
+
       })
       $(domClass.playerNameInput).blur(function() {
         $(domID.foot).removeClass('keyboardOpen');
+        $('.wrapper').removeClass('keyboardOpen');
       })
 
       //options
