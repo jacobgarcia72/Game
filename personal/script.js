@@ -1,382 +1,616 @@
-var questionBank = [
-  "What is a song that Name can never get tired of listening to?",
-  "What would Name be doing for a living in an alternate reality?",
-  "Question?",
-  "How much does Name like waffles?",
-  "How does Name get to Sesame Street?",
-  "Who will Name eat?"
-]
-
-var domID = function(id) { return document.getElementById(id); } //Make it easer to select elements from the DOM
+$(function(){
 
 
-var numPlayers = localStorage.getItem('numPlayers'); // int: number of players
-var pointsToWin; // int: number of points needed to win
-var curPlayer; // int: current player's index
-var question; // str: the current question players are asked
-var playerPairs = []; //players will be paired of as arrays within an array
-var player = [];
-var playerDetails = function(name, answer, score, pair) {
-  this.name = name;
-  this.answer = answer;
-  this.score = score;
-  this.pair = pair;
-}
-var answerCaption = []; //captions to be placed on buttons on answer page
-var scoreEntry = []; //entries to be placed on the score board
-var gameOver = false;
-
-// Prevent all forms from reloading
-(function () {
-  var tagForm = document.getElementsByTagName("form");
-  for (var i = 0; i < tagForm.length; i++) {
-      tagForm[i].addEventListener('submit', function(){
-        event.preventDefault();
-      });
-  }
-})();
-
-
-// if you've already played, load form data from last game
-if (numPlayers) {
-  domID('txtNumPlayers').value = numPlayers;
-  for (var i = 0; i < numPlayers; i += 1) {
-    domID('txtName' + i).value = localStorage.getItem('player' + i + 'name');
-  }
-}
-
-// GAMEPLAY FUNCTIONS ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-function createPlayers(){
-  for (var i = 0; i < numPlayers; i += 1) {
-    //Add all player names to object array
-    player.push(new playerDetails(domID('txtName' + i).value, '', 0, ''));
-    //Store names for future access (if someone plays another game, name fields will be prepopulated)
-    localStorage.setItem('player' + i + 'name', domID('txtName' + i).value);
-
-  //addEventListeners for clicking on an Answer choice
-    domID('frmAnswer' + i).addEventListener('submit', function(){
-      if (this.children[0].value === player[player.findIndex(cur => cur.name===player[curPlayer].pair)].answer) {
-        domID('correctHeader').innerHTML = rndCorrectHeader();
-        domID('correctMessage').innerText = 'You\'ve earned a point!';
-        player[curPlayer].score += 1;
-        if (player[curPlayer].score === pointsToWin) {gameOver = true};
-      } else {
-        domID('correctHeader').innerHTML = rndWrongHeader();
-        domID('correctMessage').innerText = rndWrongMessage();
+    //Data Controller
+    var dataController = (function() {
+      var getQuestionBank = function() {
+        return [
+        "What is a song that Jacob can never get tired of listening to?",
+        "What would Jacob be doing for a living in an alternate reality?",
+        "What would Jacob do if he won a million dollars?"
+        ];
       }
-      domID('sectionAnswers').style.display = 'none';
-      domID('sectionCorrect').style.display = 'block'; 
-    });
-  }
 
-}
+      var questionBank = getQuestionBank();
 
-// randomize items and add those items to an array
-function rndOrder(num, addItem) { // where addItem is a function that specifies what to do with random-indexed strings
-  // create an array to hold all posible order numbers
-  var indices = [];
-  for (var i = 0; i < num; i += 1) {
-    indices.push(i); 
-  }
-  
-  var rndX; //variable for random calculations
+      var players = [];
 
-  for (var i = 0; i < num; i += 1) { 
-    //select a random order number from those remaining
-    rndX = Math.floor(Math.random() * indices.length);
-    var index = indices[rndX];
-    //we now have a random index. What do we do with it?
-    addItem(index);
-    indices.splice(rndX,1); //remove order number chosen so it won't be used again
-  }
-}
-//Functions that can be passed into rndOrder():
-function addPlayer(index) {
-  player.push(new playerDetails(player[index].name, player[index].answer, player[index].score, player[index].pair));
-}
-function addAnswerCaption(index) {
-  answerCaption.push
-  answerCaption.push(player[index].answer);
-}
-//shortcut to randomize player order
-function rndPlayers() { 
-  rndOrder(numPlayers, addPlayer);
-  player.splice(0,numPlayers);  //delete the old player objects that were duplicated
-  pairPlayers();
-}
-
-// define function to randomly pair off players/////////////////////////////////////////////////////////////////
-function pairPlayers(){
-
-
-  //create array of all player indices
-  var indices = [];
-  for (var i = 0; i < numPlayers; i += 1) {
-    indices.push(i); 
-  }
-
-  var rndX; //variable for random calculations
-  for (var i = 0; i < numPlayers-1; i += 1) { //randomize pair for each player, but stop before last player
-
-    //select a second player, not the same as the first
-    rndX = Math.floor(Math.random() * (indices.length-1)); //do not include last index. Last index will be subbed in if a player is paired with himself
-    
-    var pairName = player[indices[rndX]].name;
-
-    if (pairName === player[i].name) {
-      rndX = indices.length - 1;  //if a player is paired with himself, sub in last index
-      pairName = player[indices[rndX]].name;
-    };
-
-    indices.splice(rndX,1); //remove player index for player chosen so it won't be used again
-    
-    player[i].pair = pairName;
-  }
-
-
-  // once there is only 1 player left to pair...
-  pairName = player[indices[0]].name;
-
-  // see if player would be paired with himself
-  if (pairName === player[numPlayers-1].name) {
-  // if so, swap with a different player
-    pairName = player[0].pair; //grab pair from the first player
-    player[0].pair = player[numPlayers-1].name; //pair first player with last player
-  }
-  player[numPlayers-1].pair = pairName;
-
-}
-/// -(end pairPlayers())- ///
-
-// define function to move to the next player
-function nextPlayer() {
-  curPlayer += 1;
-  domID('headerPart2').innerHTML = player[curPlayer].name; //display name of current player on screen
-}
-
-//These 2 function will turn questions into 3rd or 2nd person statements:
-function makeThirdPerson(str, name){
-  return str.split('Name').join(name);
-}
-function makeSecondPerson(str){
-  return str.split('Name\'s').join('your').split('Name').join('you').split('does').join('do');
-}
-
-function loadQuestion() {
-  // Select and display a random question from the bank
-  var rndQ = Math.floor(Math.random() * questionBank.length);
-  question = questionBank[rndQ];
-
-  questionBank.splice(rndQ, 1); //delete that question so it won't be used again
-
-  domID('headerCaption').innerHTML = makeSecondPerson(question);
-  domID('headerCaption').classList.add('questionText');
-  rndPlayers(); //randomize players
-
-  domID('headerPart1').innerHTML = 'Hey'; //display greeting
-
-  curPlayer = -1 //start at 0 so that nextPlayer will move to 0
-  nextPlayer(); //start with first player
-}
-
-
-// EVENT LISTENERS ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// NumPlayer => InputNames --------------------------------------------------
-domID('frmNumPlayers').addEventListener('submit', function(){
-  //don't continue if a number was left blank
-  if (!domID('txtNumPlayers').value || !domID('txtPoints').value){return};
-
-  // Set numPlayers & pointsToWin
-  numPlayers = parseInt(domID('txtNumPlayers').value);
-  pointsToWin = parseInt(domID('txtPoints').value);
-
-  // Save numPlayers in local storage for future game recall
-  localStorage.setItem('numPlayers', domID('txtNumPlayers').value);
-
-  // Make Name inputs visible according to numPlayers
-  for (var i = 0; i < numPlayers; i += 1) {
-    domID('frmName' + i).style.display = 'block';
-    //if there are 4, 7, or 8 players, arrange in 4 columns instead of 3
-    if (numPlayers % 4 === 0 || numPlayers === 7) {
-      domID('inputSection' + i).classList.replace('col-33','col-25');
-    }
-  }
-  // Move to next section of the game
-  domID('sectionNumPlayers').style.display = 'none';
-  domID('sectionInputNames').style.display = 'block';
-});
-
-
-
-// InputNames => Questions -------------------------------------------------
-domID('submitNames').addEventListener('submit', function(){
-  //Make sure no text field is left blank
-  for (var i = 0; i < numPlayers; i += 1) {
-    if (domID('txtName' + i).value === '') {
-      alert('You can\'t leave a name blank!');
-      return;
-    }
-  } // Make sure no 2 players are given the same name
-  for (var i = 0; i < numPlayers; i += 1) {
-    for (var j = 0; i < numPlayers; i += 1) {
-      if (i !== j && domID('txtName' + i).value === domID('txtName' + j).value) {
-        alert('You can\'t have two players with the same name!');
-        return;
+      var Player = function(name, gender) {
+        this.name = name;
+        this.gender = gender;
+        this.answer = '';
+        this.points = 0;
+        this.pairIndex = 0;
       }
-    }
-  }
 
-
-  createPlayers();
-  loadQuestion();
-
-  // Move to next section of the game
-  domID('sectionInputNames').style.display = 'none';
-  domID('sectionQuestions').style.display = 'block';
-
-});
-
-
-// Player Submits Answer -------------------------------------------------------
-domID('frmAnswer').addEventListener('submit', function(){
-  if (domID('txtAnswer').value==='') {
-    alert('Oops! You forgot something! Answer the question, ' + player[curPlayer].name + '!');
-    return;
-  }
-
-  player[curPlayer].answer = domID('txtAnswer').value; //store answer
-  document.getElementById('txtAnswer').value = '' //and clear the textbox
-  
-  if (curPlayer !== numPlayers-1) { //see if you're on the last player
-    nextPlayer(); // if not, select the next player
-    
-  } else {
-    //otherwise, move to the Answers section!
-    loadAnswers(); 
-    curPlayer = -1;
-    nextPlayer();
-    domID('headerCaption').innerHTML = makeThirdPerson(question, player[curPlayer].pair);
-    domID('sectionQuestions').style.display = 'none';
-    domID('sectionAnswers').style.display = 'block'; 
-  }
-
-});
-
-function loadAnswers() {
-  
-  answerCaption = [];
-
-  rndOrder(numPlayers, addAnswerCaption);
-
-  // Make answers visible according to numPlayers
-  for (var i = 0; i < numPlayers; i += 1) {
-    domID('answerSection' + i).style.display = 'block';
-    domID('submitAnswer' + i).value = answerCaption[i];
-    //if there are 3 players, arrange in 1 column instead of 2
-    if (numPlayers === 3) {
-      domID('answerSection' + i).classList.replace('col-50','col-100');
-    }
-  }
-}
-
-
-function rndCorrectHeader() {
-  var message = [
-    'Congrats!',
-    'You\'re Awesome!',
-    'That\'s Right!',
-    'That\'s Correct!',
-    'You So Right!'
-  ]
-  var rndX = Math.floor(Math.random() * message.length);
-  return message[rndX];
-}
-function rndCorrectMessage() {
-  var message = [
-    'You\'ve earned a point!',
-    'Point for you!',
-    'You know your friends so well!',
-    'Have a point!',
-    'You get a point!',
-    'Enjoy that point you earned!'
-  ]
-  var rndX = Math.floor(Math.random() * message.length);
-  return message[rndX];
-}
-function rndWrongHeader() {
-  var message = [
-    'Nope!',
-    'Incorrect!',
-    'Sorry!',
-    'Wrong Answer!',
-    'Really, ' + player[curPlayer].name + '?',
-  ]
-  var rndX = Math.floor(Math.random() * message.length);
-  return message[rndX];
-}
-function rndWrongMessage() {
-  var message = [
-    'No point for you!',
-    'Guess you don\t know ' + player[curPlayer].pair + ' as well as you thought!',
-    'You really should get to know ' + player[curPlayer].pair + ' better!',
-    'Better luck next time!',
-    'Yeah, that\'s not right at all!',
-    'Come on. You can do better!',
-    'We expected better things from you!'
-  ]
-  var rndX = Math.floor(Math.random() * message.length);
-  return message[rndX];
-}
-
-domID('frmCorrect').addEventListener('submit', function(){
-  domID('sectionCorrect').style.display = 'none';
-  if (curPlayer !== numPlayers-1) { //see if you're on the last player
-    nextPlayer(); // if not, go to next player
-    domID('headerCaption').innerHTML = makeThirdPerson(question, player[curPlayer].pair);
-    domID('sectionAnswers').style.display = 'block'; 
-  } else {
-    //otherwise, move to the Score board!
-    getScoreEntries();
-    for (var i = 0; i < numPlayers; i += 1) {
-      domID('scoreEntry' + i).innerHTML = scoreEntry[i];
-      domID('sectionScoreEntry' + i).style.display = 'block';
-    }
-
-    if (gameOver) {
-      domID('headerPart1').innerHTML = 'Good';
-      domID('headerPart2').innerHTML = 'Game!';
-      domID('frmScoreBoard').style.display = 'none';
-      domID('frmPlayAgain').style.display = 'block'; 
-    } else {
-      domID('headerPart1').innerHTML = 'Score';
-      domID('headerPart2').innerHTML = 'Board';
-    }
-    domID('headerCaption').style.display = 'none';
-    domID('sectionScoreBoard').style.display = 'block'; 
-  }
-});
-function getScoreEntries() {
-  var score = [-1]; // make an index of scores to compare to. (players with a score of 0 will be added once they're compared to -1)
-  scoreEntry = []; //empty score entries array
-  for (var i = 0; i < numPlayers; i += 1) {
-    for (var j = 0; j < score.length; j += 1) {
-      if (player[i].score > score[j]) {
-        score.splice(j, 0, player[i].score);
-        scoreEntry.splice(j, 0, player[i].score + ' ' + player[i].name);
-        break;
+      var createArrayOfIndices = function(num) {
+        var indices = [];
+        for (var i = 0; i < num; i++) {
+          indices.push(i); 
+        }
+        return indices;
       }
-    }
-  }
-}
+
+      var randomizeOrder = function(arr) {
+        var indices = createArrayOfIndices(arr.length);
+
+        var newArr = [];
+        for (var i = 0; i < arr.length; i ++) {
+          var rndX; //variable for random calculations
+          rndX = Math.floor(Math.random() * indices.length);
+          var index = indices[rndX];
+          newArr.push(arr[index]);
+          indices.splice(rndX,1); //remove order number chosen so it won't be used again
+        }
+        return newArr;
+      }
+
+      var pairPlayers = function() {
+        var indices = createArrayOfIndices(players.length);
+        var lastPlayer = players.length-1;
+        
+        for (var i = 0; i < lastPlayer; i++) { //randomize pair for each player, but stop before last player
+
+          while (true) {
+            var rndX = Math.floor(Math.random() * (indices.length)); 
+            var pair = indices[rndX];
+            //as long as pair index is not player's index, we're good
+            if (pair !== i) {
+              indices.splice(rndX,1); //remove player index for player chosen so it won't be used again
+              players[i].pairIndex = pair;
+              break;
+            } 
+          }
+        }
+
+        // once there is only 1 player left to pair...
+        var pair = indices[0];
+
+        // see if last player would be paired with himself
+        if (pair === lastPlayer) {
+        // if so, swap with a random player
+          var rndX = Math.floor(Math.random() * lastPlayer); 
+          players[lastPlayer].pairIndex = players[rndX].pairIndex; //grab pair from the rnd player
+          players[rndX].pairIndex = lastPlayer; //finish swap
+        } else {
+          players[lastPlayer].pairIndex = pair;
+        }
+      }
+
+      return {
+
+        randomizePlayers: function() {
+          var playerIndices = createArrayOfIndices(players.length);
+          playerIndices = randomizeOrder(playerIndices);
+
+          for (var i = 0; i < playerIndices.length; i ++) {
+            players.push(players[playerIndices[i]]); 
+          }
+          players.splice(0,playerIndices.length);
+
+          pairPlayers();
+        },
+
+        getQuestion: function() {
+          if (questionBank.length === 0) { // if the game has run out of questions to use, 
+            questionBank = getSideQuestBank(); // reset the bank
+          }
+  
+          var rndX = Math.floor(Math.random() * (questionBank.length));
+          var question = questionBank[rndX]; //returns a string
+          questionBank.splice(rndX, 1);
+          return question;
+        },
+
+        makeThirdPerson: function(text, name, gender) {
+          if (gender=='he') {
+            return text.split('Jacob').join(name);
+          } else if (gender=='she') {
+            return text.split('Jacob').join(name).split(' his ').join(' her ').split(' he ').join(' she ').split(' him').join(' her');
+          } else {
+            return text.split('Jacob').join(name).split(' his ').join(' their ').split(' he ').join(' they ').split(' them').join(' their');
+          }
+        },
+
+        makeSecondPerson: function(text) {
+          return text.split('Jacob\'s').join('your').split('Jacob').join('you').split('does').join('do').split(' his ').join(' your ').split(' he ').join(' you ').split(' him').join(' you');
+        },
+  
+        createPlayers: function(playerDetails) { //takes an array of [[name, gender], ...]
+          for (var i = 0; i < playerDetails.length; i++) {
+            var name = playerDetails[i][0]; //name
+            var gender = playerDetails[i][1]; //gender
+            players.push(new Player(name, gender)); //name, gender'
+            //save info for future games
+            localStorage.setItem('player' + i + 'name', name);
+            localStorage.setItem('player' + i + 'gender', gender);
+            localStorage.setItem('numPlayers', playerDetails.length);
+          };
+          this.randomizePlayers();
+        },
+
+        addPoint: function(playerIndex) {
+          players[playerIndex].points += 1;
+        },
+
+        submitAnswer: function(answer, playerIndex) {
+          players[playerIndex].answer = answer;
+        },
+
+        //returns array of answers in a random order
+        getAnswers: function() {
+          var answers = [];
+          for (var i = 0; i < players.length; i++) {
+            answers.push(players[i].answer);
+          }
+          answers = randomizeOrder(answers);
+          return answers;
+        },
+
+        //returns array of player names and scores in descending order
+        getPlayerScores: function() {
+          var scores = [['', -1]];
+
+          for (var i = 0; i < players.length; i++) {
+            for (var j = 0; j < scores.length; j++) {
+              if (players[i].points > scores[j][1]) {
+                scores.splice(j, 0, [players[i].name, players[i].points]);
+                break;
+              }
+            }
+          }
+          scores.pop(); //at this point the placeholder (['',-1]) should be at the end
+          return scores;
+        },
+  
+        player: function(index) {
+          return {
+            name: players[index].name,
+            points: players[index].points,
+            gender: players[index].gender,
+            answer: players[index].answer,
+            pair: {
+              index: players[index].pairIndex,
+              name: players[players[index].pairIndex].name,
+              gender: players[players[index].pairIndex].gender,
+              answer: players[players[index].pairIndex].answer
+            }
+          }
+        }
+
+      }
+    })();
 
 
-domID('frmScoreBoard').addEventListener('submit', function(){
-  loadQuestion()
-  domID('headerCaption').style.display = 'block';
-  domID('sectionScoreBoard').style.display = 'none';
-  domID('sectionQuestions').style.display = 'block';
+    //UI Controller
+    var uiController = (function() {
+
+      var dom = {
+        nameInputs: '#nameInputs',
+        continue: '#frmContinue',
+        yesNo: '#frmYesNo',
+        instructions: '#instructions',
+        answerBox: '#answerBox',
+        scoreBoard: '#scoreBoard',
+        frmEnterPlayers: '#frmEnterPlayers',
+        header: '#gameHeader',
+        footer: '#foot',
+        nextPlayer: '#nextPlayer',
+        options: '#frmButtons',
+        yes: '#submitYes',
+        no: '#submitNo',
+        banner: ['.gameBanner','#gameBanner1','#gameBanner2'],
+        btnNumPlayers: '.btnNum',
+        btnGender: '.btnGender',
+        gameElement: '.gameElement',
+        playerNameInput: '.playerNameInput',
+        numRounds: '#numRounds'
+      };
+
+      var rndMessage = function(type, name) {
+        var messages = [];
+        switch (type) {
+          case 'correctHead':
+            messages = [
+              'Congrats, ' + name + '!',
+              'You\'re Awesome!',
+              'That\'s Right!',
+              'That\'s Correct!',
+              'You So Right!'
+            ];
+            break;
+          case 'correctBody':
+            messages = [
+              'You\'ve earned a point!',
+              'Point for you!',
+              'You know your friends so well!',
+              'Have a point!',
+              'You get a point!',
+              'Enjoy that point you earned!',
+              'That\'s a classic ' + name + ' answer!'
+            ];
+            break;
+          case 'incorrectHead':
+            messages = [
+              'Nope!',
+              'Incorrect!',
+              'Too Bad!',
+              'Wrong Answer!',
+              'Really, ' + name + '?',
+            ];
+            break;
+          case 'incorrectBody':
+            messages = [
+              'No point for you!',
+              'Guess you don\'t know ' + name + ' as well as you thought you did!',
+              'You really should get to know ' + name + ' better!',
+              'Better luck next time!',
+              'Yeah, that\'s not right at all!',
+              'Come on. You can do better!',
+              'We expected better things from you!'
+            ];
+            break;
+        }
+        var rndX = Math.floor(Math.random() * (messages.length)); 
+        return messages[rndX];
+      }
+
+      
+      return {
+
+        getDomStrings: function() {
+          return dom;
+        },
+  
+        createPlayerInputs : function() {
+          var html = '<div class="row">';
+          for (var i = 0; i <= 8; i++) {
+            var name = localStorage.getItem('player'+i+'name');
+            if (!name) {name='';};
+            var gender = localStorage.getItem('player'+i+'gender');
+            if (!gender) {gender='';};
+            var heClassSelected = gender === 'he' ? 'greenSelected' : '';
+            var sheClassSelected = gender === 'she' ? 'greenSelected' : '';
+            html += '<div class="col-50"><div id="rowPlayer' + i + '" style="display:none;"><input type="text" tabindex="' + (i + 1) + '" value="' + name + '" class="playerNameInput" id="txtName'+ i +'"><div data-index="'+ i +'" data-gender="'+ gender +'" id="gender'+ i +'"><input type="button" value="he" class="greenHover btnGender ' + heClassSelected +'"><input type="button" value="she" class="greenHover btnGender ' + sheClassSelected +'"></div></div></div>';
+            if (i%2===1 && i) {
+              html += '</div><div class="row">';
+            }
+          };
+          html+="</div>";
+          $(dom.nameInputs).html(html);
+        },
+
+
+        selectNumPlayers: function(numPlayers) {
+          $('input[class *= "btnNum"]').removeClass("greenSelected"); //deselect all buttons
+          $(dom.btnNumPlayers+'[value="' + numPlayers + '"]').addClass("greenSelected"); //show selected
+  
+          for (var i = 0; i < numPlayers; i++) {
+            $('#rowPlayer' + i).show()
+          }
+          for (var i = numPlayers; i <= 8; i++) {
+            $('#rowPlayer' + i).hide()
+          }
+        },
+
+        selectGender: function(playerIndex, gender) {
+          var otherGender = gender === 'he' ? 'she' : 'he';
+          $('div#gender' + playerIndex + ' > input[value="' + otherGender + '"').removeClass("greenSelected"); //deselect other gender
+          $('div#gender' + playerIndex + ' > input[value="' + gender + '"').val(gender).addClass("greenSelected"); //select gender
+          $('div#gender' + playerIndex).data('gender', gender); //set gender
+        },
+
+        showOptions: function(captions) {
+          var html = '';
+          for (var i = 0; i < captions.length; i++) {
+            html += '<input type="submit" value="' + captions[i] + '" class="greenHover" id="option' + i + '" data-index="' + i + '"><br>';
+          };
+          $(dom.options).html(html).show();
+        },
+
+        displayScoreboard: function(playerScores, curR, totalRounds) {
+          $(dom.gameElement).hide();
+          $(dom.scoreBoard).html('');
+          
+          for (var i = 0; i<playerScores.length; i++) {
+            $(dom.scoreBoard).append('<p id="scoreEntry' + i + '">' + playerScores[i][0] + ':&nbsp;&nbsp;' + playerScores[i][1] + '</p>').show();
+          }
+
+          $(dom.banner[2]).text('Scores');
+          if (curR < totalRounds) {
+            $(dom.banner[1]).text('');
+            /////show scores
+            $(dom.continue + ' input').val('Continue');
+            $(dom.continue).show();
+          } else {
+            $(dom.banner[1]).text('Final');
+            $(dom.instructions).html("<p>Play Again?</p>").show();
+            $(dom.yesNo).show();
+          }
+          $(dom.footer).show();
+          window.scrollTo(0,0); 
+        },
+
+        showScreen: function(screen, player, text, round) {
+          $(dom.gameElement).hide();
+
+          switch (screen) {
+            case 'welcome':
+              $(dom.header).text('Welcome!').show();
+              $(dom.instructions).html('<p>How well do you know your friend group?</p><p>This is the place to find out!</p><p>In this game, you\'ll answer some personal questions about yourself, then figure out who said what!</p>').show();
+              break;
+            case 'inputPlayers':
+              numPlayers = localStorage.getItem('numPlayers')//load number from previous game
+              if (!numPlayers) {numPlayers=3}; //default
+              this.selectNumPlayers(numPlayers);
+              $(dom.header).text("Number of Players:").show();
+              $(dom.frmEnterPlayers).show();
+              break;
+            case 'passDevice':
+              $(dom.banner[1]).text('Round');
+              var roundNumbers = ['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
+              $(dom.banner[2]).text(roundNumbers[round]);
+              $(dom.header).text('Pass the device to').show();
+              $(dom.nextPlayer).text(player).show();
+              $(dom.continue + ' input').val('Continue');
+              break;
+            case 'inputAnswer':
+              $(dom.banner[1]).text('Hey');
+              $(dom.banner[2]).text(player);
+              $(dom.instructions).html('<p>' + text + '</p>').show();
+              $(dom.continue + ' input').val('Submit');
+              $(dom.answerBox).val('').show();
+              break;
+            case 'guessAnswer':
+              $(dom.banner[1]).text('Hey');
+              $(dom.banner[2]).text(player);
+              $(dom.instructions).html('<p>' + text + '</p>').show();
+              $(dom.options).show();
+              break;
+            case 'correct':
+              $(dom.header).text(rndMessage('correctHead', player)).show();
+              $(dom.instructions).html('<p>' + rndMessage('correctBody', text) + '</p>').show();
+              $(dom.continue + ' input').val('Continue');
+              break;
+            case 'incorrect':
+              $(dom.header).text(rndMessage('incorrectHead', player)).show();
+              $(dom.instructions).html('<p>' + rndMessage('incorrectBody', text) + '</p>').show();
+              $(dom.continue + ' input').val('Continue');
+              break;
+          }
+
+          if (screen !== 'guessAnswer') {
+            $(dom.continue).show();
+            $(dom.footer).show();
+          }
+
+          window.scrollTo(0,0); 
+        }
+
+      }
+
+    })();
+
+
+    //Global App Controller
+    var controller = (function(dataCtrl, uiCtrl) {
+      var currentScreen = 'welcome';
+      var curR = 0;
+      var curP = 0;
+      var numPlayers = 3;
+      var currentPlayer = function(){
+        return dataCtrl.player(curP);
+      }
+      var totalRounds = 5;
+      var question = '';
+      var guessing = false; //true when a player is guessing what the other player said
+      var dom = uiCtrl.getDomStrings();
+
+      var nextPlayer = function() {
+        if (curP===numPlayers-1) {
+          curP = 0;
+          if (guessing) {
+            guessing = false;
+            curR += 1;
+            question = dataCtrl.getQuestion();
+          } else {
+            guessing = true;
+          }
+        } else {
+          curP += 1;
+        }
+      }
+
+      var validateNames = function() {
+        var num = $('.greenSelected').val();
+        var names = [];
+        for (var i = 0; i < num; i++) {
+          var newName = $('#txtName'+ i).val();
+          if (!newName) {
+            alert('You can\'t leave a name blank!');
+            return false;
+          } else {
+            names.push(newName);
+          }
+        };
+        for (var i = 0; i < num; i++) {
+          for (var j = 0; j < num; j++) {
+            if (i !== j && names[i]===names[j]) {
+              alert('You can\'t have more than one player with the same name!');
+              return false;
+            }
+          }
+        }
+        return true;
+      };
+
+
+
+      //submit player names
+      var submitPlayerNames = function(){
+        numPlayers = $('.greenSelected').val();
+        var playerDetails = []; //array of names and genders
+        for (var i = 0; i < numPlayers; i++) {
+          playerDetails.push([
+            $('#txtName'+ i).val(), //name
+            $('#gender' + i).data('gender') //gender
+          ]);
+        };
+        dataCtrl.createPlayers(playerDetails);
+      };
+
+      var setRounds = function(){
+        totalRounds = $(dom.numRounds).val();
+        localStorage.setItem('numRounds',totalRounds);
+      };
+      var getRounds = function(){
+        totalRounds = localStorage.getItem('numRounds');
+        if (!totalRounds) {
+            totalRounds=5;
+          };
+        $(dom.numRounds).val(totalRounds);
+      };
+
+      var submitAnswer = function(answer){
+        if (!answer) {
+          alert('Oops! You forgot something! Answer the question, ' + currentPlayer().name + '!');
+          return false;
+        }
+        dataCtrl.submitAnswer(answer, curP);
+        nextPlayer();
+        return true;
+      };
+
+      var submitGuess = function(correct){
+        if (correct) {
+          dataCtrl.addPoint(curP);
+          currentScreen = 'correct';
+        } else {
+          currentScreen = 'incorrect';
+        }
+        uiCtrl.showScreen(currentScreen, currentPlayer().name, currentPlayer().pair.name);
+        nextPlayer();
+      };
+
+      var setEventListeners = function() {
+        
+        //num of player buttons
+        $(dom.btnNumPlayers).on('click', function(){
+          var numPlayers = $(this).val();
+          uiCtrl.selectNumPlayers(numPlayers);
+        });
+  
+        //gender buttons
+        $(dom.btnGender).on('click', function(){
+          var gender = $(this).val();
+          var playerIndex = $(this).parent().data('index');
+          uiCtrl.selectGender(playerIndex, gender);
+        });
+
+        //continue button
+        $(dom.continue).on('submit', function(){
+          var text = '';
+
+          switch(currentScreen){
+            case 'welcome':
+              currentScreen = 'inputPlayers';
+              getRounds();
+              uiCtrl.showScreen(currentScreen);
+              return; //players aren't defined yet
+            case 'inputPlayers':
+              if (validateNames()) {
+                currentScreen = 'passDevice';
+                submitPlayerNames();
+                setRounds();
+                question = dataCtrl.getQuestion();
+              } else {
+                return; //abort if name forms weren't filled out properly
+              }
+              break;
+            case 'passDevice': 
+              if (guessing) {
+                currentScreen = 'guessAnswer';
+                text = dataCtrl.makeThirdPerson(question, currentPlayer().pair.name, currentPlayer().pair.gender);
+                uiCtrl.showOptions(dataCtrl.getAnswers());
+                setEventListenersForOptions();
+              } else {
+                currentScreen = 'inputAnswer';
+                text = dataCtrl.makeSecondPerson(question);
+              }
+              break;
+            case 'inputAnswer':
+              if (submitAnswer($(dom.answerBox).val())) {
+                currentScreen = "passDevice";
+              } else {
+                return; //abort if answer was left blank
+              }
+              break;
+            case 'correct':
+            case 'incorrect':
+              if (curP === 0) {
+                currentScreen = 'scores';
+                uiCtrl.displayScoreboard(dataCtrl.getPlayerScores(), curR, totalRounds);
+                return;
+              } else {
+                currentScreen = 'passDevice';
+              }
+              break;
+            case "scores":
+              currentScreen = 'passDevice';
+              break;
+          }
+
+          uiCtrl.showScreen(currentScreen, currentPlayer().name, text, curR);
+        });
+
+        //Play Again?
+        $(dom.yesNo).on('submit', function(){
+          var choice = $(document.activeElement).data('index');
+          if (choice===0) {
+            location.reload();
+          } else if (choice===1) {
+            window.open('../index.html','_self');
+          }
+        });
+
+
+        // text inputs
+        $('input[type="text"]').focus(function() {
+          $(dom.footer + ' footer').addClass('keyboardOpen');
+          $(dom.footer + ' .whiteSpace').addClass('keyboardOpen');
+        });
+        $('input[type="text"]').blur(function() {
+          $(dom.footer + ' footer').removeClass('keyboardOpen');
+          $(dom.footer + ' .whiteSpace').removeClass('keyboardOpen');
+        });
+      }
+
+      var setEventListenersForOptions = function() {
+        $('[id^="option"]').on('click', function(){
+          var i = $(this).data('index'); //get index of option chosen
+          var correct = ($(this).val() === currentPlayer().pair.answer);
+          submitGuess(correct);
+        });
+      }
+
+      return {
+        init: function() {
+  
+          uiCtrl.createPlayerInputs();
+          
+          //prevent all forms from reloading
+          $("form").on("submit", function(event){
+            event.preventDefault();
+          });
+          
+          setEventListeners();
+
+          uiCtrl.showScreen('welcome');
+        }
+      }
+    })(dataController, uiController);
+
+
+    controller.init();
+
 });
-
-domID('yesPlayAgain').onclick = function(){location.reload()};
-domID('noPlayAgain').onclick = function(){window.open('../index.html','_self')};

@@ -80,7 +80,7 @@ div.noPad {
   padding: 0px;
 }
 
-#foot {
+footer {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -91,21 +91,21 @@ div.noPad {
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
 }
-.wrapper {
-  padding-bottom:160px;
+.whiteSpace {
+  height: 170px;
 }
+
 /* hide the footer if a keyboard comes up */
 @media (pointer:none), (pointer:coarse) {
-  #foot.keyboardOpen {
+  footer.keyboardOpen {
     position: static;
-    bottom: -200px;
   }
-  .wrapper.keyboardOpen {
-    padding-bottom:0px;
+  .whiteSpace.keyboardOpen {
+    height: 0;
   }
 }
 
-p, input, select, .pad, #foot, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
+p, input, select, .pad, footer, .whiteSpace, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
   transition-duration: 0.4s;
 }
 
@@ -178,7 +178,7 @@ div.yesNo .colorIncorrect {
   line-height: 360px;
 }
 div.yesNo p#questionText {
-  padding: 15pt 0 20pt 0;
+  padding: 15pt 0 40pt 0;
   margin: 0;
   font-size: 25pt;
   line-height: 30pt;
@@ -227,9 +227,8 @@ form input[type="number"] {
   width: 85px;
   font-size: 32pt;
   text-align: center;
-  border: none;
+  border: 1px solid #343536;
   border-radius: 5px;
-  border-style: none;
   background: #fdfeff;
   color: #333344;
   font-family: 'Comfortaa', sans-serif;
@@ -279,7 +278,7 @@ form.frmAnswer input[type="submit"] {
   margin: 12px 0px 0px 0px;
 }
 
-form input[type="text"] {
+input[type="text"] {
   height: 60px;
   width: 95%;
   font-size: 32pt;
@@ -293,7 +292,9 @@ form input[type="text"] {
   padding-left: 12px;
   margin-bottom: 10px;
   margin-top: 20px;
+  outline: 0;
 }
+
 form input.playerNameInput {
   max-width: 600px;
   text-align: center;
@@ -630,7 +631,7 @@ div#scoreBoard p {
     margin: 0px;
   }
   div.yesNo p#questionText {
-    padding: 0pt 0 10pt 0;
+    padding: 0pt 0 20pt 0;
   }
   form input[type="submit"] {
     font-size: 20pt;
@@ -657,13 +658,13 @@ div#scoreBoard p {
     margin-top: 5px;
     margin-bottom: 0px;
   }
-  #foot {
+  footer {
     height: 90px;
     padding-top:8px;
   }
 
-  .wrapper {
-    padding-bottom:96px;
+  .whiteSpace {
+    height: 100px;
   }
 
   select {

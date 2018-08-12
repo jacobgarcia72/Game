@@ -369,6 +369,17 @@ var controller = (function(playerCtrl, questionCtrl, uiCtrl) {
       answerChoice(2);
     });
 
+    // text inputs
+    $('input[type="text"]').focus(function() {
+      $(dom.footer + ' footer').addClass('keyboardOpen');
+      $(dom.footer + ' .whiteSpace').addClass('keyboardOpen');
+    });
+    $('input[type="text"]').blur(function() {
+      $(dom.footer + ' footer').removeClass('keyboardOpen');
+      $(dom.footer + ' .whiteSpace').removeClass('keyboardOpen');
+    });
+
+    //Play Again?
     $(dom.yesNo).on('submit', function(){
       var choice = $(document.activeElement).data('index');
       if (choice===0) {
@@ -395,8 +406,12 @@ var controller = (function(playerCtrl, questionCtrl, uiCtrl) {
         // Get player names
         $(dom.txtName[i]).val(localStorage.getItem('player' + i + 'name'));
       }
-      $(dom.selectRounds).val(localStorage.getItem('totalrounds'));
-      $(dom.selectQuestions).val(localStorage.getItem('totalquestions'));
+      total.rounds = localStorage.getItem('totalrounds');
+      if (!total.rounds) {total.rounds=5};
+      $(dom.selectRounds).val(total.rounds);
+      total.questions = localStorage.getItem('totalquestions');
+      if (!total.questions) {total.questions=5};
+      $(dom.selectQuestions).val(total.questions);
 
       setUpEventListeners();
 

@@ -39,7 +39,7 @@ $(function(){
         return bank;
       }
       return [{
-        "coins": 4,
+        "coins": 10,
         "pages": 
         [
           {
@@ -79,7 +79,7 @@ $(function(){
           },
           {
             "awards": [0],
-            "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 4 coins!",
+            "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 10 coins!",
             "options": 
             [
               {
@@ -219,7 +219,7 @@ $(function(){
 
     return {
 
-      createPlayers: function(playerDetails) { //takes an array of [name, gender]
+      createPlayers: function(playerDetails) { //takes an array of [[name, gender], ...]
         for (var i = 0; i < playerDetails.length; i++) {
           var name = playerDetails[i][0]; //name
           var gender = playerDetails[i][1]; //gender
@@ -250,7 +250,7 @@ $(function(){
         }
 
         var rndX = Math.floor(Math.random() * (sideQuestBank.length));
-        newQuest = sideQuestBank[rndX]; //returns an array where [0] = short form, [1] = long form
+        var newQuest = sideQuestBank[rndX]; //returns an array where [0] = short form, [1] = long form
         sideQuestBank.splice(rndX, 1);
         newQuest = formatQuest(newQuest, playerIndex, 'side'); 
         players[playerIndex].quests.push(newQuest);
@@ -263,7 +263,7 @@ $(function(){
         }
 
         var rndX = Math.floor(Math.random() * (mainQuestBank.length));
-        newQuest = mainQuestBank[rndX]; //returns an object
+        var newQuest = mainQuestBank[rndX]; //returns an object
         mainQuestBank.splice(rndX, 1);
         newQuest = formatQuest(newQuest, playerIndex, 'main'); 
         return newQuest;
@@ -295,7 +295,7 @@ $(function(){
   //UI Controller
   var uiController = (function() {
 
-    var domID = {
+    var dom = {
       nameInputs: '#nameInputs',
       continue: '#frmContinue',
       yesNo: '#frmYesNo',
@@ -307,9 +307,7 @@ $(function(){
       options: '#frmButtons',
       yes: '#submitYes',
       no: '#submitNo',
-      trophy: '#trophyIcon'
-    };
-    var domClass = {
+      trophy: '#trophyIcon',
       banner: '.gameBanner',
       btnNumPlayers: '.btnNum',
       btnGender: '.btnGender',
@@ -326,24 +324,14 @@ $(function(){
       for (var i = 0; i < captions.length; i++) {
         html += '<input type="submit" value="' + captions[i] + '" class="darkgreenHover" id="option' + i + '" data-index="' + i + '"><br>';
       }
-      $(domID.options).html(html);
-      $(domID.options).show();
-      // $('[id^="option"]').hide();
-      // for (var i = 0; i < num; i++) {
-      //   $('#option' + i).val(captions[i]);
-      //   $('#option' + i).show();
-      //   $(domID.options).show();
-      //};
+      $(dom.options).html(html);
+      $(dom.options).show();
     };
 
     return {
 
-      getDomIDs: function() {
-        return domID;
-      },
-
-      getDomClasses: function() {
-        return domClass;
+      getDoms: function() {
+        return dom;
       },
 
       createPlayerInputs : function() {
@@ -361,60 +349,60 @@ $(function(){
           }
         };
         html+="</div>";
-        $(domID.nameInputs).html(html);
+        $(dom.nameInputs).html(html);
       },
 
 
       showScreen: function(screen) {
-        $(domClass.gameElement).hide(); //hide all elements, then we'll just show what we need
+        $(dom.gameElement).hide(); //hide all elements, then we'll just show what we need
 
         switch (screen) {
           case 'inputPlayers':
             numPlayers = localStorage.getItem('numPlayers')//load number from previous game
             if (!numPlayers) {numPlayers=3};
             this.selectNumPlayers(numPlayers);
-            $(domID.header).text("Number of Players:").show();
-            $(domID.frmEnterPlayers + ',' + domID.continue + ',' + domID.foot).show();
+            $(dom.header).text("Number of Players:").show();
+            $(dom.frmEnterPlayers + ',' + dom.continue + ',' + dom.foot).show();
             break;
           case 'instructions':
             var htmlInstructions = '<p>Each player begins the game with 10 coins and one side quest.</p><p>Coins are earned as the game goes on. Players can use coins to unlock more quests.</p><p>A player only needs to complete one side quest in order to win the game. Therefore, additional side quests will give you more chances of winning.</p><p>Side quests may be completed at any point, once the game begins. So try to fulfill your quests when your opponents least expect it.</p><p>Good luck!</p>';
 
-            $(domID.header).text('Instructions');
-            $(domID.instructions).html(htmlInstructions);
-            $(domID.header + ',' + domID.instructions + ',' + domID.continue + ',' + domID.foot).show();
+            $(dom.header).text('Instructions');
+            $(dom.instructions).html(htmlInstructions);
+            $(dom.header + ',' + dom.instructions + ',' + dom.continue + ',' + dom.foot).show();
             break;
           case 'trophy':
               var htmlInstructions = '<p>When a player believes he or she has completed a side quest, tap the trophy icon on the top of the screen.</p><p>Let the game begin!</p>';
-              $(domClass.iconContainer).show();
-              $(domClass.iconContainer).animate({opacity: '1'}, {duration: 250});
-              $(domClass.banner).addClass('moveLeft');
-              $(domID.header).text('Read Aloud:').show();
-              $(domID.instructions).html(htmlInstructions).show();
-              $(domID.continue + ',' + domID.foot).show();
+              $(dom.iconContainer).show();
+              $(dom.iconContainer).animate({opacity: '1'}, {duration: 250});
+              $(dom.banner).addClass('moveLeft');
+              $(dom.header).text('Read Aloud:').show();
+              $(dom.instructions).html(htmlInstructions).show();
+              $(dom.continue + ',' + dom.foot).show();
               break;
           case 'passDeviceIntro':
           case 'passDevice':
-            $(domID.header).text('Pass the device to');
-            $(domID.continue + ' input').val('Continue');
-            $(domID.header + ',' + domID.nextPlayer + ',' + domID.continue + ',' + domID.foot).show();
+            $(dom.header).text('Pass the device to');
+            $(dom.continue + ' input').val('Continue');
+            $(dom.header + ',' + dom.nextPlayer + ',' + dom.continue + ',' + dom.foot).show();
             break;
           case 'firstSideQuest1':
-            $(domID.instructions).html('<p>You have been assigned a top secret side quest to complete. If you fulfill your mission, you win the game!</p><p>Make sure nobody else is looking over your shoulder, and tap "Continue" to reveal your side quest!</p>');
-            $(domID.header + ',' + domID.instructions + ',' + domID.continue + ',' + domID.foot).show();
+            $(dom.instructions).html('<p>You have been assigned a top secret side quest to complete. If you fulfill your mission, you win the game!</p><p>Make sure nobody else is looking over your shoulder, and tap "Continue" to reveal your side quest!</p>');
+            $(dom.header + ',' + dom.instructions + ',' + dom.continue + ',' + dom.foot).show();
             break;
           case 'firstSideQuest2':
-            $(domID.header).text('Your Quest:');
-            $(domID.header + ',' + domID.instructions + ',' + domID.continue + ',' + domID.foot).show();
+            $(dom.header).text('Your Quest:');
+            $(dom.header + ',' + dom.instructions + ',' + dom.continue + ',' + dom.foot).show();
             break;
           case 'turnOptions':
             showOptions(['Continue Story','View Side Quests','Unlock Side Quests']);
-            $(domID.header + ',' + domID.options).show();
+            $(dom.header + ',' + dom.options).show();
         }
       },
 
       selectNumPlayers: function(numPlayers) {
         $('input[class *= "btnNum"]').removeClass("darkgreenSelected"); //deselect all buttons
-        $(domClass.btnNumPlayers+'[value="' + numPlayers + '"]').addClass("darkgreenSelected"); //show selected
+        $(dom.btnNumPlayers+'[value="' + numPlayers + '"]').addClass("darkgreenSelected"); //show selected
 
         for (var i = 0; i < numPlayers; i++) {
           $('#rowPlayer' + i).show()
@@ -441,76 +429,77 @@ $(function(){
           questShortForms.push(quests[i][0]); //extract only the short forms of the array
         };
         showOptions(questShortForms);
-        $(domID.instructions).hide();
+        $(dom.instructions).hide();
         if (!trophyMenuOpen) {
-          this.displayText(domID.header, 'Your Active Quests');
-          $(domID.continue + ' input').val('Back');
+          this.displayText(dom.header, 'Your Active Quests');
+          $(dom.continue + ' input').val('Back');
         }
-      
-        $(domID.continue + ',' + domID.foot).show();
+        $(dom.yesNo).hide();
+        $(dom.continue + ',' + dom.foot).show();
         
       },
 
       showSideQuest: function(quest, trophyMenuOpen) { //takes the long form of a quest as a string
         if (trophyMenuOpen) {
-          $(domID.header).text('Was this quest completed?').show();
-          $(domID.continue).hide();
-          $(domID.yes).val('Yes');
-          $(domID.no).val('No');
-          $(domID.yesNo).show();
+          $(dom.header).text('Was this quest completed?').show();
+          $(dom.continue).hide();
+          $(dom.yes).val('Yes');
+          $(dom.no).val('No');
+          $(dom.yesNo).show();
         } else {
-          $(domID.header).text('Your Quest:').show();
-          $(domID.continue).show();
-          $(domID.continue + ' input').val('OK')
+          $(dom.header).text('Your Quest:').show();
+          $(dom.continue).show();
+          $(dom.yesNo).hide();
+          $(dom.continue + ' input').val('OK')
         }
-        $(domID.instructions).html('<p>' + quest + '</p>').show();
-        $(domID.options).hide();
-        $(domID.foot).show();
+        $(dom.instructions).html('<p>' + quest + '</p>').show();
+        $(dom.options).hide();
+        $(dom.foot).show();
       },
 
       showUnlockScreen: function(points) {
-        $(domClass.gameElement).hide(); 
+        $(dom.gameElement).hide(); 
 
         var html = '<p>You have <b>' + points + '</b> coins.</p><p>It costs <b>25</b> coins to unlock a new side quest.</p>';
         if (points < 25) {
           html+='<p>Sorry! Come back another time!</p>';
-          $(domID.continue).show();
+          $(dom.continue).show();
         } else {
           html+='<p>Would like to go ahead and unlock a new quest?</p>'
-          $(domID.yesNo).show();
+          $(dom.yesNo).show();
         };
-        $(domID.header).text('Unlock Side Quests').show();
-        $(domID.instructions).html(html).show();
-        $(domID.yes).val('Yes');
-        $(domID.no).val('No');
-        $(domID.foot).show();
+        $(dom.header).text('Unlock Side Quests').show();
+        $(dom.instructions).html(html).show();
+        $(dom.yes).val('Yes');
+        $(dom.no).val('No');
+        $(dom.foot).show();
       },
 
       showMainQuest: function(quest, index) {
-        $(domClass.gameElement).hide(); 
-        $(domID.header).text('Read Aloud:').show();
-        $(domID.instructions).html('<p>' + quest.pages[index].caption + '</p><br>').show();
+        $(dom.gameElement).hide(); 
+        $(dom.header).text('Read Aloud:').show();
+        $(dom.instructions).html('<p>' + quest.pages[index].caption + '</p><br>').show();
 
         if (quest.pages[index].options.length === 1) {
           //if there is one option, use the continue button
-          $(domID.continue + ' input').val(quest.pages[index].options[0].caption);
-          $(domID.continue).show();
+          $(dom.continue + ' input').val(quest.pages[index].options[0].caption);
+          $(dom.continue).show();
         } else {  
           //if there are two options, use the yes/no buttons
-          $(domID.yes).val(quest.pages[index].options[0].caption);
-          $(domID.no).val(quest.pages[index].options[1].caption);
-          $(domID.yesNo).show();
+          $(dom.yes).val(quest.pages[index].options[0].caption);
+          $(dom.no).val(quest.pages[index].options[1].caption);
+          $(dom.yesNo).show();
         };
 
-        $(domID.foot).show();
+        $(dom.foot).show();
         window.scrollTo(0,0); 
       },
 
       showTrophyMenu: function(players) {
-        $(domClass.gameElement).hide(); 
-        $(domID.header).text('Do we have a winner?').show();
-        $(domID.continue + ' input').val('Cancel');
-        $(domID.continue + ',' + domID.foot).show();
+        $(dom.gameElement).hide(); 
+        $(dom.header).text('Do we have a winner?').show();
+        $(dom.continue + ' input').val('Cancel');
+        $(dom.continue + ',' + dom.foot).show();
         showOptions(players);
       }
     }
@@ -521,8 +510,7 @@ $(function(){
 
   //Global App Controller
   var controller = (function(dataCtrl, uiCtrl) {
-    var domID = uiCtrl.getDomIDs();
-    var domClass = uiCtrl.getDomClasses();
+    var dom = uiCtrl.getDoms();
 
     var currentScreen = "intro";
     var trophyMenu = {screen: '', open: false, playerIndex: 0, questIndex: 0}
@@ -579,19 +567,19 @@ $(function(){
       //see if there's a timer
       if (mainQuest.pages[curPage].options[choice].timer>0) {
 
-        $(domClass.gameElement).hide(); 
-        $(domID.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer).show();
-        $(domID.continue + ' input').val('Stop Timer');
-        $(domID.foot + ',' + domID.continue).show();
+        $(dom.gameElement).hide(); 
+        $(dom.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer).show();
+        $(dom.continue + ' input').val('Stop Timer');
+        $(dom.foot + ',' + dom.continue).show();
 
         var timer = setInterval(function(){
           mainQuest.pages[curPage].options[choice].timer-=1;
-          if ($(domID.nextPlayer).text()==='1') {
+          if ($(dom.nextPlayer).text()==='1') {
             navigator.vibrate(1500);
-            $(domID.continue + ' input').val('Continue');
+            $(dom.continue + ' input').val('Continue');
           }
           if (mainQuest.pages[curPage].options[choice].timer >= 0){
-            $(domID.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer);
+            $(dom.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer);
           } else {
             clearInterval(timer);
           }
@@ -614,7 +602,7 @@ $(function(){
         }
 
         currentScreen = 'passDevice';
-        uiCtrl.displayText(domID.nextPlayer, currentPlayer().name);
+        uiCtrl.displayText(dom.nextPlayer, currentPlayer().name);
         uiCtrl.showScreen(currentScreen);
 
       } else {
@@ -643,9 +631,9 @@ $(function(){
 
     var closeTrophyMenu = function() {
       trophyMenu.open = false;
-      $(domClass.iconContainer).animate({opacity: '1'}, {duration: 250});
-      $(domClass.banner).addClass('moveLeft');
-      $(domID.continue + ' input').val('Continue');
+      $(dom.iconContainer).animate({opacity: '1'}, {duration: 250});
+      $(dom.banner).addClass('moveLeft');
+      $(dom.continue + ' input').val('Continue');
       //if they were looking at something on the turn menu when they clicked the icon, just go back to the turn menu to avoid confusion
       if (currentScreen === 'viewSideQuest' || currentScreen === 'viewSideQuests' || currentScreen === 'unlockQuests') {
         currentScreen = 'turnOptions';
@@ -655,9 +643,9 @@ $(function(){
     var setEventListeners = function() {
 
       //trophy icon
-      $(domID.trophy).on('click', function(){
-        $(domClass.iconContainer).animate({opacity: '0'}, {duration: 50});
-        $(domClass.banner).removeClass('moveLeft');
+      $(dom.trophy).on('click', function(){
+        $(dom.iconContainer).animate({opacity: '0'}, {duration: 50});
+        $(dom.banner).removeClass('moveLeft');
         var players = dataCtrl.getPlayerNamesArray();
         uiCtrl.showTrophyMenu(players);
         setEventListenersForOptions();
@@ -666,20 +654,20 @@ $(function(){
       });
 
       //num of player buttons
-      $(domClass.btnNumPlayers).on('click', function(){
+      $(dom.btnNumPlayers).on('click', function(){
         var numPlayers = $(this).val();
         uiCtrl.selectNumPlayers(numPlayers);
       });
 
       //gender buttons
-      $(domClass.btnGender).on('click', function(){
+      $(dom.btnGender).on('click', function(){
         var gender = $(this).val();
         var playerIndex = $(this).parent().data('index');
         uiCtrl.selectGender(playerIndex, gender);
       });
 
       //continue button
-      $(domID.continue).on('submit', function(){
+      $(dom.continue).on('submit', function(){
 
         if (trophyMenu.open) {
 
@@ -727,7 +715,7 @@ $(function(){
               currentScreen = 'viewSideQuests';
               break;
             case 'mainQuest':
-              if ($(domID.continue + ' input').val() === 'Stop Timer'){ //if there's a timer and you clicked Stop
+              if ($(dom.continue + ' input').val() === 'Stop Timer'){ //if there's a timer and you clicked Stop
                 mainQuest.pages[curPage].options[0].timer = 0; //cut timer short
               };
               loadNextPage(0);
@@ -740,8 +728,8 @@ $(function(){
       });
 
       //yesNo buttons
-      $(domID.yesNo).on('submit', function(){
-        $(domID.yes).removeClass('')
+      $(dom.yesNo).on('submit', function(){
+        $(dom.yes).removeClass('')
 
         var choice = $(document.activeElement).data('index');
         if (trophyMenu.open) {
@@ -785,16 +773,15 @@ $(function(){
 
       });
 
-      //player inputs
-      $(domClass.playerNameInput).focus(function() {
-        $(domID.foot).addClass('keyboardOpen');
-        $('.wrapper').addClass('keyboardOpen');
-
-      })
-      $(domClass.playerNameInput).blur(function() {
-        $(domID.foot).removeClass('keyboardOpen');
-        $('.wrapper').removeClass('keyboardOpen');
-      })
+    // text inputs
+    $('input[type="text"]').focus(function() {
+      $(dom.foot + ' footer').addClass('keyboardOpen');
+      $(dom.foot + ' .whiteSpace').addClass('keyboardOpen');
+    });
+    $('input[type="text"]').blur(function() {
+      $(dom.foot + ' footer').removeClass('keyboardOpen');
+      $(dom.foot + ' .whiteSpace').removeClass('keyboardOpen');
+    });
 
       //options
       setEventListenersForOptions();
@@ -839,7 +826,7 @@ $(function(){
             default:
               //if it gets to this point, we're looking at quest view
               currentScreen='viewSideQuest';
-              $(domID.continue + ' input').val('OK');
+              $(dom.continue + ' input').val('OK');
               var i = $(this).data('index');
           }
           showScreen(currentScreen, i);
@@ -852,7 +839,7 @@ $(function(){
     var showScreen = function(screen, i, j) { //i and j are indices that can be passed in as needed
       switch (screen){
         case 'trophy selectQuest':
-          uiCtrl.displayText(domID.header, 'Which quest did ' + dataCtrl.player(i).gender + ' complete?');
+          uiCtrl.displayText(dom.header, 'Which quest did ' + dataCtrl.player(i).gender + ' complete?');
           uiCtrl.showSideQuests(dataCtrl.player(i).quests, trophyMenu.open);
           setEventListenersForOptions();
           break;
@@ -870,7 +857,7 @@ $(function(){
           uiCtrl.showUnlockScreen(currentPlayer().points);
           break;
         case 'turnOptions':
-          uiCtrl.displayText(domID.header, currentPlayer().name + '\'s Turn');
+          uiCtrl.displayText(dom.header, currentPlayer().name + '\'s Turn');
           uiCtrl.showScreen(screen);
           setEventListenersForOptions();
           break;
@@ -879,20 +866,20 @@ $(function(){
           break;
         case 'passDevice':
         case 'passDeviceIntro':
-          uiCtrl.displayText(domID.nextPlayer, currentPlayer().name);
+          uiCtrl.displayText(dom.nextPlayer, currentPlayer().name);
           uiCtrl.showScreen(screen);
           break;
         case 'firstSideQuest1':
-          uiCtrl.displayText(domID.header, currentPlayer().name + ',');
+          uiCtrl.displayText(dom.header, currentPlayer().name + ',');
           uiCtrl.showScreen(screen);
           break;
         case 'firstSideQuest2':
-          uiCtrl.displayText(domID.instructions, '<p>' + currentPlayer().quests[0][1] + '</p>'); //[first quest][long form]
+          uiCtrl.displayText(dom.instructions, '<p>' + currentPlayer().quests[0][1] + '</p>'); //[first quest][long form]
           uiCtrl.showScreen(screen);
           break;
         case 'winner':
-          uiCtrl.displayText(domID.header, 'Congratulations, ' + dataCtrl.player(trophyMenu.playerIndex).name + '!!');
-          uiCtrl.displayText(domID.instructions, '<p>You are the Side Quest champion!<br><br><br>Play Again?</p>');
+          uiCtrl.displayText(dom.header, 'Congratulations, ' + dataCtrl.player(trophyMenu.playerIndex).name + '!!');
+          uiCtrl.displayText(dom.instructions, '<p>You are the Side Quest champion!<br><br><br>Play Again?</p>');
           break;
         default:
           uiCtrl.showScreen(screen);

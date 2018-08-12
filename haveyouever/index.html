@@ -12,8 +12,6 @@
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 <body>
-  
-<div class="wrapper">
 
   <!-- Game Banner -->
   <header class="gameBanner">
@@ -123,23 +121,25 @@
   
   
     <!-- Footer -->
-    <div id="foot" class="gameElement center pad">
-   
-      <!-- Continue Button -->
-      <form id="frmContinue" class="gameElement">
-        <input type="submit" value="Continue" class="tealHover">
-      </form>
+    <div id="foot" class="gameElement">
+      <div class="whiteSpace"></div>
 
-      <!-- Yes or No -->
-      <form id="frmYesNo" style="display: none;" class="gameElement">
-        <input type="submit" value="Yes" id="submitYes" data-index="0">
-        <input type="submit" value="No" id="submitNo" data-index="1">
-      </form>
-      
-      </div>
+      <footer class="center pad">
+        <!-- Continue Button -->
+        <form id="frmContinue" class="gameElement">
+          <input type="submit" value="Continue" class="tealHover">
+        </form>
+
+        <!-- Yes or No -->
+        <form id="frmYesNo" style="display: none;" class="gameElement">
+          <input type="submit" value="Yes" id="submitYes" data-index="0">
+          <input type="submit" value="No" id="submitNo" data-index="1">
+        </form>
+      </footer>
+
     </div>
   
-</div>
+
 
   <!-- script --> 
   <script type="text/javascript" src="../libraries/jquery-3.3.1.min.js"></script>
