@@ -112,7 +112,7 @@ p, input, select, .pad, footer, .whiteSpace, header.banner, header.gameBanner, h
 /******* COLORED TEXT & BACKS ***************************************************/
 
 .greenText {
-  color: #11dd99;
+  color: #10b864;
 }
 .darkgreenText {
   color: #2d7c2d;
@@ -125,7 +125,7 @@ p, input, select, .pad, footer, .whiteSpace, header.banner, header.gameBanner, h
 }
 
 .greenBack {
-  background-color: #11dd99;
+  background-color: #10b864;
 }
 .darkgreenBack {
   background-color: #2d7c2d;
@@ -133,7 +133,7 @@ p, input, select, .pad, footer, .whiteSpace, header.banner, header.gameBanner, h
 
 
 form input[type="submit"].greenHover:hover {
-  background: #11dd99;
+  background: #10b864;
 }  
 form input[type="submit"].darkgreenHover:hover {
   background: #2d7c2d;
@@ -398,7 +398,7 @@ div.gameLinks a {
 div.gameLinks a:hover {
   color: #ffffff;
   background-color: #44ccff;
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 
@@ -427,7 +427,7 @@ form input.btnGender {
 }
 
 form input[type="button"].greenSelected {
-  background-color: #11dd99;
+  background-color: #10b864;
 }
 form input[type="button"].darkgreenSelected {
   background-color: #2d7c2d;
@@ -688,7 +688,7 @@ div#scoreBoard p {
     background: #99aabb;
   }
   form input[type="submit"].greenHover {
-    background: #11dd99;
+    background: #10b864;
   }  
   form input[type="submit"].darkgreenHover {
     background: #2d7c2d;
