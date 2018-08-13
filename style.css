@@ -71,6 +71,9 @@ div.strip p {
 
 * {
   box-sizing: border-box;
+  /* get rid of blue highlight on mobile */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  outline: none;
 }
 
 .noMargin {
@@ -215,9 +218,6 @@ div.yesNo p#questionText {
 
 /********** Forms *******************************************************/
 
-input {
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* get rid of blue highlight on mobile */
-}
 
 form#frmEnterPlayers p {
   padding-bottom: 6px;
