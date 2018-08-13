@@ -38,61 +38,7 @@ $(function(){
       if (bank.length > 0) {
         return bank;
       }
-      return [{
-        "coins": 10,
-        "pages": 
-        [
-          {
-            "caption": "Name0, as you know, Name1 has not been laughing enough. This needs to change.xxYou've been assigned the task of making Name1 laugh.xxPass the device to Name2 to read the next page of instructions.",
-            "options": 
-            [
-              {
-                "caption": "Continue",
-                "nextPage": 1
-              }
-            ]
-          },
-          {
-            "caption": "Name2, you will be the judge. Here are the rules.xxName0 has 30 seonds to make Name1 laugh.xxHe0 can't touch him1, but other than that, he0 can do whatever it takes to get Name1 to laugh.xxWhen Name0 is ready, start the timer!",
-            "options": 
-            [
-              {
-                "caption": "Start Timer",
-                "timer": 30,
-                "nextPage": 2
-              }
-            ]
-          },
-          {
-            "caption": "Name2, did Name1 laugh?",
-            "options": 
-            [
-              {
-                "caption": "Yes",
-                "nextPage": 3
-              },
-              {
-                "caption": "No",
-                "nextPage": 4
-              }
-            ]
-          },
-          {
-            "awards": [0],
-            "caption": "Congratulations, Name0!xxYou have succeeded in your mission and have been awarded 10 coins!",
-            "options": 
-            [
-              {
-                "caption": "Continue",
-                "nextPage": 4
-              }
-            ]
-          }
-      ]}
-  
-  
-  
-    ]
+      return [{"coins": 12, "pages": [{"caption": "Name0, the village is opening up a new museum and is looking for interesting artifacts. You and Name1 will each compete to find the most interesting artifacts to present to Name2.xxPass the device to Name2 to read the next page of instructions.", "options": [{"caption": "Continue", "nextPage": 1}]}, {"caption": "Name0 and Name1 have 12 seconds to find artifacts to present. They can find items from around the room, from outside, something they left in their car, wherever! But when time runs out, it's time to present! The winner gets 12 coins.", "options": [{"timer": 12, "caption": "Start Timer", "nextPage": 2}]}, {"caption": "Name0 now has 15 seconds to present his0 artifact and explain why it deserves a spot in the museum.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 3}]}, {"caption": "And now, Name1 has 15 seconds to present his1 artifact and explain why it deserves a spot.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 4}]}, {"caption": "And now, Name2, you decide.xxWhose artifact belongs in the museum?", "options": [{"caption": "Name0's", "nextPage": 5}, {"caption": "Name1's", "nextPage": 6}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [1], "caption": "Congratulations, Name1!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]}]
     };
 
     var sideQuestBank = getSideQuestBank();
@@ -562,29 +508,35 @@ $(function(){
       dataCtrl.createPlayers(playerDetails);
     };
 
+    var stopTimer;
+    var startTimer = function(seconds) {
+      stopTimer=false;
+      var timer = setInterval(function(){
+        seconds-=1;
+        $(dom.nextPlayer).html(seconds);
+        if (seconds===0) {
+          mainQuest.pages[curPage].options[0].timer=0;
+          navigator.vibrate(1500);
+          $(dom.continue + ' input').val('Continue');
+        } 
+        if (!seconds || stopTimer){
+          clearInterval(timer);
+        }
+      }, 1000);
+    }
+
     var loadNextPage = function(choice) {
-      
+
       //see if there's a timer
       if (mainQuest.pages[curPage].options[choice].timer>0) {
 
         $(dom.gameElement).hide(); 
-        $(dom.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer).show();
+        var seconds = mainQuest.pages[curPage].options[choice].timer;
+        $(dom.nextPlayer).text(seconds).show();
         $(dom.continue + ' input').val('Stop Timer');
         $(dom.foot + ',' + dom.continue).show();
 
-        var timer = setInterval(function(){
-          mainQuest.pages[curPage].options[choice].timer-=1;
-          if ($(dom.nextPlayer).text()==='1') {
-            navigator.vibrate(1500);
-            $(dom.continue + ' input').val('Continue');
-          }
-          if (mainQuest.pages[curPage].options[choice].timer >= 0){
-            $(dom.nextPlayer).text(mainQuest.pages[curPage].options[choice].timer);
-          } else {
-            clearInterval(timer);
-          }
-        }, 1000);
-
+        startTimer(seconds);
 
         return;
       }
@@ -716,7 +668,8 @@ $(function(){
               break;
             case 'mainQuest':
               if ($(dom.continue + ' input').val() === 'Stop Timer'){ //if there's a timer and you clicked Stop
-                mainQuest.pages[curPage].options[0].timer = 0; //cut timer short
+                stopTimer = true; //cut timer short
+                mainQuest.pages[curPage].options[0].timer=0;
               };
               loadNextPage(0);
               return;
