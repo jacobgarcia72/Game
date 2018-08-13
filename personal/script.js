@@ -7,9 +7,71 @@ $(function(){
         return [
         "What is a song that Jacob can never get tired of listening to?",
         "What would Jacob be doing for a living in an alternate reality?",
-        "What would Jacob do if he won a million dollars?"
-        ];
+        "What does Jacob wish he would spend more time doing?",
+        "Describe Jacob's favorite shirt.",
+        "What would be unique about Jacob's dream house?",
+        "Where has Jacob never been that he's always wanted to go?",
+        "What job does Jacob feel like he would be terrible at?",
+        "What's Jacob's favorite drink?",
+        "What is some place that Jacob hopes he never has to go back to?",
+        "Gun to Jacob's head, he has to recite one song perfectly word for word if he wants to live. What song does he choose?",
+        "What takes up too much of Jacob's time?",
+        "What does Jacob wish more people knew?",
+        "What is Jacob's dream car?",
+        "What is Jacob most looking forward to right now?",
+        "What's a website that Jacob goes to often that other people don't?",
+        "What's a song that Jacob loves that's kind of embarrassing to admit?",
+        "If Jacob had a superpower, what would it be?",
+        "What is one of Jacob's greatest regrets?",
+        "What is one of Jacob's proudest accomplishments from the past five years?",
+        "What is something weird or unusual that Jacob finds attractive?",
+        "What is something Jacob hopes he accomplishes before he dies?",
+        "What is a toy from Jacob's childhood that he remembers fondly?",
+        "What show does Jacob still have fond memories of watching as a kid?",
+        "Who does Jacob think would be really fun to see in concert, but he's never seen them?",
+        "If Jacob was in charge of providing dinner for this group, what would everyone be eating?",
+        "What's Jacob's go-to place for lunch?",
+        "What is Jacob's favorite restaurant?",
+        "Where can Jacob often be found on a weekend night?",
+        "What does Jacob think would make his job a lot more exciting?",
+        "If Jacob could change one thing about his life, what would it be?",
+        "What is a weird quirk about Jacob?",
+        "What is something Jacob enjoys doing in his free time that not everyone knows he does?",
+        "Where does Jacob go to feel more at peace with his life?",
+        "If Jacob could change something about his past, what would it be?",
+        "What is a goal that Jacob has that he is working towards?",
+        "What is something Jacob wants to see before he dies?",
+        "If Jacob were president, what would be his top issue?",
+        "What do a lot of people like that Jacob doesn't like?",
+        "What is Jacob's favorite fast food place?",
+        "What is currently Jacob's favorite song?",
+        "What is currently Jacob's favorite show?",
+        "Where would Jacob spend more time if he could?",
+        "What was something Jacob loved when he was younger that he doesn't care too much for anymore?",
+        "What is Jacob afraid of?",
+        "Besides money, what would Jacob like to be given as a gift?",
+        "What would be Jacob's ideal place to take a date?",
+        "What is something Jacob owns that means a lot to him?",
+        "What does Jacob typically listen to while he is driving?",
+        "What does Jacob typically get to drink when he gets fast food?",
+        "What's a song that makes Jacob sad?",
+        "What's a song that always puts Jacob in a good mood?",
+        "What keeps Jacob up at night?",
+        "Jacob's playlist is filled with: __________?",
+        "Jacob has one day to live. What is he doing?",
+        "What is something Jacob likes about his appearance?",
+        "If Jacob could take a day trip right now, where would he go?",
+        "What will Jacob be doing after he retires?",
+        "What does Jacob want to do after this game?",
+        "What is the worst job Jacob ever had?",
+        "What is something Jacob has always wanted to do better he hasn't gotten around to yet?",
+        "If Jacob had to spend $10,000 in one day, how would he spend it?",
+        "What is the first thing Jacob likes to do it the morning?",
+        "What song gets Jacob pumped up?",
+        "If Jacob had to move to another country, where would it be?"
+        ]; // use he is for he's!
       }
+      
 
       var questionBank = getQuestionBank();
 
@@ -77,6 +139,31 @@ $(function(){
         }
       }
 
+      //use for 'You' or 'They' to drop the -s at the end of a verb (e.g. he eats => you eat)
+      var dropTheS = function(text, pronoun) {
+        text = text.split(pronoun + ' ');
+
+        for (var i = 1; i < text.length; i++) {
+          //get the index of the last letter of the word immediately after 'you'
+          var lastLetter = text[i].length - 1;
+          if (text[i].indexOf(' ') > 0 && text[i].indexOf(' ') - 1 < lastLetter) {lastLetter = text[i].indexOf(' ') - 1;}; 
+          if (text[i].indexOf('?') > 0 && text[i].indexOf('?') - 1 < lastLetter) {lastLetter = text[i].indexOf('?') - 1;}; 
+          if (text[i].indexOf(',') > 0 && text[i].indexOf(',') - 1 < lastLetter) {lastLetter = text[i].indexOf(',') - 1;}; 
+          if (text[i].indexOf('.') > 0 && text[i].indexOf('.') - 1 < lastLetter) {lastLetter = text[i].indexOf('.') - 1;}; 
+
+          if (text[i][lastLetter] === 's') { //if there's an s at the end
+            //if it ends in -shes, -sses, -xes, -ces (finishes, tosses, fixes, etc.)
+            if (text[i].substring(lastLetter-3,lastLetter+1) === 'shes' || text[i].substring(lastLetter-3,lastLetter+1) === 'sses' || text[i].substring(lastLetter-2,lastLetter+1) === 'ces' || text[i].substring(lastLetter-2,lastLetter+1) === 'xes') { 
+              text[i] = text[i].slice(0,lastLetter-1) + text[i].slice(lastLetter+1); // erase -es
+            } else {
+              text[i] = text[i].slice(0,lastLetter) + text[i].slice(lastLetter+1); // erase -s
+            }
+          }
+        }
+        text = text.join(pronoun + ' '); //put string back together
+        return text;
+      }
+
       return {
 
         randomizePlayers: function() {
@@ -92,6 +179,7 @@ $(function(){
         },
 
         getQuestion: function() {
+
           if (questionBank.length === 0) { // if the game has run out of questions to use, 
             questionBank = getSideQuestBank(); // reset the bank
           }
@@ -104,16 +192,26 @@ $(function(){
 
         makeThirdPerson: function(text, name, gender) {
           if (gender=='he') {
-            return text.split('Jacob').join(name);
+            return text.split('Jacob').join(name).split(' he is ').join(' he\'s ');
           } else if (gender=='she') {
-            return text.split('Jacob').join(name).split(' his ').join(' her ').split(' he ').join(' she ').split(' him').join(' her');
+            return text.split('Jacob').join(name).split(' he is ').join(' she\'s ').split(' his ').join(' her ').split(' he ').join(' she ').split(' him').join(' her').split(' he\'s ').join(' she\'s ');
           } else {
-            return text.split('Jacob').join(name).split(' his ').join(' their ').split(' he ').join(' they ').split(' them').join(' their');
+            text = text.split('Jacob').join(name).split(' he is ').join(' they\'re ').split(' his ').join(' their ').split(' he ').join(' they ').split(' them').join(' their').split(' he\'s ').join(' they\'ve ').split(' they has').join(' they have').split('does they').join('do they').split('they does').join('they do').split(' they goes').join(' they go').split(' they was').join(' they were').split(' was they ').join(' were they ').split(' is they').join(' are they');
+            text = dropTheS(text, 'they');
+            return text;
           }
         },
 
         makeSecondPerson: function(text) {
-          return text.split('Jacob\'s').join('your').split('Jacob').join('you').split('does').join('do').split(' his ').join(' your ').split(' he ').join(' you ').split(' him').join(' you');
+          text = text.split('Jacob\'s').join('your').split('Jacob').join('you').split(' he is ').join(' you\'re ').split(' has').join(' have').split(' his ').join(' your ').split(' he ').join(' you ').split(' him').join(' you').split(' he\'s ').join(' you\'ve ').split(' is you ').join(' are you ').split(' you was').join(' you were').split(' was you ').join(' were you ').split('does you').join('do you').split('you does').join('you do').split(' you goes').join(' you go');
+
+          text = dropTheS(text, 'you');
+
+          //capitalize 'you' if it's the first word
+          if (text.substring(0,3)==='you') {
+            text = 'Y' + text.slice(1);
+          }
+          return text;
         },
   
         createPlayers: function(playerDetails) { //takes an array of [[name, gender], ...]
@@ -216,18 +314,20 @@ $(function(){
               'You\'re Awesome!',
               'That\'s Right!',
               'That\'s Correct!',
-              'You So Right!'
+              'You So Right!',
+              'Go ' + name + '!',
+              'Score!'
             ];
             break;
           case 'correctBody':
             messages = [
               'You\'ve earned a point!',
               'Point for you!',
-              'You know your friends so well!',
               'Have a point!',
               'You get a point!',
               'Enjoy that point you earned!',
-              'That\'s a classic ' + name + ' answer!'
+              'That\'s a classic ' + name + ' answer!',
+              'You know ' + name + ' so well!'
             ];
             break;
           case 'incorrectHead':
@@ -236,7 +336,7 @@ $(function(){
               'Incorrect!',
               'Too Bad!',
               'Wrong Answer!',
-              'Really, ' + name + '?',
+              'Really, ' + name + '?'
             ];
             break;
           case 'incorrectBody':
@@ -331,7 +431,7 @@ $(function(){
           window.scrollTo(0,0); 
         },
 
-        showScreen: function(screen, player, text, round) {
+        showScreen: function(screen, player, text, round, totalRounds) {
           $(dom.gameElement).hide();
 
           switch (screen) {
@@ -345,6 +445,33 @@ $(function(){
               this.selectNumPlayers(numPlayers);
               $(dom.header).text("Number of Players:").show();
               $(dom.frmEnterPlayers).show();
+              break;
+            case 'instructions':
+              $(dom.banner[1]).text('Read');
+              $(dom.banner[2]).text('Aloud');
+              $(dom.header).text('Instructions:').show();
+              $(dom.instructions).html('<p>At the start of each round, a new question will be read to the group.</p><p>Don\'t answer the question out loud. Each player will have the opportunity to enter his or her answer secretly.</p><p>Once all answers have been recorded, players will take turns guessing who said what.</p><p>At the end of ' + totalRounds + ' rounds, the player with the most correct guesses wins!</p>').show();
+              $(dom.continue + ' input').val('Continue');
+              break;
+            case 'guessingIntro':
+              $(dom.banner[1]).text('Read');
+              $(dom.banner[2]).text('Aloud');
+              $(dom.header).text('Instructions:').show();
+              $(dom.instructions).html('<p>Now it\'s time to figure out who said what!</p><p>Each player will guess what one other player said.</p><p>This half of the round is not secret. Read your question and your guess out loud so other players can follow along.</p>').show();
+              $(dom.continue + ' input').val('Continue');
+              break;
+            case 'question':
+              $(dom.banner[1]).text('Read');
+              $(dom.banner[2]).text('Aloud');
+              if (round===0) {
+                $(dom.header).text('First Question:').show();
+              } else if (round===totalRounds-1) {
+                $(dom.header).text('Final Question:').show();
+              } else {
+                $(dom.header).text('Next Question:').show();
+              }
+              $(dom.instructions).html('<p>' + text + '</p>').show();
+              $(dom.continue + ' input').val('Continue');
               break;
             case 'passDevice':
               $(dom.banner[1]).text('Round');
@@ -394,6 +521,7 @@ $(function(){
 
     //Global App Controller
     var controller = (function(dataCtrl, uiCtrl) {
+
       var currentScreen = 'welcome';
       var curR = 0;
       var curP = 0;
@@ -519,10 +647,11 @@ $(function(){
               return; //players aren't defined yet
             case 'inputPlayers':
               if (validateNames()) {
-                currentScreen = 'passDevice';
+                currentScreen = 'instructions';
                 submitPlayerNames();
                 setRounds();
                 question = dataCtrl.getQuestion();
+                text = dataCtrl.makeSecondPerson(question);
               } else {
                 return; //abort if name forms weren't filled out properly
               }
@@ -540,7 +669,11 @@ $(function(){
               break;
             case 'inputAnswer':
               if (submitAnswer($(dom.answerBox).val())) {
-                currentScreen = "passDevice";
+                if (curR === 0 && curP === 0) { //give an introduction to how the guessing round works on the first go through
+                  currentScreen = 'guessingIntro';
+                } else {
+                  currentScreen = 'passDevice';
+                }
               } else {
                 return; //abort if answer was left blank
               }
@@ -555,12 +688,18 @@ $(function(){
                 currentScreen = 'passDevice';
               }
               break;
+            case 'instructions':
             case "scores":
+              currentScreen = 'question';
+              text = dataCtrl.makeSecondPerson(question);
+              break;
+            case "question":
+            case 'guessingIntro':
               currentScreen = 'passDevice';
               break;
           }
 
-          uiCtrl.showScreen(currentScreen, currentPlayer().name, text, curR);
+          uiCtrl.showScreen(currentScreen, currentPlayer().name, text, curR, totalRounds);
         });
 
         //Play Again?
@@ -587,8 +726,7 @@ $(function(){
 
       var setEventListenersForOptions = function() {
         $('[id^="option"]').on('click', function(){
-          var i = $(this).data('index'); //get index of option chosen
-          var correct = ($(this).val() === currentPlayer().pair.answer);
+          var correct = ($(this).val().trim().toLowerCase() === currentPlayer().pair.answer.trim().toLowerCase());
           submitGuess(correct);
         });
       }
@@ -606,6 +744,7 @@ $(function(){
           setEventListeners();
 
           uiCtrl.showScreen('welcome');
+
         }
       }
     })(dataController, uiController);

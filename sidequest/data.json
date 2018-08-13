@@ -13,7 +13,7 @@
     ["Name1 Brings Food","If at any point Name1 brings you any food, you win."],
     ["Shoes","If at any point another player takes off, or puts on, shoes or sandals, you win."],
     ["Yawn","If another player opens his or her mouth to yawn at any point, you win when they finish yawning."],
-    ["Take Picture","If at any point another player takes a picture (selfies count) that includes you in it, you win."],
+    ["Photo Bomb","If at any point another player takes a picture (selfies count) that includes you in it, you win."],
     ["Show Picture", "If at any point another player shows you a picture saved on his or her phone, you win."],
     ["Social Media","If another player interacts with you on social media in any way during the game (liking a post, commenting, sending a friend request, etc.), you win."],
     ["Phone Number","If at any point another player gives you a phone number, theirs or somebody else's, you win."],
@@ -27,7 +27,9 @@
     ["Fart","If at any point you hear somebody else fart audibly, you win."],
     ["Stare","You must stare at people throughout the game.xxStare at someone until they ask what you're doing or why you're staring. Reply simply, \"I don't know,\" and look away.xxThe third time you do this successfully, you win."],
     ["Looking at Phones","Keep count to yourself of how many times other player's look at their phones. (If you're playing on a phone, this phone doesn't count.) If you get to 10, you win."],
-    ["Dude","Get someone to draw attention to the fact that you're saying \"Dude\" a lot.xxHowever, you can't say it more than once per sentence. (For example, you can't just keep saying \"Dude, Dude, Dude\" until someone says something.)"]
+    ["Dude","Get someone to draw attention to the fact that you're saying \"Dude\" a lot.xxHowever, you can't say it more than once per sentence. (For example, you can't just keep saying \"Dude, Dude, Dude\" until someone says something.)"],
+    ["Keys","If another player takes keys out of their pocket, you win."],
+    ["Gum","If you give Name1 gum or a mint and he1 accepts, you win the moment he1 puts it into his1 mouth."]
   ],
   "mainQuests": 
   [
@@ -694,12 +696,16 @@
       "pages": 
       [
         {
-          "caption": "Name0, Name1 is in danger! There is a flock of wild animals heading in his1 direction and you need to warn him1!xxUnfortunately, on your way, you trip and fall face first into a pool of acid. You can no longer speak or see, and your only option is to draw the kind of animal that's coming with your eyes shut.xxGrab some paper and something to draw with, and pass the device to Name2 and have him2 read the next page of instructions.",
+          "caption": "Name0, Name1 is in danger! There is a flock of wild animals heading in his1 direction and you need to warn him1!xxUnfortunately, on your way, you trip and fall face first into a pool of acid. You can no longer speak or see, and your only option is to draw the kind of animal that's coming with your eyes shut.xxGrab some paper and something to draw with, and pass the device to Name2 to read the next page of instructions.xx(If there is absolutely nothing available to draw with, press Forfeit.)",
           "options": 
           [
             {
               "caption": "Continue",
               "nextPage": 1
+            },
+            {
+              "caption": "Forfeit",
+              "nextPage": 10
             }
           ]
         },
@@ -750,35 +756,23 @@
             }
           ]
         }
-    ]}
+    ]},
+    {"coins": 10, "pages": [{"caption": "Name0, you have been corresponding with one of the villages most dangerous criminals, Demetrius, who has offered you 10 coins to break him out of prison. You just need a key.", "options": [{"caption": "Continue", "nextPage": 1}]}, {"caption": "If you can show that you have at least one key with you, press Yes to break Demetrius free.", "options": [{"caption": "Yes", "nextPage": 2}, {"caption": "No", "nextPage": 3}]}, {"awards": [0], "caption": "You break Demetrius out of prison, and in return, he gives you 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"caption": "Bad luck!xxBetter start carrying your keys with you!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 5, "pages": [{"caption": "Name0, look in your pocket (or wherever you keep money). Do you have any change?xxIf so, you've earned yourself 5 coins!", "options": [{"caption": "Yes", "nextPage": 1}, {"caption": "No", "nextPage": 2}]}, {"awards": [0], "caption": "You've earned 5 coins. If you can produce exactly 68 cents in change, we'll make it 20!xxFrom the change you have, can you make exactly 68 cents?", "options": [{"caption": "Yes", "nextPage": 3}, {"caption": "No", "nextPage": 4}]}, {"caption": "Better luck next time!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [0,0,0], "caption": "Congratulations, Name0!xxYou win 20 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"caption": "Too bad.xxBut we'll give you another chance!xxIf you can get the change you need from Name1 or Name2, you and whichever one of them helps you out can split the 20!", "options": [{"caption": "Continue", "nextPage": 5}]}, {"caption": "Are you able to produce exactly 68 cents with help from Name1 or Name2?", "options": [{"caption": "Yes", "nextPage": 6}, {"caption": "No", "nextPage": 7}]}, {"awards": [0], "caption": "Great!xxWho gave you the change you needed?", "options": [{"caption": "Name1", "nextPage": 8}, {"caption": "Name2", "nextPage": 9}]}, {"caption": "That's okay. You still won 5 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [1,1], "caption": "Congratulations, Name0 and Name1!xxYou each win 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [2,2], "caption": "Congratulations, Name0 and Name2!xxYou each win 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 10, "pages": [{"caption": "Name0, you have a date tonight with a very wealthy villager, who will give you 10 coins if you make a good impression. But to do this, you need fresh breath!xxIf you have gum or mints, or can acquire one or the other, you succeed in this challenge.", "options": [{"caption": "Continue", "nextPage": 1}]}, {"caption": "Were you able to get gum or a mint?", "options": [{"caption": "Yes", "nextPage": 2}, {"caption": "No", "nextPage": 3}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYour date was fantasic!xx Have 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"caption": "You failed to impress your date with your bad breath. xxSorry!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 12, "pages": [{"caption": "Name0, the new sandwich shop in town is hiring. But you need to prove your sandwich-making skills!xxYou have 45 seconds to make a sandwich for another player. If you come back in 45 seconds with a sandwich, you've earned 12 coins!", "options": [{"timer": 45, "caption": "Start Timer", "nextPage": 1}, {"caption": "Pass", "nextPage": 10}]}, {"caption": "Did Name0 come back with a sandwich and give it to another player?", "options": [{"caption": "Yes", "nextPage": 2}, {"caption": "No", "nextPage": 10}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 8, "pages": [{"caption": "Name0, we need evidence that you were here! If you post a picture on social media right now (Facebook, Snapchat, Instagram...), you win 8 coins!", "options": [{"caption": "Done", "nextPage": 1}, {"caption": "Pass", "nextPage": 10}]}, {"awards": [0], "caption": "You win 8 coins!xxIf you get at least one interaction in the next 30 seconds, we'll double it!xx(likes, views, reacts, etc.)xxOther players count!", "options": [{"timer": 30, "caption": "Start Timer", "nextPage": 2}, {"caption": "I'm Good", "nextPage": 10}]}, {"caption": "Did you get any interactions on your photo?", "options": [{"caption": "Yes", "nextPage": 3}, {"caption": "No", "nextPage": 4}]}, {"awards": [0], "caption": "You've earned 16 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"caption": "That's okay! You still got 8 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 10, "pages": [{"caption": "Name0, you get to decide who deserves the next 10 coins:xxName1 or Name2xxYou get to decide the criteria for who gets the points, but you get no more than 30 seconds to make your decision.", "options": [{"timer": 30, "caption": "Start Timer", "nextPage": 1}]}, {"caption": "We need a decision.xxWho gets the coins?", "options": [{"caption": "Name1", "nextPage": 2}, {"caption": "Name2", "nextPage": 3}]}, {"awards": [1], "caption": "Pass the phone to Name1.", "options": [{"caption": "Continue", "nextPage": 4}]}, {"awards": [2], "caption": "Pass the phone to Name2.", "options": [{"caption": "Continue", "nextPage": 5}]}, {"caption": "Congratulation, Name1!xxYou earned 10 coins, based on whatever criteria Name0 thought was fair.xxNow it's up to you to decide, should Name0 also get 10 coins?", "options": [{"caption": "Yes", "nextPage": 6}, {"caption": "No", "nextPage": 10}]}, {"caption": "Congratulation, Name2!xxYou earned 10 coins, based on whatever criteria Name0 thought was fair.xxNow it's up to you to decide, should Name0 also get 10 coins?", "options": [{"caption": "Yes", "nextPage": 6}, {"caption": "No", "nextPage": 10}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou get 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 12, "pages": [{"caption": "Name0, the village is opening up a new museum and is looking for interesting artifacts. You and Name1 will each compete to find the most interesting artifacts to present to Name2.xxPass the device to Name2 to read the next page of instructions.", "options": [{"caption": "Continue", "nextPage": 1}]}, {"caption": "Name0 and Name1 have 30 seconds to find artifacts to present. They can find items from around the room, from outside, something they left in their car, wherever! But when time runs out, it's time to present! The winner gets 12 coins", "options": [{"timer": 30, "caption": "Start Timer", "nextPage": 2}]}, {"caption": "Name0 now has 15 seconds to present his0 artifact and explains why it deserves a spot in the museum.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 3}]}, {"caption": "And now, Name1 has 15 seconds to present his1 artifact and explains why it deserves a spot.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 4}]}, {"caption": "And now, Name2, you decide.xxWhose artifact belongs in the museum?", "options": [{"caption": "Name0's", "nextPage": 5}, {"caption": "Name1's", "nextPage": 6}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [1], "caption": "Congratulations, Name1!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]},
+
+    {"coins": 10, "pages": [{"caption": "Name0, the village is holding a paper airplane competition with a prize of 10 coins, and it's come down to you and Name1.xxPass the phone to Name2 to read the next page of instructions.xx(If you don't have any access to paper, press Forfeit.)", "options": [{"caption": "Continue", "nextPage": 1}, {"caption": "Forfeit", "nextPage": 10}]}, {"caption": "Name2, Name0 and Name1 have 20 seconds to make a paper airplane. As soon as they both have paper, start the timer.", "options": [{"timer": 20, "caption": "Start Timer", "nextPage": 2}]}, {"caption": "Name2, you decide where the throw line is. (Go outside if you think you need more room.)xxEach player will throw their airplane from the throw line. Whichever plane lands the farthest ahead is the winning plane.", "options": [{"caption": "Continue", "nextPage": 3}]}, {"caption": "Whose plane landed farthest ahead?", "options": [{"caption": "Name0's", "nextPage": 4}, {"caption": "Name1's", "nextPage": 5}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou win 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [1], "caption": "Congratulations, Name1!xxYou win 10 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]}
 
 
-
-  ],
-
-  "template":
-  {
-    "coins": 5,
-    "pages": 
-    [
-      {
-        "awards": [0],
-        "penalties": [1],
-        "caption": "Name0, ",
-        "options": 
-        [
-          {
-            "caption": "",
-            "nextPage": 1
-          },
-          {
-            "caption": "",
-            "nextPage": 2
-          }
-        ]
-      }
-  ]}
-
-
-
+  ]
 }

@@ -587,10 +587,10 @@ div#scoreBoard p {
       line-height: 360px;
     }
     div.yesNo .colorChoices {
-      line-height: 150px;
+      line-height: 145px;
     }
     div.yesNo .colorCorrect, div.yesNo .colorIncorrect {
-      line-height: 300px;
+      line-height: 290px;
     }
   }
   div.yesNo p#questionText {
@@ -631,7 +631,7 @@ div#scoreBoard p {
     margin: 0px;
   }
   div.yesNo p#questionText {
-    padding: 0pt 0 20pt 0;
+    padding: 0pt 2pt 10pt 2pt;
   }
   form input[type="submit"] {
     font-size: 20pt;
@@ -699,4 +699,8 @@ div#scoreBoard p {
   form input[type="submit"].tealHover {
     background: #2bafa8;
   }  
+  form input[type="submit"]:disabled,
+  form input[type="submit"]:disabled:hover {
+    background: #484c53;
+  }
 }
