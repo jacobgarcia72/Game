@@ -50,7 +50,7 @@ $(function(){
         "What was something Jacob loved when he was younger that he doesn't care too much for anymore?",
         "What is Jacob afraid of?",
         "Besides money, what would Jacob like to be given as a gift?",
-        "What would be Jacob's ideal place to take a date?",
+        "What is Jacob's ideal place to take a date?",
         "What is something Jacob owns that means a lot to him?",
         "What does Jacob typically listen to while he is driving?",
         "What does Jacob typically get to drink when he gets fast food?",
@@ -64,11 +64,11 @@ $(function(){
         "What will Jacob be doing after he retires?",
         "What does Jacob want to do after this game?",
         "What is the worst job Jacob ever had?",
-        "What is something Jacob has always wanted to do better he hasn't gotten around to yet?",
+        "What is something Jacob has always wanted to do but he hasn't gotten around to yet?",
         "If Jacob had to spend $10,000 in one day, how would he spend it?",
-        "What is the first thing Jacob likes to do it the morning?",
+        "What is the first thing Jacob likes to do in the morning?",
         "What song gets Jacob pumped up?",
-        "If Jacob had to move to another country, where would it be?"
+        "If Jacob had to move to another country, what country would he go to?"
         ]; // use he is for he's!
       }
       
