@@ -132,6 +132,7 @@ var uiController = (function() {
       $(dom.scoreboard).show();
       if (curR < totalRounds) {
         $(dom.header).text('Scores:').show();
+        $(dom.continue + ' input').val('Continue');
         $(dom.continue).show();
       } else {
         $(dom.header).text('Final Scores:').show();
@@ -149,6 +150,7 @@ var uiController = (function() {
         case 'welcome':
           $(dom.header).text('Welcome!').show();
           $(dom.instructions).html('<p>In this game, you\'ll answer a series of <span class="blueText">This or That</span> questions, selecting your preference from two options.</p><p>Then you\'ll compete to see who knows the other best!</p>').show();
+          $(dom.continue + ' input').val('Continue');
           break;
         case 'inputPlayers':
           $(dom.inputForm).show();
@@ -381,7 +383,7 @@ var controller = (function(playerCtrl, questionCtrl, uiCtrl) {
 
     //Play Again?
     $(dom.yesNo).on('submit', function(){
-      var choice = $(document.activeElement).data('index');
+      var choice = $('input[type=submit]:focus').data('index');
       if (choice===0) {
         location.reload();
       } else if (choice===1) {

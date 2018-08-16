@@ -44,9 +44,14 @@ div.strip p {
 
 .row {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
 }
 
@@ -70,7 +75,8 @@ div.strip p {
 .col-100 {width: 100%;}
 
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   /* get rid of blue highlight on mobile */
   -webkit-tap-highlight-color: rgba(0,0,0,0); 
   outline: none;
@@ -91,6 +97,9 @@ footer {
   margin: 0;
   padding-top:12px;
   background-color: #d0d9df;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ecf3ff), to(#ffffff));
+  background: -webkit-linear-gradient(top, #ecf3ff, #ffffff);
+  background: -o-linear-gradient(top, #ecf3ff, #ffffff);
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
 }
@@ -109,7 +118,9 @@ footer {
 }
 
 p, input, select, .pad, footer, .whiteSpace, header.banner, header.gameBanner, h1, h2, .iconContainer, .iconContainer > * {
-  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+       -o-transition-duration: 0.4s;
+          transition-duration: 0.4s;
 }
 
 /******* COLORED TEXT & BACKS ***************************************************/
@@ -150,6 +161,9 @@ form input[type="submit"].tealHover:hover {
 
 .greyBack {
   background-color: #eff6f9;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eff6f9), to(#f8fdff));
+  background: -webkit-linear-gradient(top, #eff6f9, #f8fdff);
+  background: -o-linear-gradient(top, #eff6f9, #f8fdff);
   background: linear-gradient(to bottom, #eff6f9, #f8fdff);
 }
 
@@ -213,7 +227,9 @@ div.yesNo p#questionText {
   }
 }
 [class*="colorChoice"] {
-  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+       -o-transition-duration: 0.4s;
+          transition-duration: 0.4s;
 }
 
 /********** Forms *******************************************************/
@@ -253,11 +269,15 @@ form input[type="submit"], form input[type="button"] {
   height: 80px;
   font-family: 'Comfortaa', sans-serif;
   cursor: pointer;
-  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+       -o-transition-duration: 0.3s;
+          transition-duration: 0.3s;
 }
 
 form input[type="submit"]:active, form input[type="button"]:active {
-  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 form#frmYesNo input[type="submit"] {
@@ -396,13 +416,17 @@ div.gameLinks a {
   border-radius: 50px;
   width: 95%;
   line-height: 100px;
-  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+       -o-transition-duration: 0.3s;
+          transition-duration: 0.3s;
 }
 
 div.gameLinks a:hover {
   color: #ffffff;
   background-color: #44ccff;
-  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 
@@ -427,7 +451,9 @@ form input.btnGender {
   border-radius: 20px;
   margin: 10px 4px 50px 4px;
   font-size:24pt;
-  transform: translateY(0px);
+  -webkit-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+          transform: translateY(0px);
 }
 
 form input[type="button"].greenSelected {

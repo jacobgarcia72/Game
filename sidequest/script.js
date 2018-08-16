@@ -682,9 +682,7 @@ $(function(){
 
       //yesNo buttons
       $(dom.yesNo).on('submit', function(){
-        $(dom.yes).removeClass('')
-
-        var choice = $(document.activeElement).data('index');
+        var choice = $('input[type=submit]:focus').data('index');
         if (trophyMenu.open) {
           
           if (choice===0) {

@@ -704,7 +704,7 @@ $(function(){
 
         //Play Again?
         $(dom.yesNo).on('submit', function(){
-          var choice = $(document.activeElement).data('index');
+          var choice = $('input[type=submit]:focus').data('index');
           if (choice===0) {
             location.reload();
           } else if (choice===1) {
