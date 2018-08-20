@@ -102,8 +102,6 @@ footer {
   background: -o-linear-gradient(top, #ecf3ff, #ffffff);
   background: linear-gradient(to bottom, #ecf3ff, #ffffff);
   border-top: 1px solid #d0d7e2;
-
-  opacity: 0.9;
 }
 .whiteSpace {
   height: 170px;
@@ -693,6 +691,7 @@ div#scoreBoard p {
   footer {
     height: 90px;
     padding-top:8px;
+    opacity: 0.92;
   }
 
   .whiteSpace {
