@@ -5,30 +5,21 @@ $(function(){
 
     var getBank = function(bankType) {
       url = 'https://jacobgarcia72.github.io/Game/sidequest/data.json';
-      var bank = [];
-      fetch(url)
-      .then(function(data){
-        if(!data.ok) {
-          throw Error(data.status);
-        }
-        return data.json();        
-      })
-      .then(function(data){
-        bank = data[bankType];
-      })
-      .catch(function(){
+
+      $.getJSON(url)
+      .done(function(data){
         if(bankType==='sideQuests') {
-          bank = [['[Error]','[Error: Failed to load.]']];
+          sideQuestBank = data.sideQuests;
+        } else {
+          mainQuestBank = data.mainQuests;
+        }
+      })
+      .fail(function(){
+        if(bankType==='sideQuests') {
+          sideQuestBank = [['[Error]','[Error: Failed to load.]']];
         } else {
           alert("Failed to load necessary data.");
-          bank = [{coins:0,pages:[{caption:'[Error: Failed to load.]',options:[{caption:'Continue',nextPage:2}]}]}];
-        }
-      })
-      .then(function(){
-        if(bankType==='sideQuests') {
-          sideQuestBank = bank;
-        } else {
-          mainQuestBank = bank;
+          mainQuestBank = [{coins:0,pages:[{caption:'[Error: Failed to load.]',options:[{caption:'Continue',nextPage:2}]}]}];
         }
       });
     };
