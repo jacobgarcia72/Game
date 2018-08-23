@@ -2,47 +2,42 @@ $(function(){
 
   //Data Controller
   var dataController = (function() {
-    var getSideQuestBank = function() {
-      var bank = [];
 
-      $.ajax('data.json', {
-        async: false,
-        dataType: 'json',
-        method: 'GET',
-        success: function(retrievedData){
-          bank = retrievedData.sideQuests;
-        },
-        error: function(){
-          bank = [['','Data did not properly load.'],['','Data did not properly load.']];
+    var getBank = function(bankType) {
+      url = 'https://jacobgarcia72.github.io/Game/sidequest/data.json';
+      var bank = [];
+      fetch(url)
+      .then(function(data){
+        if(!data.ok) {
+          throw Error(data.status);
         }
-      });
-
-      return bank;
-    };
-
-    var getMainQuestBank = function(){
-      var bank = [];
-
-      $.ajax('data.json', {
-        async: false,
-        dataType: 'json',
-        method: 'GET',
-        success: function(retrievedData){
-          bank = retrievedData.mainQuests;
-        },
-        error: function(){
+        return data.json();        
+      })
+      .then(function(data){
+        bank = data[bankType];
+      })
+      .catch(function(){
+        if(bankType==='sideQuests') {
+          bank = [['[Error]','[Error: Failed to load.]']];
+        } else {
           alert("Failed to load necessary data.");
+          bank = [{coins:0,pages:[{caption:'[Error: Failed to load.]',options:[{caption:'Continue',nextPage:2}]}]}];
+        }
+      })
+      .then(function(){
+        if(bankType==='sideQuests') {
+          sideQuestBank = bank;
+        } else {
+          mainQuestBank = bank;
         }
       });
-
-      if (bank.length > 0) {
-        return bank;
-      }
-      return [{"coins": 12, "pages": [{"caption": "Name0, the village is opening up a new museum and is looking for interesting artifacts. You and Name1 will each compete to find the most interesting artifacts to present to Name2.xxPass the device to Name2 to read the next page of instructions.", "options": [{"caption": "Continue", "nextPage": 1}]}, {"caption": "Name0 and Name1 have 12 seconds to find artifacts to present. They can find items from around the room, from outside, something they left in their car, wherever! But when time runs out, it's time to present! The winner gets 12 coins.", "options": [{"timer": 12, "caption": "Start Timer", "nextPage": 2}]}, {"caption": "Name0 now has 15 seconds to present his0 artifact and explain why it deserves a spot in the museum.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 3}]}, {"caption": "And now, Name1 has 15 seconds to present his1 artifact and explain why it deserves a spot.", "options": [{"timer": 15, "caption": "Start Timer", "nextPage": 4}]}, {"caption": "And now, Name2, you decide.xxWhose artifact belongs in the museum?", "options": [{"caption": "Name0's", "nextPage": 5}, {"caption": "Name1's", "nextPage": 6}]}, {"awards": [0], "caption": "Congratulations, Name0!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}, {"awards": [1], "caption": "Congratulations, Name1!xxYou win 12 coins!", "options": [{"caption": "Continue", "nextPage": 10}]}]}]
     };
 
-    var sideQuestBank = getSideQuestBank();
-    var mainQuestBank = getMainQuestBank();
+    var sideQuestBank;
+    getBank('sideQuests');
+    
+    var mainQuestBank;
+    getBank('mainQuests');
 
     var players = [];
     var Player = function(name, gender) {
@@ -176,10 +171,6 @@ $(function(){
           localStorage.setItem('numPlayers', playerDetails.length);
         };
 
-        //give each player their first side quest. Must be done after ALL players are added so that side quests can be formatted with opponents' names
-        for (var i = 0; i < playerDetails.length; i++) {
-          this.getSideQuest(i, 0); 
-        }
       },
 
       getPlayerNamesArray: function() {
@@ -191,27 +182,29 @@ $(function(){
       },
 
       getSideQuest: function(playerIndex, price) {
-        if (sideQuestBank.length === 0) { // if the game has run out of side quests to use, 
-          sideQuestBank = getSideQuestBank(); // reset the bank
-        }
-
         var rndX = Math.floor(Math.random() * (sideQuestBank.length));
         var newQuest = sideQuestBank[rndX]; //returns an array where [0] = short form, [1] = long form
         sideQuestBank.splice(rndX, 1);
         newQuest = formatQuest(newQuest, playerIndex, 'side'); 
         players[playerIndex].quests.push(newQuest);
         players[playerIndex].points -= price;
+        
+        if (sideQuestBank.length === 0) { // if the game has run out of side quests to use, 
+          getBank('sideQuests'); // reset the bank
+        }
       },
 
       getMainQuest: function(playerIndex) {
-        if (mainQuestBank.length === 0) { // if the game has run out of main quests to use, 
-          mainQuestBank = getMainQuestBank(); // reset the bank
-        }
 
         var rndX = Math.floor(Math.random() * (mainQuestBank.length));
         var newQuest = mainQuestBank[rndX]; //returns an object
         mainQuestBank.splice(rndX, 1);
         newQuest = formatQuest(newQuest, playerIndex, 'main'); 
+
+        if (mainQuestBank.length === 0) { // if the game has run out of main quests to use, 
+          getBank('mainQuests'); // reset the bank
+        }
+
         return newQuest;
       },
 
@@ -650,6 +643,7 @@ $(function(){
               }
               break;
             case 'passDeviceIntro':
+              dataCtrl.getSideQuest(curP,0); //give current player their first side quest at price=0
               currentScreen = 'firstSideQuest1';
               break;
             case 'firstSideQuest1':
